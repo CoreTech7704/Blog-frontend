@@ -1,5 +1,6 @@
 const THEME_KEY = 'theme';
 
+// Retrieves the initial theme from localStorage or system preference
 export function getInitialTheme() {
     const saved = localStorage.getItem(THEME_KEY);
     if (saved) return saved;
@@ -10,6 +11,7 @@ export function getInitialTheme() {
     return prefersDark ? 'dark' : 'light';
 }
 
+// Applies the selected theme to the document
 export function applyTheme(theme) {
     const root = document.documentElement;
 
