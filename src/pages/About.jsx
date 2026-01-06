@@ -33,7 +33,7 @@ export default function About() {
           </p>
 
           <a
-            href="#Explore-Blogs"
+            href="#Learnmore"
             className=" relative flex items-center gap-2
             rounded-xl px-6 py-3 text-md font-semibold text-white
             bg-gradient-to-r from-cyan-500 to-violet-600
@@ -55,7 +55,7 @@ export default function About() {
       </section>
 
       {/* Why VoidWork? */}
-      <section className="py-32 px-6 bg-black">
+      <section id="Learnmore" className="py-32 px-6 bg-black">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
           <p className="text-slate-300 text-lg leading-relaxed">
@@ -81,7 +81,7 @@ export default function About() {
       </section>
 
       {/* Our Mission */}
-      <section className="py-32 px-6 bg-slate-950">
+      <section className="py-32 px-6 bg-black">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Our Mission</h2>
           <p className="text-slate-300 text-lg leading-relaxed">
@@ -93,7 +93,7 @@ export default function About() {
       </section>
 
       {/* What You’ll Find */}
-      <section className="py-32 px-6 bg-black">
+      <section className="py-32 px-6 bg-slate-950">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">
             What You’ll Find on VoidWork
@@ -110,7 +110,7 @@ export default function About() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-32 px-6 bg-slate-950 text-center">
+      <section className="py-32 px-6 bg-black text-center">
         <h2 className="text-3xl font-bold mb-4">
           If this sounds like your kind of space
         </h2>
