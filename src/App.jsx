@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import Auth from "./pages/Auth"
 import Contact from "./pages/Contact"
+import ChangePassword from "./pages/ChangePassword"
+import ResetPassword from "./pages/ResetPassword"
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/profile/change-password" element={<ChangePassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
