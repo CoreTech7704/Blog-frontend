@@ -18,6 +18,7 @@ export default function BlogCard({
         backdrop-blur-sm
         transition-all duration-300
         hover:border-white/20 hover:-translate-y-1
+        shadow-lg hover:shadow-slate-800/50 hover:shadow-2xl 
       `}
     >
       <div className={`p-6 ${featured ? "min-h-[260px]" : "min-h-[180px]"}`}>

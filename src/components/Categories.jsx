@@ -18,6 +18,17 @@ export default function Categories() {
           </p>
         </div>
 
+        
+{/* Mobile View All */}
+        <div className="mt-10 mb-8 text-center md:hidden ">
+          <a
+            href="/categories"
+            className="inline-block text-sm text-slate-400 hover:text-white transition"
+          >
+            View all blogs →
+          </a>
+        </div>
+
         {/* Category Pills */}
         <div className="flex flex-wrap justify-center gap-4">
           {categories.map((category) => (

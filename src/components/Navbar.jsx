@@ -50,8 +50,8 @@ export default function Navbar({ theme, setTheme }) {
                 Home
           </Link>
           <Link
-                key="Blog"
-                to="/blog"
+                key="Blogs"
+                to="/blogs"
                 className="
                   text-slate-600 dark:text-slate-300
                   hover:text-cyan-500 dark:hover:text-cyan-400
@@ -63,7 +63,7 @@ export default function Navbar({ theme, setTheme }) {
                   hover:after:w-full
                 "
               >
-                Blog
+                Blogs
           </Link>
           <Link
                 key="User"

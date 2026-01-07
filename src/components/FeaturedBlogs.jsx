@@ -9,7 +9,7 @@ export default function FeaturedBlogs() {
   const [mainBlog, ...sideBlogs] = featuredBlogs;
 
   return (
-    <section className="bg-slate-950 py-24 px-6">
+    <section className="bg-black py-24 px-6">
       <div className="mx-auto max-w-6xl">
 
         {/* Section Header */}

@@ -1,13 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "./pages/Home"
-import About from "./pages/About"
-import NotFound from "./pages/NotFound"
-import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
-import Auth from "./pages/Auth"
-import Contact from "./pages/Contact"
-import ChangePassword from "./pages/ChangePassword"
-import ResetPassword from "./pages/ResetPassword"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import NotFound from "./pages/NotFound";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Auth from "./pages/Auth";
+import Contact from "./pages/Contact";
+import ChangePassword from "./pages/ChangePassword";
+import ResetPassword from "./pages/ResetPassword";
+import Blogs from "./pages/Blogs";
+import CategoriesPage from "./pages/Categories";
 
 function App() {
   return (
@@ -21,18 +23,30 @@ function App() {
       >
         <Navbar />
         <Routes>
+          {/* Public */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/auth" element={<Auth />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/profile/change-password" element={<ChangePassword />} />
+
+          {/* Auth */}
+          <Route path="/auth" element={<Auth />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+
+          {/* User */}
+          <Route path="/profile/change-password" element={<ChangePassword />} />
+
+          {/* Content */}
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/categories" element={<CategoriesPage />} />
+
+          {/* Fallback */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+
         <Footer />
       </div>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
