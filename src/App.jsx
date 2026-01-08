@@ -10,6 +10,7 @@ import ChangePassword from "./pages/ChangePassword";
 import ResetPassword from "./pages/ResetPassword";
 import Blogs from "./pages/Blogs";
 import CategoriesPage from "./pages/Categories";
+import BlogView from "./pages/BlogView";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
 
           {/* Fallback */}
           <Route path="*" element={<NotFound />} />
+
+          <Route path="/blogs/:slug" element={<BlogView />} />
         </Routes>
 
         <Footer />

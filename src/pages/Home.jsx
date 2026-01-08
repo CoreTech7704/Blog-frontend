@@ -130,7 +130,8 @@ export default function Home() {
           >
             {latestBlogs.map((blog) => (
               <BlogCard
-                key={blog.title}
+                key={blog.slug}
+                slug={blog.slug}
                 title={blog.title}
                 excerpt={blog.content.slice(0, 140) + "..."}
                 category={blog.tags?.[0] || "General"}

@@ -7,9 +7,7 @@ export default function Blogs() {
       {/* PAGE HEADER */}
       <section className="px-6">
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-4xl font-bold text-slate-100">
-            Latest Blogs
-          </h1>
+          <h1 className="text-4xl font-bold text-slate-100">Latest Blogs</h1>
           <p className="mt-2 max-w-2xl text-slate-400">
             Fresh insights, updates, and deep dives from the VoidWork community.
           </p>
@@ -29,12 +27,12 @@ export default function Blogs() {
         >
           {blogs.map((blog) => (
             <BlogCard
-              key={blog.title}
+              key={blog.slug}
+              slug={blog.slug}
               title={blog.title}
               excerpt={blog.content.slice(0, 140) + "..."}
               category={blog.tags?.[0] || "General"}
               readTime={Math.max(3, Math.ceil(blog.content.length / 800))}
-              // slug={blog.slug} ← add later
             />
           ))}
         </div>

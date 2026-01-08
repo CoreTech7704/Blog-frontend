@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function BlogCard({
+  slug,
   title,
   excerpt,
   category,
@@ -10,7 +11,7 @@ export default function BlogCard({
 }) {
   return (
     <Link
-      to="/blogs/sample-slug"
+      to={`/blogs/${slug}`}
       className={`
         group relative block overflow-hidden rounded-2xl
         border border-white/10

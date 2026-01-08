@@ -38,12 +38,12 @@ export default function FeaturedBlogs() {
           <div className="md:col-span-2">
             <BlogCard
               featured
+              key={mainBlog.slug}
+              slug={mainBlog.slug}
               title={mainBlog.title}
               excerpt={mainBlog.excerpt}
               category={mainBlog.tags?.[0] || "General"}
-              readTime={mainBlog.readTime}
               coverImage={mainBlog.coverImage}
-              slug={mainBlog.slug}
             />
           </div>
 
@@ -51,7 +51,7 @@ export default function FeaturedBlogs() {
           <div className="flex flex-col gap-6">
             {sideBlogs.slice(0, 2).map((blog) => (
               <BlogCard
-                key={blog.id}
+                key={blog.slug}
                 title={blog.title}
                 excerpt={blog.excerpt}
                 category={blog.tags?.[0] || "General"}
