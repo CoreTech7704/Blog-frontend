@@ -4,13 +4,13 @@
     "title": "Intel is in crisis but still planning GPUs",
     "slug": "intel-crisis-still-planning-gpus",
     "excerpt": "Intel has expanded its product line to include dedicated GPUs through its Arc series, competing with NVIDIA and AMD.",
-    "content": "FULL_CONTENT_HERE",
+    "content": "## Intel and the GPU Gamble\n\nIntel is facing one of the toughest periods in its history, yet it continues to invest heavily in **dedicated GPUs** through its Arc lineup.\n\n### Why Intel Entered GPUs\n\n- Reduce dependency on CPUs\n- Compete with NVIDIA and AMD\n- Push AV1 and AI workloads\n\n```js\nconst arcGpu = \"Intel Arc A770\";\nconsole.log(`GPU: ${arcGpu}`);\n```\n\n### The Road Ahead\n\nWhile driver stability remains a challenge, Intel’s long-term vision could reshape the GPU market if executed correctly.",
     "coverImage": "/uploads/blog/1767262994846-879112268.webp",
     "author": {
       "name": "Admin",
       "id": "69564a74519cecc12d6d7e70"
     },
-    "tags": ["intel", "amd", "gpu", "cpu"],
+    "tags": ["intel", "gpu", "cpu"],
     "published": true,
     "createdAt": "2026-01-01T10:23:14.849Z",
     "readTime": 8,
@@ -22,17 +22,89 @@
     "title": "AMD has reportedly sold nearly 200K RX 9070 GPUs worldwide",
     "slug": "amd-sold-200k-rx-9070-gpus",
     "excerpt": "AMD’s RX 9070 GPUs are nearly sold out worldwide amid Nvidia shortages.",
-    "content": "FULL_CONTENT_HERE",
+    "content": "## AMD Capitalizes on Nvidia Shortages\n\nAMD has reportedly sold **nearly 200,000 RX 9070 GPUs**, benefiting from severe stock shortages across Nvidia’s RTX lineup.\n\n### What Changed?\n\n- Better availability\n- Competitive pricing\n- Strong raster performance\n\n```bash\n$ lspci | grep VGA\nAMD Radeon RX 9070 XT\n```\n\n### Market Impact\n\nThis surge could allow AMD to reclaim significant market share if supply remains stable.",
     "coverImage": "/uploads/blog/1767263189843-366395452.webp",
     "author": {
       "name": "Admin",
       "id": "69564a74519cecc12d6d7e70"
     },
-    "tags": ["amd", "radeon", "nvidia", "gpu"],
+    "tags": ["amd", "gpu", "nvidia"],
     "published": true,
     "createdAt": "2026-01-01T10:26:29.844Z",
     "readTime": 6,
     "featured": true,
     "views": 980
+  },
+  {
+    "id": "3",
+    "title": "U.S. allows TSMC to import chipmaking equipment into China",
+    "slug": "us-allows-tsmc-chip-equipment-china",
+    "excerpt": "The U.S. has granted TSMC limited approval to import chipmaking equipment into China-based fabs.",
+    "content": "## Semiconductor Politics\n\nThe U.S. government has granted **TSMC special permissions** to continue importing certain chipmaking equipment into its China fabs.\n\n### Why This Matters\n\n- Keeps mature-node fabs running\n- Balances geopolitics and supply chains\n\n### Key Constraints\n\n- No EUV machines\n- Advanced nodes restricted\n\nThis decision highlights how fragile the global semiconductor ecosystem has become.",
+    "coverImage": "/uploads/blog/1767285576044-426173285.webp",
+    "author": {
+      "name": "Admin",
+      "id": "69564a74519cecc12d6d7e70"
+    },
+    "tags": ["tsmc", "chips", "geopolitics"],
+    "published": true,
+    "createdAt": "2026-01-01T16:39:36.049Z",
+    "readTime": 7,
+    "featured": false,
+    "views": 740
+  },
+  {
+    "id": "4",
+    "title": "Attack on Putin's Residency Raises Global Tensions",
+    "slug": "attack-on-putin-residency-global-tensions",
+    "excerpt": "An alleged attack on Putin’s residence sparks fear and speculation worldwide.",
+    "content": "## A Dangerous Escalation\n\nReports suggest an attack targeted **Putin’s residency**, escalating fears of broader conflict.\n\n### What We Know\n\n- Incident occurred overnight\n- Limited official confirmation\n\n### Global Reaction\n\nMarkets reacted immediately, highlighting how geopolitical shocks ripple through technology and finance sectors.",
+    "coverImage": "/uploads/blog/1767286304561-627677685.jpg",
+    "author": {
+      "name": "Admin",
+      "id": "6956a4eec7af321853c1b786"
+    },
+    "tags": ["war", "geopolitics"],
+    "published": true,
+    "createdAt": "2026-01-01T16:49:57.821Z",
+    "readTime": 4,
+    "featured": false,
+    "views": 1600
+  },
+  {
+    "id": "5",
+    "title": "Why Modern CPUs Rely So Heavily on Cache",
+    "slug": "why-modern-cpus-rely-on-cache",
+    "excerpt": "CPU cache design has become more important than raw clock speeds.",
+    "content": "## The Cache Revolution\n\nModern CPUs are no longer defined by GHz alone.\n\n### Types of Cache\n\n- L1: fastest, smallest\n- L2: balanced\n- L3: shared across cores\n\n```c\nint sum(int a, int b) {\n  return a + b;\n}\n```\n\n### Why Cache Wins\n\nMemory latency is the true bottleneck in modern systems.",
+    "coverImage": "/uploads/blog/cpu-cache.webp",
+    "author": {
+      "name": "Admin",
+      "id": "69564a74519cecc12d6d7e70"
+    },
+    "tags": ["cpu", "hardware"],
+    "published": true,
+    "createdAt": "2026-01-02T09:10:00.000Z",
+    "readTime": 5,
+    "featured": false,
+    "views": 560
+  },
+  {
+    "id": "6",
+    "title": "The Rise of AV1: Why Video Encoding Is Changing",
+    "slug": "rise-of-av1-video-encoding",
+    "excerpt": "AV1 is reshaping video streaming and content creation.",
+    "content": "## Goodbye H.264?\n\nAV1 is rapidly becoming the preferred codec for modern platforms.\n\n### Benefits\n\n- Better compression\n- Royalty-free\n- Hardware acceleration\n\n### Adoption\n\nYouTube, Netflix, and GPUs from Intel and AMD already support AV1.",
+    "coverImage": "/uploads/blog/av1.webp",
+    "author": {
+      "name": "Admin",
+      "id": "69564a74519cecc12d6d7e70"
+    },
+    "tags": ["video", "av1", "encoding"],
+    "published": true,
+    "createdAt": "2026-01-02T12:00:00.000Z",
+    "readTime": 6,
+    "featured": false,
+    "views": 430
   }
 ]

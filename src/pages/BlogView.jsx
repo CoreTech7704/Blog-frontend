@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import blogs from "@/data/blogs.json";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import MarkdownContent from "@/components/MarkdownContent";
 
 export default function BlogView() {
   const { slug } = useParams();
@@ -45,9 +46,7 @@ export default function BlogView() {
 
       <section className="px-6 py-24">
         <article className="mx-auto max-w-3xl space-y-6 text-slate-300">
-          {blog.content.split("\n\n").map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
+            <MarkdownContent content={blog.content} />
         </article>
       </section>
     </main>
