@@ -468,10 +468,10 @@ export default function FloatingLines({
       destroyed = true;
       cancelAnimationFrame(raf);
 
-      // ✅ ResizeObserver
+      // ResizeObserver
       ro?.disconnect();
 
-      // ✅ Pointer events
+      // Pointer events
       if (interactive && renderer.domElement) {
         renderer.domElement.removeEventListener(
           "pointermove",
@@ -483,12 +483,12 @@ export default function FloatingLines({
         );
       }
 
-      // ✅ Three.js cleanup
+      // Three.js cleanup
       geometry.dispose();
       material.dispose();
       renderer.dispose();
 
-      // ✅ Remove canvas safely
+      // Remove canvas safely
       if (renderer.domElement?.parentElement) {
         renderer.domElement.parentElement.removeChild(renderer.domElement);
       }
