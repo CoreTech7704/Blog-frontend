@@ -11,6 +11,8 @@ import ResetPassword from "./pages/ResetPassword";
 import Blogs from "./pages/Blogs";
 import CategoriesPage from "./pages/Categories";
 import BlogView from "./pages/BlogView";
+import Profile from "./pages/Profile";
+import ProfileEdit from "./pages/ProfileEdit";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* User */}
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/editprofile" element={<ProfileEdit />}/>
           <Route path="/profile/change-password" element={<ChangePassword />} />
 
           {/* Content */}
