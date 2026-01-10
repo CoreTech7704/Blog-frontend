@@ -33,9 +33,7 @@ export default function BlogView() {
             #{blog.tags?.[0] || "General"}
           </span>
 
-          <h1 className="text-4xl sm:text-5xl font-bold">
-            {blog.title}
-          </h1>
+          <h1 className="text-4xl sm:text-5xl font-bold">{blog.title}</h1>
 
           <p className="mt-6 text-sm text-slate-500">
             {new Date(blog.createdAt?.$date).toDateString()} •{" "}
@@ -46,8 +44,97 @@ export default function BlogView() {
 
       <section className="px-6 py-24">
         <article className="mx-auto max-w-3xl space-y-6 text-slate-300">
-            <MarkdownContent content={blog.content} />
+          <MarkdownContent content={blog.content} />
         </article>
+      </section>
+
+      {/* Comments Section */}
+      <section className="px-6 pb-24">
+        <div className="mx-auto max-w-3xl">
+          {/* Header */}
+          <h3 className="text-xl font-semibold text-white mb-6">
+            Comments <span className="text-slate-500">(2)</span>
+          </h3>
+
+          {/* Add Comment */}
+          <div className="mb-8">
+            {/* assume logged-in for now */}
+            <textarea
+              rows={3}
+              placeholder="Write a comment..."
+              className="
+          w-full rounded-lg
+          bg-[#0b0f1a]
+          border border-white/10
+          text-slate-200
+          p-4
+          placeholder:text-slate-500
+          focus:outline-none focus:ring-2 focus:ring-sky-400
+        "
+            />
+
+            <button
+              className="
+          mt-3 px-5 py-2 rounded-md
+          bg-sky-400 text-slate-950
+          font-medium
+          hover:bg-sky-300
+          transition-colors
+        "
+            >
+              Post Comment
+            </button>
+          </div>
+
+          {/* Comments List */}
+          <div className="space-y-4">
+            {/* Comment */}
+            <div
+              className="
+          rounded-xl
+          bg-[#0b0f1a]
+          border border-white/10
+          p-5
+        "
+            >
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="font-medium text-white">Harsh Panchal</p>
+                  <p className="text-xs text-slate-500 mt-1">2 hours ago</p>
+                </div>
+
+                {/* owner / admin */}
+                <button className="text-xs text-red-400 hover:underline">
+                  Delete
+                </button>
+              </div>
+
+              <p className="mt-3 text-slate-300 leading-relaxed">
+                Great article! The Tailwind v4 dark mode explanation was very
+                clear.
+              </p>
+            </div>
+
+            {/* Comment */}
+            <div
+              className="
+          rounded-xl
+          bg-[#0b0f1a]
+          border border-white/10
+          p-5
+        "
+            >
+              <div>
+                <p className="font-medium text-white">Amit Patel</p>
+                <p className="text-xs text-slate-500 mt-1">1 day ago</p>
+              </div>
+
+              <p className="mt-3 text-slate-300 leading-relaxed">
+                This helped me fix my project. Thanks for sharing!
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   );

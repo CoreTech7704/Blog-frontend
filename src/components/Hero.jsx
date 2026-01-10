@@ -1,5 +1,6 @@
 import FloatingLines from "@/components/ui/FloatingLines";
 import { ArrowRight } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -30,8 +31,8 @@ export default function Hero() {
         </p>
 
         <div className="flex gap-4">
-          <a
-          href="#Explore-Blogs"
+          <Link
+          to="/blogs"
           className=" relative flex items-center gap-2
             rounded-xl px-6 py-3 text-md font-semibold text-white
             bg-gradient-to-r from-cyan-500 to-violet-600
@@ -45,9 +46,9 @@ export default function Hero() {
         >
           Explore Blogs 
           <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-        </a>
-        <a
-          href="#get-started"
+        </Link>
+        <Link
+          to="/auth"
           className="relative inline-flex items-center justify-center
             px-6 py-2 rounded-xl
             text-md font-semibold text-white/80
@@ -60,7 +61,7 @@ export default function Hero() {
           "
         >
           Join Voidwork
-        </a>
+        </Link>
         </div>
       </div>
 

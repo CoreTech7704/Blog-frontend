@@ -7,7 +7,7 @@ export default function Blogs() {
       {/* PAGE HEADER */}
       <section className="px-6">
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-4xl font-bold text-slate-100">Latest Blogs</h1>
+          <h1 className="text-4xl font-bold text-slate-100">Recent Blogs</h1>
           <p className="mt-2 max-w-2xl text-slate-400">
             Fresh insights, updates, and deep dives from the VoidWork community.
           </p>

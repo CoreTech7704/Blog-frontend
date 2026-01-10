@@ -13,6 +13,9 @@ import CategoriesPage from "./pages/Categories";
 import BlogView from "./pages/BlogView";
 import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
+import Dashboard from "./pages/Dashboard"
+import CreateBlog from "./pages/CreateBlog";
+import EditBlog from "./pages/EditBlog"
 
 function App() {
   return (
@@ -38,16 +41,18 @@ function App() {
           {/* User */}
           <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<ProfileEdit />}/>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/blogs/new" element={<CreateBlog />} />
+          <Route path="/dashboard/blogs/:id/edit" element={<EditBlog />} />
           <Route path="/profile/change-password" element={<ChangePassword />} />
 
           {/* Content */}
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/categories" element={<CategoriesPage />} />
+          <Route path="/blogs/:slug" element={<BlogView />} />
 
           {/* Fallback */}
           <Route path="*" element={<NotFound />} />
-
-          <Route path="/blogs/:slug" element={<BlogView />} />
         </Routes>
 
         <Footer />
