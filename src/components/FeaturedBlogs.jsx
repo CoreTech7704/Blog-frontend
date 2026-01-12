@@ -1,17 +1,29 @@
 import BlogCard from "./BlogCard";
-import blogs from "@/data/blogs.json";
+import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 
-export default function FeaturedBlogs() {
-  const featuredBlogs = blogs.filter((blog) => blog.featured);
+export default function FeaturedBlogs({ blogs = [], loading }) {
+  if (loading) {
+    return (
+      <div className="grid gap-6 md:grid-cols-3">
+        <div className="md:col-span-2">
+          <BlogCardSkeleton featured />
+        </div>
+        <div className="flex flex-col gap-6">
+          <BlogCardSkeleton />
+          <BlogCardSkeleton />
+        </div>
+      </div>
+    );
+  }
 
-  if (featuredBlogs.length === 0) return null;
+  const featuredBlogs = blogs.filter((b) => b.featured);
+  if (!featuredBlogs.length) return null;
 
   const [mainBlog, ...sideBlogs] = featuredBlogs;
 
   return (
     <section className="bg-black py-24 px-6">
       <div className="mx-auto max-w-6xl">
-
         {/* Section Header */}
         <div className="mb-12 flex items-end justify-between">
           <div>
@@ -19,7 +31,8 @@ export default function FeaturedBlogs() {
               Featured Blogs
             </h2>
             <p className="mt-2 max-w-xl text-slate-400">
-              Hand-picked articles worth your time — deep dives, guides, and insights.
+              Hand-picked articles worth your time — deep dives, guides, and
+              insights.
             </p>
           </div>
 
@@ -33,7 +46,6 @@ export default function FeaturedBlogs() {
 
         {/* Grid */}
         <div className="grid gap-6 md:grid-cols-3">
-
           {/* Main Featured */}
           <div className="md:col-span-2">
             <BlogCard
@@ -61,7 +73,6 @@ export default function FeaturedBlogs() {
               />
             ))}
           </div>
-
         </div>
 
         {/* Mobile View All */}
@@ -73,7 +84,6 @@ export default function FeaturedBlogs() {
             View all blogs →
           </a>
         </div>
-
       </div>
     </section>
   );

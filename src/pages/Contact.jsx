@@ -115,8 +115,9 @@ export default function Contact() {
                hover:shadow-xl hover:shadow-violet-500/40
               active:scale-95"
                 type="submit"
+                disabled
               >
-                Send Message
+                Send Message (Coming Soon)
               </button>
             </div>
           </form>

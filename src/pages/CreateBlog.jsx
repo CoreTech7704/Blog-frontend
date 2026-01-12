@@ -1,8 +1,16 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import api from "@/api/axios";
 
 export default function CreateBlog() {
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    api.get("/api/categories").then((res) => {
+      setCategories(res.data);
+    });
+  }, []);
 
   const [coverPreview, setCoverPreview] = useState(
     "https://via.placeholder.com/1200x500?text=Cover+Image"
@@ -10,7 +18,7 @@ export default function CreateBlog() {
 
   const [form, setForm] = useState({
     title: "",
-    description: "",
+    excerpt: "",
     content: "",
     category: "",
     status: "draft",
@@ -30,12 +38,34 @@ export default function CreateBlog() {
     setCoverPreview(null);
   }
 
-  function handleSubmit(status) {
-    const blogData = { ...form, status };
-    console.log("New blog:", blogData);
+  async function handleSubmit(status) {
+    if (!form.title || !form.content || !form.category) {
+      alert("Title, content, and category are required");
+      return;
+    }
 
-    // later: send to backend
-    navigate("/dashboard");
+    try {
+      const payload = {
+        title: form.title,
+        excerpt: form.excerpt,
+        content: form.content,
+        category: form.category,
+        status,
+      };
+
+      await api.post("/api/blogs", payload);
+
+      alert(
+        status === "published"
+          ? "Blog published successfully"
+          : "Draft saved successfully"
+      );
+
+      navigate("/dashboard");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to create blog");
+    }
   }
 
   return (
@@ -64,8 +94,8 @@ export default function CreateBlog() {
         {/* Description */}
         <Textarea
           label="Short Description"
-          name="description"
-          value={form.description}
+          name="excerpt"
+          value={form.excerpt}
           onChange={handleChange}
           placeholder="Brief summary of your blog"
           rows={3}
@@ -152,10 +182,12 @@ export default function CreateBlog() {
             "
           >
             <option value="">Select category</option>
-            <option value="React">React</option>
-            <option value="Backend">Backend</option>
-            <option value="CSS">CSS</option>
-            <option value="JavaScript">JavaScript</option>
+
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.name}
+              </option>
+            ))}
           </select>
         </div>
 

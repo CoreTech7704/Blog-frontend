@@ -1,189 +1,190 @@
+import { useEffect, useState } from "react";
 import Hero from "../components/Hero";
 import FeaturedBlogs from "../components/FeaturedBlogs";
-import blogs from "@/data/blogs.json";
 import BlogCard from "@/components/BlogCard";
+import api from "@/api/axios";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 
 export default function Home() {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    api
+      .get("/api/blogs/latest")
+      .then((res) => setBlogs(res.data))
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }, []);
+
   const latestBlogs = blogs.slice(0, 4);
-  const categories = [...new Set(blogs.flatMap(b => b.tags))].slice(0, 10);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    api.get("/api/categories").then((res) => {
+      setCategories(res.data.slice(0, 10));
+    });
+  }, []);
 
   return (
-    <main className=" bg-black text-white overflow-x-hidden">
-      {/* HERO */}
+    <main className="bg-black text-white overflow-x-hidden">
       <Hero />
 
       {/* FEATURED BLOGS */}
-      <section
-        className="
-          relative z-10
-          bg-black
-          py-24 px-6
-          -mt-1
-        "
-      >
+      <section className="relative z-10 bg-black py-24 px-6 -mt-1">
         <div className="mx-auto max-w-6xl">
-          <FeaturedBlogs />
+          <FeaturedBlogs blogs={blogs} loading={loading} />
         </div>
       </section>
 
-      {/* CATEGORIES PREVIEW */}
-      <section
-        className="
-          relative z-20
-          bg-slate-950
-          rounded-[3rem]
-          py-24 px-6
-          mt-24
-        "
-      >
+      {/* CATEGORIES */}
+      <section className="relative z-20 bg-slate-950 rounded-[3rem] py-24 px-6 mt-24">
         <div className="mx-auto max-w-6xl">
-          {/* Header */}
           <div className="mb-12 flex items-end justify-between">
             <div>
-              <h2 className="text-4xl font-bold text-slate-100">
-                Categories
-              </h2>
+              <h2 className="text-4xl font-bold text-slate-100">Categories</h2>
               <p className="mt-2 max-w-2xl text-slate-400">
                 Explore blogs by topics and areas of interest.
               </p>
             </div>
-
             <Link
               to="/categories"
-              className="hidden md:inline-block text-sm text-slate-400 hover:text-white transition"
+              className="hidden md:inline-block text-sm text-slate-400 hover:text-white"
             >
               View all →
             </Link>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {categories.map((cat) => (
-              <Link
-                key={cat}
-                to={`/categories/${cat.toLowerCase()}`}
+          {/* GRID */}
+      <section className="mt-12 px-6 pb-24">
+        <div
+          className="
+            mx-auto max-w-6xl
+            grid gap-4
+            grid-cols-2
+            sm:grid-cols-3
+            md:grid-cols-4
+            lg:grid-cols-5
+          "
+        >
+          {/* LOADING SKELETON */}
+          {loading &&
+            [...Array(10)].map((_, i) => (
+              <div
+                key={i}
                 className="
                   rounded-xl border border-white/10
-                  bg-black/40 backdrop-blur-sm
+                  bg-slate-950
+                  px-4 py-3
+                  h-10
+                  animate-pulse
+                "
+              />
+            ))}
+
+          {/* ERROR */}
+          {error && (
+            <p className="col-span-full text-red-400">
+              Failed to load categories
+            </p>
+          )}
+
+          {/* EMPTY */}
+          {!loading && !error && categories.length === 0 && (
+            <p className="col-span-full text-slate-400">
+              No categories found 🚧
+            </p>
+          )}
+
+          {/* DATA */}
+          {!loading &&
+            !error &&
+            categories.map((cat) => (
+              <Link
+                key={cat._id}
+                to={`/categories/${cat.slug}`}
+                className="
+                  rounded-xl border border-white/10
+                  bg-slate-950
                   px-4 py-3 text-sm text-slate-300
                   hover:text-white hover:border-white/20
                   transition text-center
                 "
               >
-                #{cat}
+                #{cat.name}
               </Link>
             ))}
-          </div>
-
-          {/* Mobile CTA */}
-          <div className="mt-12 text-center md:hidden">
-            <Link
-              to="/categories"
-              className="text-sm text-slate-400 hover:text-white transition"
-            >
-              View all categories →
-            </Link>
-          </div>
+        </div>
+      </section>
         </div>
       </section>
 
-      {/* LATEST BLOGS PREVIEW */}
-      <section
-        className="
-          relative z-30
-          bg-black
-          rounded-t-[3rem]
-          py-24 px-6
-          mt-24
-        "
-      >
+      {/* LATEST BLOGS */}
+      <section className="relative z-30 bg-black rounded-t-[3rem] py-24 px-6 mt-24">
         <div className="mx-auto max-w-6xl">
-          {/* Header */}
           <div className="mb-12 flex items-end justify-between">
             <div>
               <h2 className="text-4xl font-bold text-slate-100">
                 Latest Blogs
               </h2>
               <p className="mt-2 max-w-2xl text-slate-400">
-                Fresh insights, updates, and deep dives from the VoidWork community.
+                Fresh insights from the VoidWork community.
               </p>
             </div>
-
             <Link
               to="/blogs"
-              className="hidden md:inline-block text-sm text-slate-400 hover:text-white transition"
+              className="hidden md:inline-block text-sm text-slate-400 hover:text-white"
             >
               View all →
             </Link>
           </div>
 
-          {/* Grid */}
-          <div
-            className="
-              grid gap-8
-              grid-cols-1
-              sm:grid-cols-2
-              lg:grid-cols-3
-            "
-          >
+          {/* STATES */}
+          {loading && (
+            <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {[...Array(3)].map((_, i) => (
+                <BlogCardSkeleton key={i} />
+              ))}
+            </div>
+          )}
+
+          {error && <p className="text-red-400">Failed to load blogs</p>}
+          {!loading && !error && latestBlogs.length === 0 && (
+            <p className="text-slate-400">No blogs yet 🚧</p>
+          )}
+
+          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {latestBlogs.map((blog) => (
               <BlogCard
-                key={blog.slug}
+                key={blog._id}
                 slug={blog.slug}
                 title={blog.title}
-                excerpt={blog.content.slice(0, 140) + "..."}
+                excerpt={blog.excerpt || blog.content?.slice(0, 140) + "..."}
                 category={blog.tags?.[0] || "General"}
-                readTime={Math.max(3, Math.ceil(blog.content.length / 800))}
+                readTime={blog.readTime || 5}
               />
             ))}
-          </div>
-
-          {/* Mobile CTA */}
-          <div className="mt-12 text-center md:hidden">
-            <Link
-              to="/blogs"
-              className="text-sm text-slate-400 hover:text-white transition"
-            >
-              View all blogs →
-            </Link>
           </div>
         </div>
       </section>
 
       {/* WHY VOIDWORK */}
-      <section
-        className="
-          relative z-40
-          bg-slate-950
-          rounded-t-[3rem]
-          py-32 px-6
-          mt-24
-        "
-      >
+      <section className="relative z-40 bg-slate-950 rounded-t-[3rem] py-32 px-6 mt-24">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Why VoidWork?
-          </h2>
-          <p className="text-slate-300 text-lg leading-relaxed">
-            The internet is full of tutorials that explain what to type, but not
-            why it works. VoidWork exists to bridge that gap — focusing on
-            understanding systems, making better decisions, and learning in a
-            way that actually sticks.
+          <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
+          <p className="text-slate-300 text-lg">
+            VoidWork focuses on understanding systems, not memorizing code.
           </p>
           <Link
-          to="/blogs"
-          className="inline-flex items-center gap-2
-               rounded-xl px-6 py-3 mt-4 font-semibold
-               bg-gradient-to-r from-cyan-500 to-violet-500
-               text-black hover:scale-105 transition
-               border border-white
-               hover:shadow-xl hover:shadow-violet-500/40
-              active:scale-95"
-        >
-          About VoidWork <ArrowRight />
-        </Link>
+            to="/blogs"
+            className="inline-flex items-center gap-2 rounded-xl px-6 py-3 mt-4 font-semibold
+              bg-gradient-to-r from-cyan-500 to-violet-500 text-black"
+          >
+            About VoidWork <ArrowRight />
+          </Link>
         </div>
       </section>
     </main>

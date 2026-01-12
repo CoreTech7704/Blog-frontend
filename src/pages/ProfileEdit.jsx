@@ -1,50 +1,80 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "@/api/axios";
 
 export default function ProfileEdit() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  // mock existing user data
   const [form, setForm] = useState({
-    name: "Harsh Panchal",
-    title: "Full-Stack Developer",
-    about:
-      "I am a full-stack developer who loves building scalable web applications and clean user interfaces.",
-    github: "github.com/harshpanchal",
-    linkedin: "linkedin.com/in/harshpanchal",
-    email: "harsh@example.com",
-  })
+    fullname: "",
+    username: "",
+    bio: "",
+    email: "",
+  });
 
-  const [avatarPreview, setAvatarPreview] = useState(null)
+  const [avatarPreview, setAvatarPreview] = useState(null);
+
+  /* ================= FETCH USER ================= */
+  useEffect(() => {
+    api.get("/api/user/me").then((res) => {
+      const { user } = res.data;
+
+      setForm({
+        fullname: user.fullname,
+        username: user.username,
+        bio: user.bio || "",
+        email: user.email,
+      });
+    });
+  }, []);
 
   function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value })
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleImageChange(e) {
-    const file = e.target.files[0]
-    if (!file) return
-    setAvatarPreview(URL.createObjectURL(file))
+async function handleImageChange(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  // preview instantly
+  setAvatarPreview(URL.createObjectURL(file));
+
+  const fd = new FormData();
+  fd.append("avatar", file);
+
+  try {
+    await api.put("/api/user/me/avatar", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  } catch {
+    alert("Failed to update avatar");
+  }
+}
+
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      await api.put("/api/user/me", {
+        fullname: form.fullname,
+        username: form.username,
+        bio: form.bio,
+      });
+
+      navigate("/profile");
+    } catch (err) {
+      alert(err.response?.data?.message || "Failed to update profile");
+    }
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
-
-    // later: send data to backend
-    console.log("Updated profile:", form)
-
-    navigate("/profile")
-  }
-
+  
   return (
     <main className="max-w-3xl mx-auto px-4 my-24">
       <form
         onSubmit={handleSubmit}
-        className="
-          bg-slate-100 dark:bg-slate-900
-          border border-slate-200 dark:border-slate-800
-          rounded-2xl p-8
-        "
+        className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8"
       >
         <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
           Edit Profile
@@ -57,14 +87,7 @@ export default function ProfileEdit() {
           </label>
 
           <div className="flex items-center gap-4 mt-3">
-            <div
-              className="
-                w-24 h-24 rounded-full
-                bg-slate-300 dark:bg-slate-700
-                flex items-center justify-center
-                overflow-hidden
-              "
-            >
+            <div className="w-24 h-24 rounded-full bg-slate-300 dark:bg-slate-700 flex items-center justify-center overflow-hidden">
               {avatarPreview ? (
                 <img
                   src={avatarPreview}
@@ -78,15 +101,7 @@ export default function ProfileEdit() {
               )}
             </div>
 
-            <label
-              className="
-                cursor-pointer px-4 py-2 rounded-md
-                border border-slate-300 dark:border-slate-700
-                text-slate-700 dark:text-slate-300
-                hover:bg-slate-200 dark:hover:bg-slate-800
-                transition-colors
-              "
-            >
+            <label className="cursor-pointer px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
               Change Image
               <input
                 type="file"
@@ -98,80 +113,49 @@ export default function ProfileEdit() {
           </div>
         </div>
 
-        {/* Name */}
+        {/* Full Name */}
         <Input
           label="Full Name"
-          name="name"
-          value={form.name}
+          name="fullname"
+          value={form.fullname}
           onChange={handleChange}
         />
 
-        {/* Title */}
+        {/* Username */}
         <Input
-          label="Title"
-          name="title"
-          value={form.title}
+          label="Username"
+          name="username"
+          value={form.username}
           onChange={handleChange}
         />
 
-        {/* About */}
+        {/* Bio */}
         <div className="mt-4">
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
-            About Me
+            Bio
           </label>
           <textarea
-            name="about"
-            rows="4"
-            value={form.about}
+            name="bio"
+            rows={4}
+            value={form.bio}
             onChange={handleChange}
-            className="
-              mt-1 w-full rounded-md
-              bg-white dark:bg-slate-800
-              border border-slate-300 dark:border-slate-700
-              text-slate-900 dark:text-slate-100
-              p-3 focus:outline-none focus:ring-2 focus:ring-sky-400
-            "
+            className="mt-1 w-full rounded-md bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
           />
         </div>
 
-        {/* Connect */}
-        <div className="mt-6">
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-            Connect
-          </h2>
-
-          <Input
-            label="GitHub"
-            name="github"
-            value={form.github}
-            onChange={handleChange}
-          />
-
-          <Input
-            label="LinkedIn"
-            name="linkedin"
-            value={form.linkedin}
-            onChange={handleChange}
-          />
-
-          <Input
-            label="Email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-          />
-        </div>
+        {/* Email (read-only) */}
+        <Input
+          label="Email"
+          name="email"
+          value={form.email}
+          disabled
+        />
 
         {/* Actions */}
         <div className="flex gap-3 mt-8">
           <button
             type="submit"
-            className="
-              px-5 py-2 rounded-md
-              bg-sky-400 text-slate-950
-              font-medium hover:bg-sky-300
-              transition-colors
-            "
+            className="px-5 py-2 rounded-md bg-sky-400 text-slate-950 font-medium hover:bg-sky-300 transition-colors"
           >
             Save Changes
           </button>
@@ -179,23 +163,19 @@ export default function ProfileEdit() {
           <button
             type="button"
             onClick={() => navigate("/profile")}
-            className="
-              px-5 py-2 rounded-md
-              border border-slate-300 dark:border-slate-700
-              text-slate-700 dark:text-slate-300
-              hover:bg-slate-200 dark:hover:bg-slate-800
-              transition-colors
-            "
+            className="px-5 py-2 rounded-md border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
           >
             Cancel
           </button>
         </div>
       </form>
     </main>
-  )
+  );
 }
 
-function Input({ label, name, value, onChange }) {
+/* ================= INPUT ================= */
+
+function Input({ label, name, value, onChange, disabled }) {
   return (
     <div className="mt-4">
       <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -206,14 +186,11 @@ function Input({ label, name, value, onChange }) {
         name={name}
         value={value}
         onChange={onChange}
-        className="
-          mt-1 w-full rounded-md
-          bg-white dark:bg-slate-800
-          border border-slate-300 dark:border-slate-700
-          text-slate-900 dark:text-slate-100
-          p-2 focus:outline-none focus:ring-2 focus:ring-sky-400
-        "
+        disabled={disabled}
+        className={`mt-1 w-full rounded-md bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 p-2 focus:outline-none focus:ring-2 focus:ring-sky-400 ${
+          disabled ? "opacity-60 cursor-not-allowed" : ""
+        }`}
       />
     </div>
-  )
+  );
 }

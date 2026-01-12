@@ -1,7 +1,21 @@
-import blogs from "@/data/blogs.json";
+import { useEffect, useState } from "react";
 import BlogCard from "@/components/BlogCard";
+import BlogCardSkeleton from "@/components/BlogCardSkeleton";
+import api from "@/api/axios";
 
 export default function Blogs() {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    api
+      .get("/api/blogs/latest") 
+      .then((res) => setBlogs(res.data))
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <main className="min-h-screen bg-slate-950 text-white pt-32">
       {/* PAGE HEADER */}
@@ -25,16 +39,42 @@ export default function Blogs() {
             lg:grid-cols-3
           "
         >
-          {blogs.map((blog) => (
-            <BlogCard
-              key={blog.slug}
-              slug={blog.slug}
-              title={blog.title}
-              excerpt={blog.content.slice(0, 140) + "..."}
-              category={blog.tags?.[0] || "General"}
-              readTime={Math.max(3, Math.ceil(blog.content.length / 800))}
-            />
-          ))}
+          {/* LOADING */}
+          {loading &&
+            [...Array(6)].map((_, i) => (
+              <BlogCardSkeleton key={i} />
+            ))}
+
+          {/* ERROR */}
+          {error && (
+            <p className="col-span-full text-red-400">
+              Failed to load blogs.
+            </p>
+          )}
+
+          {/* EMPTY */}
+          {!loading && !error && blogs.length === 0 && (
+            <p className="col-span-full text-slate-400">
+              No blogs found 🚧
+            </p>
+          )}
+
+          {/* DATA */}
+          {!loading &&
+            !error &&
+            blogs.map((blog) => (
+              <BlogCard
+                key={blog._id}
+                slug={blog.slug}
+                title={blog.title}
+                excerpt={
+                  blog.excerpt ||
+                  blog.content?.slice(0, 140) + "..."
+                }
+                category={blog.tags?.[0] || "General"}
+                readTime={blog.readTime || 5}
+              />
+            ))}
         </div>
       </section>
     </main>

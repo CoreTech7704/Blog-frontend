@@ -1,8 +1,19 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getCategories } from "@/utils/getCategories";
+import api from "@/api/axios";
 
 export default function CategoriesPage() {
-  const categories = getCategories(); // all categories
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    api
+      .get("/api/categories")
+      .then((res) => setCategories(res.data))
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <main className="min-h-screen bg-black text-white pt-32">
@@ -30,23 +41,56 @@ export default function CategoriesPage() {
             lg:grid-cols-5
           "
         >
-          {categories.map((cat) => (
-            <Link
-              key={cat}
-              to={`/categories/${cat.toLowerCase()}`}
-              className="
-                rounded-xl border border-white/10
-                bg-slate-950
-                px-4 py-3 text-sm text-slate-300
-                hover:text-white hover:border-white/20
-                transition text-center
-              "
-            >
-              #{cat}
-            </Link>
-          ))}
+          {/* LOADING SKELETON */}
+          {loading &&
+            [...Array(10)].map((_, i) => (
+              <div
+                key={i}
+                className="
+                  rounded-xl border border-white/10
+                  bg-slate-950
+                  px-4 py-3
+                  h-10
+                  animate-pulse
+                "
+              />
+            ))}
+
+          {/* ERROR */}
+          {error && (
+            <p className="col-span-full text-red-400">
+              Failed to load categories
+            </p>
+          )}
+
+          {/* EMPTY */}
+          {!loading && !error && categories.length === 0 && (
+            <p className="col-span-full text-slate-400">
+              No categories found 🚧
+            </p>
+          )}
+
+          {/* DATA */}
+          {!loading &&
+            !error &&
+            categories.map((cat) => (
+              <Link
+                key={cat._id}
+                to={`/categories/${cat.slug}`}
+                className="
+                  rounded-xl border border-white/10
+                  bg-slate-950
+                  px-4 py-3 text-sm text-slate-300
+                  hover:text-white hover:border-white/20
+                  transition text-center
+                "
+              >
+                #{cat.name}
+              </Link>
+            ))}
         </div>
       </section>
     </main>
   );
 }
+
