@@ -5,6 +5,7 @@ import api from "@/api/axios";
 export default function CreateBlog() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
+  const [coverFile, setCoverFile] = useState(null);
 
   useEffect(() => {
     api.get("/api/categories").then((res) => {
@@ -13,7 +14,7 @@ export default function CreateBlog() {
   }, []);
 
   const [coverPreview, setCoverPreview] = useState(
-    "https://via.placeholder.com/1200x500?text=Cover+Image"
+    "https://via.placeholder.com/1200x500?text=Cover+Image",
   );
 
   const [form, setForm] = useState({
@@ -21,7 +22,6 @@ export default function CreateBlog() {
     excerpt: "",
     content: "",
     category: "",
-    status: "draft",
   });
 
   function handleChange(e) {
@@ -31,11 +31,14 @@ export default function CreateBlog() {
   function handleCoverChange(e) {
     const file = e.target.files[0];
     if (!file) return;
+
+    setCoverFile(file);
     setCoverPreview(URL.createObjectURL(file));
   }
 
   function removeCover() {
     setCoverPreview(null);
+    setCoverFile(null);
   }
 
   async function handleSubmit(status) {
@@ -45,20 +48,36 @@ export default function CreateBlog() {
     }
 
     try {
-      const payload = {
-        title: form.title,
-        excerpt: form.excerpt,
-        content: form.content,
-        category: form.category,
-        status,
-      };
+      const fd = new FormData();
+      fd.append("title", form.title);
+      fd.append("excerpt", form.excerpt);
+      fd.append("content", form.content);
+      fd.append("category", form.category);
+      fd.append("status", status);
 
-      await api.post("/api/blogs", payload);
+      // ✅ Validate only if cover exists
+      if (coverFile) {
+        if (!coverFile.type.startsWith("image/")) {
+          alert("Only images allowed");
+          return;
+        }
+
+        if (coverFile.size > 5 * 1024 * 1024) {
+          alert("Max 5MB allowed");
+          return;
+        }
+
+        fd.append("cover", coverFile);
+      }
+
+      await api.post("/api/blogs", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       alert(
         status === "published"
           ? "Blog published successfully"
-          : "Draft saved successfully"
+          : "Draft saved successfully",
       );
 
       navigate("/dashboard");

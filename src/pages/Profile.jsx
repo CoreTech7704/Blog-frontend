@@ -16,9 +16,7 @@ export default function Profile() {
 
   if (loading) {
     return (
-      <p className="text-center mt-24 text-slate-500">
-        Loading profile...
-      </p>
+      <p className="text-center mt-24 text-slate-500">Loading profile...</p>
     );
   }
 
@@ -32,23 +30,19 @@ export default function Profile() {
           {/* Avatar */}
           <div className="w-28 h-28 rounded-full bg-slate-300 flex items-center justify-center">
             <img
-  src={getImageUrl(user.avatar)}
-  alt="avatar"
-  className="w-full h-full rounded-full object-cover"
-/>
+              src={getImageUrl(user.avatar)}
+              alt="avatar"
+              className="w-full h-full rounded-full object-cover"
+            />
           </div>
 
           {/* Info */}
           <div className="flex-1">
             <h1 className="text-3xl font-bold">{user.fullname}</h1>
 
-            <p className="text-slate-500 mt-1">
-              @{user.username}
-            </p>
+            <p className="text-slate-500 mt-1">@{user.username}</p>
 
-            <p className="text-slate-400 mt-1">
-              {user.email}
-            </p>
+            <p className="text-slate-400 mt-1">{user.email}</p>
 
             <div className="flex gap-3 mt-5">
               <Link
@@ -58,10 +52,7 @@ export default function Profile() {
                 Edit Profile
               </Link>
 
-              <Link
-                to="/dashboard"
-                className="px-4 py-2 border rounded-md"
-              >
+              <Link to="/dashboard" className="px-4 py-2 border rounded-md">
                 My Blogs
               </Link>
             </div>
@@ -72,15 +63,16 @@ export default function Profile() {
         <div className="grid grid-cols-3 gap-4 mt-8">
           <StatCard label="Blogs" value={stats.blogs} />
           <StatCard label="Role" value={user.role} />
-          <StatCard label="Joined" value={new Date(user.createdAt).getFullYear()} />
+          <StatCard
+            label="Joined"
+            value={new Date(user.createdAt).getFullYear()}
+          />
         </div>
 
         {/* Bio */}
         <div className="mt-8 bg-slate-200 dark:bg-slate-800 rounded-xl p-6">
           <h2 className="font-semibold text-lg">About</h2>
-          <p className="mt-3">
-            {user.bio || "No bio added yet."}
-          </p>
+          <p className="mt-3">{user.bio || "No bio added yet."}</p>
         </div>
       </div>
     </main>

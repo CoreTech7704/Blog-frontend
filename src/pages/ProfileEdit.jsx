@@ -12,46 +12,55 @@ export default function ProfileEdit() {
     email: "",
   });
 
-  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState("");
 
   /* ================= FETCH USER ================= */
-  useEffect(() => {
-    api.get("/api/user/me").then((res) => {
-      const { user } = res.data;
+useEffect(() => {
+  api.get("/api/user/me").then((res) => {
+    const { user } = res.data;
 
-      setForm({
-        fullname: user.fullname,
-        username: user.username,
-        bio: user.bio || "",
-        email: user.email,
-      });
+    setForm({
+      fullname: user.fullname,
+      username: user.username,
+      bio: user.bio || "",
+      email: user.email,
     });
-  }, []);
+
+    if (user.avatar) {
+      setAvatarPreview(
+        user.avatar.startsWith("http")
+          ? user.avatar
+          : `${import.meta.env.VITE_API_URL}${user.avatar}`
+      );
+    }
+  });
+}, []);
+
 
   function handleChange(e) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-async function handleImageChange(e) {
-  const file = e.target.files[0];
-  if (!file) return;
+  async function handleImageChange(e) {
+    const file = e.target.files[0];
+    if (!file) return;
 
-  // preview instantly
-  setAvatarPreview(URL.createObjectURL(file));
+    // preview instantly
+    setAvatarPreview(URL.createObjectURL(file));
 
-  const fd = new FormData();
-  fd.append("avatar", file);
+    const fd = new FormData();
+    fd.append("avatar", file);
 
-  try {
-    await api.put("/api/user/me/avatar", fd, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-  } catch {
-    alert("Failed to update avatar");
+    try {
+      await api.put("/api/user/me/avatar", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+    } catch {
+      setAvatarPreview(form.avatar); // revert
+      alert("Failed to update avatar");
+    }
   }
-}
-
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -69,7 +78,6 @@ async function handleImageChange(e) {
     }
   }
 
-  
   return (
     <main className="max-w-3xl mx-auto px-4 my-24">
       <form
@@ -144,12 +152,7 @@ async function handleImageChange(e) {
         </div>
 
         {/* Email (read-only) */}
-        <Input
-          label="Email"
-          name="email"
-          value={form.email}
-          disabled
-        />
+        <Input label="Email" name="email" value={form.email} disabled />
 
         {/* Actions */}
         <div className="flex gap-3 mt-8">

@@ -17,7 +17,6 @@ import NotFound from "./pages/NotFound";
 
 /* Auth pages */
 import Auth from "./pages/Auth";
-import VerifyEmail from "./pages/VerifyEmail";
 import ResetPassword from "./pages/ResetPassword";
 
 /* User / Protected pages */
@@ -46,7 +45,6 @@ function App() {
 
           {/* ================= AUTH ================= */}
           <Route path="/auth" element={<Auth />} />
-          <Route path="/verify-email/:token" element={<VerifyEmail />} />
           <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* ================= PROTECTED ================= */}
