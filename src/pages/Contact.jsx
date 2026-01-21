@@ -1,6 +1,49 @@
+import { useState } from "react";
+import api from "@/api/axios";
 import FloatingLines from "@/components/ui/FloatingLines";
 
 export default function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError("");
+    setSuccess(false);
+
+    if (!form.name || !form.email || !form.subject || !form.message) {
+      return setError("All fields are required");
+    }
+
+    if (!/^\S+@\S+\.\S+$/.test(form.email)) {
+      return setError("Enter a valid email address");
+    }
+
+    try {
+      setLoading(true);
+      await api.post("/api/contact", form);
+      setSuccess(true);
+      setForm({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      setError("Failed to send message. Try again later.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <main>
       <section className="relative min-h-screen overflow-hidden bg-[#05070d]">
@@ -55,69 +98,59 @@ export default function Contact() {
         </div>
 
         <div className="max-w-md mx-auto relative overflow-hidden z-10 bg-gray-800 p-8 rounded-lg shadow-md before:w-24 before:h-24 before:absolute before:bg-purple-600 before:rounded-full before:-z-10 before:blur-2xl after:w-32 after:h-32 after:absolute after:bg-sky-400 after:rounded-full after:-z-10 after:blur-xl after:top-24 after:-right-12">
-          <form method="post" action="#">
-            <div className="mb-4">
-              <label
-                className="block text-sm font-medium text-gray-300"
-                htmlFor="name"
-              >
-                Full Name
-              </label>
-              <input
-                className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
-                id="name"
-                type="text"
-                placeholder="John Doe"
-                required
-              />
-            </div>
+          <form onSubmit={handleSubmit}>
+            <Input
+              label="Full Name"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="John Doe"
+            />
 
-            <div className="mb-4">
-              <label
-                className="block text-sm font-medium text-gray-300"
-                htmlFor="email"
-              >
-                Email Address
-              </label>
-              <input
-                className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
-                name="email"
-                id="email"
-                type="email"
-                placeholder="john@example.com"
-                required
-              />
-            </div>
+            <Input
+              label="Email Address"
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="john@example.com"
+            />
 
-            <div className="mb-4">
-              <label
-                className="block text-sm font-medium text-gray-300"
-                htmlFor="message"
-              >
-                Message
-              </label>
-              <textarea
-                className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
-                rows="3"
-                name="message"
-                id="message"
-                placeholder="Tell us what's on your mind..."
-                required
-              ></textarea>
-            </div>
+            <Input
+              label="Subject"
+              name="subject"
+              value={form.subject}
+              onChange={handleChange}
+              placeholder="Subject of message"
+            />
 
-            <div className="flex justify-end">
+            <Textarea
+              label="Message"
+              name="message"
+              value={form.message}
+              onChange={handleChange}
+              placeholder="Tell us what's on your mind..."
+            />
+
+            {error && <p className="text-sm text-red-400 mt-2">{error}</p>}
+
+            {success && (
+              <p className="text-sm text-green-400 mt-2">
+                Message sent successfully!
+              </p>
+            )}
+
+            <div className="flex justify-end mt-4">
               <button
-                className="inline-flex items-center gap-2
-               rounded-xl px-6 py-3 font-semibold
-               bg-gradient-to-r from-cyan-500 to-violet-500
-               text-white hover:scale-105 transition
-               hover:shadow-xl hover:shadow-violet-500/40
-              active:scale-95"
-                type="submit"
-                disabled
+                disabled={loading || success}
+                className="
+                  rounded-xl px-6 py-3 font-semibold
+                  bg-gradient-to-r from-cyan-500 to-violet-500
+                  text-white hover:scale-105 transition
+                  disabled:opacity-50 disabled:cursor-not-allowed
+                "
               >
-                Send Message (Coming Soon)
+                {loading ? "Sending..." : "Send Message"}
               </button>
             </div>
           </form>
@@ -127,5 +160,37 @@ export default function Contact() {
         </p>
       </section>
     </main>
+  );
+}
+
+function Input({ label, name, value, onChange, type = "text", placeholder }) {
+  return (
+    <div className="mb-4">
+      <label className="block text-sm text-gray-300">{label}</label>
+      <input
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
+      />
+    </div>
+  );
+}
+
+function Textarea({ label, name, value, onChange, placeholder }) {
+  return (
+    <div className="mb-4">
+      <label className="block text-sm text-gray-300">{label}</label>
+      <textarea
+        name={name}
+        rows={4}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
+      />
+    </div>
   );
 }
