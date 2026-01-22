@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import api from "@/api/axios";
-import MarkdownContent from "@/components/MarkdownContent";
+import MarkdownContent from "@/components/MarkDownContent";
 import BlogViewSkeleton from "@/components/BlogViewSkeleton";
 
 export default function BlogView() {
