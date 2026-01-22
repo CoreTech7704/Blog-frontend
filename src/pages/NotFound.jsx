@@ -1,5 +1,5 @@
 import FloatingLines from "@/components/ui/FloatingLines";
-import FuzzyText from "../components/ui/Fuzzytext";
+import FuzzyText from "../components/ui/FuzzyText";
 import { ArrowRight } from 'lucide-react';
 import { Link } from "react-router-dom";
 
