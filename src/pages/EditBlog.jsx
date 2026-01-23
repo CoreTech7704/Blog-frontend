@@ -17,21 +17,21 @@ export default function EditBlog() {
   const [loading, setLoading] = useState(true);
 
   /* ================= FETCH BLOG ================= */
-useEffect(() => {
-  api
-    .get(`/api/blogs/edit/${id}`)
-    .then((res) => {
-      const blog = res.data;
-      setForm({
-        title: blog.title,
-        excerpt: blog.excerpt || "",
-        content: blog.content,
-        category: blog.category?._id || "",
-        status: blog.status,
-      });
-    })
-    .finally(() => setLoading(false));
-}, [id]);
+  useEffect(() => {
+    api
+      .get(`/api/blogs/edit/${id}`)
+      .then((res) => {
+        const blog = res.data;
+        setForm({
+          title: blog.title,
+          excerpt: blog.excerpt || "",
+          content: blog.content,
+          category: blog.category?._id || "",
+          status: blog.status,
+        });
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
 
   function handleChange(e) {
     const { name, value } = e.target;

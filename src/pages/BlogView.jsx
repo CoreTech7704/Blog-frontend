@@ -81,8 +81,6 @@ export default function BlogView() {
               className="w-full h-96 object-cover rounded-xl mb-10"
             />
           )}
-
-          <div className="mx-auto max-w-3xl">...</div>
         </section>
       </section>
 
