@@ -72,7 +72,11 @@ export default function BlogView() {
           {blog.coverImage && (
             <img
               loading="lazy"
-              src={blog.coverImage}
+              src={
+                blog.coverImage.startsWith("http")
+                  ? blog.coverImage
+                  : `${import.meta.env.VITE_API_URL}${blog.coverImage}`
+              }
               alt="cover"
               className="w-full h-96 object-cover rounded-xl mb-10"
             />
