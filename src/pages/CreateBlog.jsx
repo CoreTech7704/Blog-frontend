@@ -13,9 +13,7 @@ export default function CreateBlog() {
     });
   }, []);
 
-  const [coverPreview, setCoverPreview] = useState(
-    "https://via.placeholder.com/1200x500?text=Cover+Image",
-  );
+  const [coverPreview, setCoverPreview] = useState(null);
 
   const [form, setForm] = useState({
     title: "",
@@ -120,7 +118,6 @@ export default function CreateBlog() {
           rows={3}
         />
 
-        {/* Cover Image*/}
         {/* Cover Image */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
