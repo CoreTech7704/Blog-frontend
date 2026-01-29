@@ -6,6 +6,7 @@ export default function CreateBlog() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [coverFile, setCoverFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     api.get("/api/categories").then((res) => {
@@ -40,12 +41,16 @@ export default function CreateBlog() {
   }
 
   async function handleSubmit(status) {
+    if (isSubmitting) return;
+    
     if (!form.title || !form.content || !form.category) {
       alert("Title, content, and category are required");
       return;
     }
 
     try {
+      setIsSubmitting(true);
+      
       const fd = new FormData();
       fd.append("title", form.title);
       fd.append("excerpt", form.excerpt);
@@ -82,6 +87,8 @@ export default function CreateBlog() {
     } catch (err) {
       console.error(err);
       alert("Failed to create blog");
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -221,39 +228,38 @@ export default function CreateBlog() {
         <div className="flex flex-col sm:flex-row gap-3 mt-8">
           <button
             type="button"
+            disabled={isSubmitting}
             onClick={() => handleSubmit("published")}
-            className="
-              px-5 py-2 rounded-md
-              bg-sky-400 text-slate-950
-              font-medium hover:bg-sky-300
-              transition-colors
-            "
+            className={`
+              px-5 py-2 rounded-md font-medium transition-colors
+              bg-sky-400 text-slate-950 hover:bg-sky-300
+              disabled:opacity-50 disabled:cursor-not-allowed
+            `}
           >
-            Publish Blog
+            {isSubmitting ? "Publishing..." : "Publish Blog"}
           </button>
 
           <button
             type="button"
+            disabled={isSubmitting}
             onClick={() => handleSubmit("draft")}
-            className="
+            className={`
               px-5 py-2 rounded-md
               border border-slate-300 dark:border-slate-700
               text-slate-700 dark:text-slate-300
               hover:bg-slate-200 dark:hover:bg-slate-800
               transition-colors
-            "
+              disabled:opacity-50 disabled:cursor-not-allowed
+            `}
           >
-            Save as Draft
+            {isSubmitting ? "Saving..." : "Save as Draft"}
           </button>
 
           <button
             type="button"
+            disabled={isSubmitting}
             onClick={() => navigate("/dashboard")}
-            className="
-              px-5 py-2 rounded-md
-              text-slate-500 dark:text-slate-400
-              hover:underline
-            "
+            className="px-5 py-2 rounded-md text-slate-500 dark:text-slate-400 hover:underline disabled:opacity-50"
           >
             Cancel
           </button>
