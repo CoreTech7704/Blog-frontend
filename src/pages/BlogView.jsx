@@ -64,7 +64,7 @@ export default function BlogView() {
 
           <p className="mt-6 text-sm text-slate-500">
             {new Date(blog.createdAt).toDateString()} •{" "}
-            {Math.max(3, Math.ceil(blog.content.length / 800))} min read
+            {blog.readingTime} min read
           </p>
         </div>
 
