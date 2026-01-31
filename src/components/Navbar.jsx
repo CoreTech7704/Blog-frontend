@@ -119,7 +119,7 @@ export default function Navbar({ theme, setTheme }) {
         </div>
 
         {/* Right actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <ThemeToggle theme={theme} setTheme={setTheme} />
 
           <button
