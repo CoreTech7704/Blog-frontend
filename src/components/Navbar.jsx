@@ -1,16 +1,26 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import api from "@/api/axios";
 
 export default function Navbar({ theme, setTheme }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
   const [userOpen, setUserOpen] = useState(false);
   const userRef = useRef(null);
+
+  const location = useLocation();
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "auto";
+  }, [mobileOpen]);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -73,9 +83,8 @@ export default function Navbar({ theme, setTheme }) {
                 {user.fullname || "User"}
                 <ChevronDown
                   size={14}
-                  className={`transition-transform ${
-                    userOpen ? "rotate-180" : ""
-                  }`}
+                  className={`transition-transform ${userOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -85,10 +94,9 @@ export default function Navbar({ theme, setTheme }) {
                   bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl
                   border border-white/20 shadow-lg
                   transition-all duration-200
-                  ${
-                    userOpen
-                      ? "opacity-100 scale-100"
-                      : "opacity-0 scale-95 pointer-events-none"
+                  ${userOpen
+                    ? "opacity-100 scale-100"
+                    : "opacity-0 scale-95 pointer-events-none"
                   }
                 `}
               >
@@ -114,6 +122,13 @@ export default function Navbar({ theme, setTheme }) {
         <div className="flex items-center gap-4">
           <ThemeToggle theme={theme} setTheme={setTheme} />
 
+          <button
+            className="md:hidden text-slate-300 text-2xl"
+            onClick={() => setMobileOpen((v) => !v)}
+          >
+            <Menu />
+          </button>
+
           {!user && (
             <Link
               to="/auth?mode=login"
@@ -129,6 +144,53 @@ export default function Navbar({ theme, setTheme }) {
           )}
         </div>
       </nav>
+
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div
+          className="
+            md:hidden mt-2 mx-4
+            bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl
+            border border-white/20 rounded-2xl
+            p-4 space-y-4
+            transition-all duration-200 ease-out
+          "
+        >
+          <MobileLink to="/" label="Home" setMobileOpen={setMobileOpen} />
+          <MobileLink to="/blogs" label="Blogs" setMobileOpen={setMobileOpen} />
+          <MobileLink to="/contact" label="Contact" setMobileOpen={setMobileOpen} />
+          <MobileLink to="/about" label="About" setMobileOpen={setMobileOpen} />
+
+          {user ? (
+            <>
+              <MobileLink to="/profile" label="Profile" setMobileOpen={setMobileOpen} />
+              <MobileLink to="/dashboard" label="Dashboard" setMobileOpen={setMobileOpen} />
+              <MobileLink
+                to="/dashboard/blogs/new"
+                label="Create Blog"
+                setMobileOpen={setMobileOpen}
+              />
+
+              <button
+                onClick={() => {
+                  setMobileOpen(false);
+                  handleLogout();
+                }}
+                className="text-left text-red-500"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <MobileLink
+              to="/auth?mode=login"
+              label="Login"
+              setMobileOpen={setMobileOpen}
+            />
+          )}
+        </div>
+      )}
+
     </header>
   );
 }
@@ -164,5 +226,22 @@ function DropdownItem({ to, label }) {
     >
       {label}
     </Link>
+  );
+}
+
+function MobileLink({ to, label, setMobileOpen }) {
+  const navigate = useNavigate();
+
+  return (
+    <button
+      onClick={() => {
+        setMobileOpen(false);
+        navigate(to);
+      }}
+      className="block w-full text-left text-slate-700 dark:text-slate-300
+                 hover:text-cyan-400"
+    >
+      {label}
+    </button>
   );
 }
