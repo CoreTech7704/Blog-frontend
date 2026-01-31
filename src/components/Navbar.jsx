@@ -20,6 +20,9 @@ export default function Navbar({ theme, setTheme }) {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [mobileOpen]);
 
   // Close dropdown on outside click
@@ -125,6 +128,7 @@ export default function Navbar({ theme, setTheme }) {
           <button
             className="md:hidden text-slate-300 text-2xl"
             onClick={() => setMobileOpen((v) => !v)}
+            aria-label="Toggle navigation menu"
           >
             <Menu />
           </button>
@@ -132,8 +136,9 @@ export default function Navbar({ theme, setTheme }) {
           {!user && (
             <Link
               to="/auth?mode=login"
-              className="
-                px-5 h-10 flex items-center justify-center
+
+              className="hidden
+                px-5 h-10 md:flex items-center justify-center
                 rounded-xl font-semibold
                 bg-gradient-to-r from-cyan-500 to-violet-500
                 text-black hover:scale-105 transition
@@ -171,23 +176,44 @@ export default function Navbar({ theme, setTheme }) {
                 setMobileOpen={setMobileOpen}
               />
 
+              <div
+                className="
+                  flex items-center justify-center
+                  pt-4 mt-4
+                  border-t border-white/20
+                "
+              >
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    handleLogout();
+                  }}
+                  className="text-lg font-medium text-red-500"
+                >
+                  Logout
+                </button>
+              </div>
+            </>
+          ) : (
+            <div
+              className="
+                flex items-center justify-center
+                pt-4 mt-4
+                border-t border-white/20
+              "
+            >
               <button
                 onClick={() => {
                   setMobileOpen(false);
-                  handleLogout();
+                  navigate("/auth?mode=login");
                 }}
-                className="text-left text-red-500"
+                className="text-lg font-medium text-cyan-500"
               >
-                Logout
+                Login
               </button>
-            </>
-          ) : (
-            <MobileLink
-              to="/auth?mode=login"
-              label="Login"
-              setMobileOpen={setMobileOpen}
-            />
+            </div>
           )}
+
         </div>
       )}
 
