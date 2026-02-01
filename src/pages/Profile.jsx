@@ -1,11 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "@/api/axios";
 import { getImageUrl } from "@/utils/getImageUrl";
+import { useAuth } from "@/hooks/useAuth";
+
 
 export default function Profile() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     api
@@ -22,6 +27,24 @@ export default function Profile() {
 
   const { user, stats } = data;
 
+  async function handledeleteaccount() {
+    if (deleting) return;
+    const ok = window.confirm(
+      "This will permanently delete your account and all data. Are you sure?"
+    );
+    if (!ok) return;
+
+    setDeleting(true);
+    try {
+      await api.post("/api/auth/deleteaccount");
+    } finally {
+      localStorage.removeItem("accessToken");
+      setUser(null);
+      navigate("/auth?mode=login");
+    }
+  }
+
+
   return (
     <main className="max-w-6xl mx-auto px-4 mt-24 mb-10">
       <div className="bg-slate-100 dark:bg-slate-900 border rounded-2xl p-8">
@@ -30,7 +53,7 @@ export default function Profile() {
           {/* Avatar */}
           <div className="w-28 h-28 rounded-full bg-slate-300 flex items-center justify-center">
             <img
-              src={getImageUrl(user.avatar)}
+              src={getImageUrl(user.avatar) || "/default-avatar.png"}
               alt="avatar"
               className="w-full h-full rounded-full object-cover"
             />
@@ -73,6 +96,27 @@ export default function Profile() {
         <div className="mt-8 bg-slate-200 dark:bg-slate-800 rounded-xl p-6">
           <h2 className="font-semibold text-lg">About</h2>
           <p className="mt-3">{user.bio || "No bio added yet."}</p>
+        </div>
+
+        <div className="flex gap-3 mt-5">
+          <Link
+            to="/change-password"
+            className="px-4 py-2 bg-sky-400 rounded-md font-medium"
+          >
+            Change Password
+          </Link>
+
+          <button
+            onClick={() => {
+              handledeleteaccount();
+            }}
+            disabled={deleting}
+            className={`px-4 py-2 rounded-md
+              ${deleting ? "bg-red-400 cursor-not-allowed" : "bg-red-600 hover:bg-red-700"}
+              text-white`}
+            >
+            {deleting ? "Deleting..." : "Delete Account"}
+          </button>
         </div>
       </div>
     </main>
