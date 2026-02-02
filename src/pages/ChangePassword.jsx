@@ -1,21 +1,52 @@
 import { useState } from "react";
+import api from "@/api/axios";
 import FloatingLines from "@/components/ui/FloatingLines";
 
 export default function ChangePassword() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [form, setForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
 
-  function handleSubmit(e) {
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
     setError(null);
+
+    if (loading) return;
+
+    if (form.newPassword !== form.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    if (form.newPassword.length < 8) {
+      setError("Password must be at least 8 characters");
+      return;
+    }
+
     setLoading(true);
 
-    // 🔗 Backend later
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await api.post("/api/auth/change-password", {
+        currentPassword: form.currentPassword,
+        newPassword: form.newPassword,
+      });
+
       setSuccess(true);
-    }, 1200);
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to update password");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -54,8 +85,11 @@ export default function ChangePassword() {
                     Current Password
                   </label>
                   <input
+                    name="currentPassword"
                     type="password"
                     required
+                    value={form.currentPassword}
+                    onChange={handleChange}
                     className="w-full rounded-lg px-4 py-3
                                bg-black/40 border border-white/10
                                text-white placeholder-slate-500
@@ -70,8 +104,11 @@ export default function ChangePassword() {
                     New Password
                   </label>
                   <input
+                    name="newPassword"
                     type="password"
                     required
+                    value={form.newPassword}
+                    onChange={handleChange}
                     className="w-full rounded-lg px-4 py-3
                                bg-black/40 border border-white/10
                                text-white placeholder-slate-500
@@ -86,8 +123,11 @@ export default function ChangePassword() {
                     Confirm New Password
                   </label>
                   <input
+                    name="confirmPassword"
                     type="password"
                     required
+                    value={form.confirmPassword}
+                    onChange={handleChange}
                     className="w-full rounded-lg px-4 py-3
                                bg-black/40 border border-white/10
                                text-white placeholder-slate-500
