@@ -55,9 +55,13 @@ export default function Navbar({ theme, setTheme }) {
       <nav
         className="
           relative mx-auto mt-4 max-w-6xl h-14 px-6
-          bg-transparent backdrop-blur-md
-          border border-white/20 rounded-2xl
+          bg-white/70 dark:bg-slate-900/60
+          backdrop-blur-xl
+          border border-slate-200/50 dark:border-white/20
+          shadow-sm dark:shadow-none
+          rounded-2xl
           flex items-center justify-between
+          transition-colors
         "
       >
         {/* Brand */}
@@ -70,7 +74,12 @@ export default function Navbar({ theme, setTheme }) {
         </Link>
 
         {/* Navigation */}
-        <div className="hidden md:flex gap-6 text-lg font-medium items-center">
+        <div 
+        className="
+              hidden md:flex gap-6 text-lg font-medium items-center
+              text-slate-700 dark:text-slate-300
+              "
+        >
           <NavLink to="/" label="Home" />
           <NavLink to="/blogs" label="Blogs" />
           <NavLink to="/contact" label="Contact" />
@@ -81,7 +90,12 @@ export default function Navbar({ theme, setTheme }) {
             <div className="relative" ref={userRef}>
               <button
                 onClick={() => setUserOpen((v) => !v)}
-                className="flex items-center gap-1 text-slate-300 hover:text-cyan-400"
+                className="
+                flex items-center gap-1
+                text-slate-700 dark:text-slate-300
+                hover:text-cyan-500
+                transition-colors
+                "
               >
                 {user.fullname || "User"}
                 <ChevronDown
@@ -94,9 +108,12 @@ export default function Navbar({ theme, setTheme }) {
               <div
                 className={`
                   absolute right-0 mt-3 w-48 rounded-xl
-                  bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl
-                  border border-white/20 shadow-lg
+                  bg-white/80 dark:bg-slate-900/80
+                  backdrop-blur-xl
+                  border border-slate-200/50 dark:border-white/20
+                  shadow-lg
                   transition-all duration-200
+                  hover:bg-slate-100 dark:hover:bg-slate-800
                   ${userOpen
                     ? "opacity-100 scale-100"
                     : "opacity-0 scale-95 pointer-events-none"
@@ -126,7 +143,11 @@ export default function Navbar({ theme, setTheme }) {
 
           <Link
             to="#"
-            className="text-slate-300 text-2xl hover:scale-105 transition"
+            className="
+              text-slate-600 dark:text-slate-300
+              hover:text-cyan-500
+              text-2xl hover:scale-105 transition
+            "  
           >
             <Search />
           </Link>
@@ -134,7 +155,7 @@ export default function Navbar({ theme, setTheme }) {
           <ThemeToggle theme={theme} setTheme={setTheme} />
 
           <button
-            className="md:hidden text-slate-300 text-2xl"
+            className="md:hidden text-slate-600 dark:text-slate-300 text-2xl"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle navigation menu"
           >
