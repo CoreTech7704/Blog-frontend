@@ -44,7 +44,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* CATEGORIES */}
-      <section className="relative z-20 bg-slate-950 rounded-t-[3rem] py-24 px-6 mt-24">
+      <section className="relative z-20 bg-slate-950 rounded-t-[3rem] py-20 px-6 mt-24">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 flex items-end justify-between">
           <div>

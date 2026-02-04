@@ -257,11 +257,12 @@ function NavLink({ to, label }) {
     <Link
       to={to}
       className="
-        text-slate-300 hover:text-cyan-400
+        hover:text-cyan-400
         relative after:absolute after:-bottom-1
         after:left-0 after:h-[2px] after:w-0
         after:bg-cyan-400 after:transition-all
         hover:after:w-full
+        transition-colors
       "
     >
       {label}
