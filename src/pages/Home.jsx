@@ -44,7 +44,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* CATEGORIES */}
-      <section className="relative z-20 bg-slate-950 rounded-[3rem] py-24 px-6 mt-24">
+      <section className="relative z-20 bg-slate-950 rounded-t-[3rem] py-24 px-6 mt-24">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 flex items-end justify-between">
           <div>
@@ -129,10 +129,8 @@ export default function Home() {
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* WHY VOIDWORK */}
-      <section className="relative z-40 bg-slate-950 rounded-t-[3rem] py-32 px-6 mt-24">
+      <section className="relative z-40 bg-slate-950 rounded-b-[3rem] py-32 px-6">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
           <p className="text-slate-300 text-lg">
@@ -151,7 +149,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* LATEST BLOGS */}
-      <section className="relative z-30 bg-black rounded-t-[3rem] py-24 px-6 mt-24">
+      <section className="relative z-30 bg-black py-24 px-6 mt-24">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between">
             <div>
