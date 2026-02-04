@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
-import { ChevronDown, Menu } from "lucide-react";
+import { ChevronDown, Menu, Search } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import api from "@/api/axios";
@@ -123,6 +123,14 @@ export default function Navbar({ theme, setTheme }) {
 
         {/* Right actions */}
         <div className="flex ml-2 items-center gap-2">
+
+          <Link
+            to="#"
+            className="text-slate-300 text-2xl hover:scale-105 transition"
+          >
+            <Search />
+          </Link>
+
           <ThemeToggle theme={theme} setTheme={setTheme} />
 
           <button
