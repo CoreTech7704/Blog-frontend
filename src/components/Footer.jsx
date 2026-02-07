@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 border-t border-white/10">
+    <footer className="bg-slate-950 dark:bg-slate-950 border-t border-white/10 transition-colors duration-300">
       <div className="mx-auto max-w-6xl px-6 py-12">
         
         {/* Top section */}
