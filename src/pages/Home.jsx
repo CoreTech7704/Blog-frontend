@@ -32,7 +32,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-black text-white overflow-x-hidden">
+    <main className="bg-slate-50 dark:bg-black text-slate-900 dark:text-white overflow-x-hidden transition-colors duration-300">
       <Hero />
 
       {/* FEATURED BLOGS */}
@@ -45,19 +45,23 @@ export default function Home() {
       <SectionDivider />
 
       {/* CATEGORIES */}
-      <section className="relative z-20 bg-slate-950 rounded-t-[3rem] py-20 px-6 mt-24">
+      <section className="relative z-20 bg-white dark:bg-slate-950 rounded-t-[3rem] py-20 px-6 mt-24 transition-colors duration-300">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between">
             <div>
-              <h2 className="text-4xl font-bold text-slate-100">Categories</h2>
-              <p className="mt-2 max-w-2xl text-slate-400">
+              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100">Categories</h2>
+              <p className="mt-2 max-w-2xl text-slate-500 dark:text-slate-400">
                 Explore blogs by topics and areas of interest.
               </p>
             </div>
             <Link
               to="/categories"
-              className="hidden md:inline-block text-sm text-slate-400 hover:text-white"
-            >
+              className="
+                hidden md:inline-block text-sm
+                text-slate-500 dark:text-slate-400
+                hover:text-slate-900 dark:hover:text-white
+              "
+              >
               View all →
             </Link>
           </div>
@@ -80,12 +84,13 @@ export default function Home() {
                   <div
                     key={i}
                     className="
-                  rounded-xl border border-white/10
-                  bg-slate-950
-                  px-4 py-3
-                  h-10
-                  animate-pulse
-                "
+                    rounded-xl border
+                    border-slate-200 dark:border-white/10
+                    bg-slate-100 dark:bg-slate-950
+                    px-4 py-3
+                    h-10
+                    animate-pulse
+                  "
                   />
                 ))}
 
@@ -112,11 +117,13 @@ export default function Home() {
                     to={`/categories/${cat.slug}`}
                     aria-label={`Category ${cat.name}`}
                     className="
-                          group rounded-xl border border-white/10
-                          bg-slate-950 px-4 py-3 text-sm
-                          text-slate-300 text-center
+                          group rounded-xl border
+                          bg-white dark:bg-slate-950
+                          border-slate-200 dark:border-white/10
+                          text-slate-700 dark:text-slate-300
+                          px-4 py-3 text-sm text-center
                           transition-all duration-300
-                          hover:text-white
+                          hover:text-slate-900 dark:hover:text-white
                           hover:border-cyan-400/40
                           hover:-translate-y-0.5
                           hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]
@@ -131,7 +138,7 @@ export default function Home() {
       </section>
 
       {/* GLOW DIVIDER */}
-      <div className="relative z-30 bg-slate-950">
+      <div className="relative z-30 bg-white dark:bg-slate-950 transition-colors duration-300">
         <div className="relative h-16">
           <GlowLine
             orientation="horizontal"
@@ -143,10 +150,10 @@ export default function Home() {
       </div>
 
       {/* WHY VOIDWORK */}
-      <section className="relative bg-slate-950 rounded-b-[3rem] py-32 px-6">
+      <section className="relative bg-white dark:bg-slate-950 rounded-b-[3rem] py-32 px-6 transition-colors duration-300">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
-          <p className="text-slate-300 text-lg">
+          <p className="text-slate-700 dark:text-slate-300 text-lg">
             VoidWork focuses on understanding systems, not memorizing code.
           </p>
           <Link
@@ -159,24 +166,26 @@ export default function Home() {
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* LATEST BLOGS */}
-      <section className="relative z-30 bg-black py-24 px-6 mt-24">
+      <section className="relative z-30 bg-slate-100 dark:bg-black py-24 px-6 mt-24 transition-colors duration-300">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between">
             <div>
-              <h2 className="text-4xl font-bold text-slate-100">
+              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100">
                 Latest Blogs
               </h2>
-              <p className="mt-2 max-w-2xl text-slate-400">
+              <p className="mt-2 max-w-2xl text-slate-500 dark:text-slate-400">
                 Fresh insights from the VoidWork community.
               </p>
             </div>
             <Link
               to="/blogs"
-              className="hidden md:inline-block text-sm text-slate-400 hover:text-white"
-            >
+              className="
+                hidden md:inline-block text-sm
+                text-slate-500 dark:text-slate-400
+                hover:text-slate-900 dark:hover:text-white
+              "
+              >
               View all →
             </Link>
           </div>
