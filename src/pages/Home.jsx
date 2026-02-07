@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 import SectionDivider from "@/components/SectionDivider";
+import GlowLine from '@/components/GlowLine';
 
 export default function Home() {
   const [blogs, setBlogs] = useState([]);
@@ -45,26 +46,26 @@ export default function Home() {
 
       {/* CATEGORIES */}
       <section className="relative z-20 bg-slate-950 rounded-t-[3rem] py-20 px-6 mt-24">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-12 flex items-end justify-between">
-          <div>
-            <h2 className="text-4xl font-bold text-slate-100">Categories</h2>
-            <p className="mt-2 max-w-2xl text-slate-400">
-              Explore blogs by topics and areas of interest.
-            </p>
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 flex items-end justify-between">
+            <div>
+              <h2 className="text-4xl font-bold text-slate-100">Categories</h2>
+              <p className="mt-2 max-w-2xl text-slate-400">
+                Explore blogs by topics and areas of interest.
+              </p>
+            </div>
+            <Link
+              to="/categories"
+              className="hidden md:inline-block text-sm text-slate-400 hover:text-white"
+            >
+              View all →
+            </Link>
           </div>
-          <Link
-            to="/categories"
-            className="hidden md:inline-block text-sm text-slate-400 hover:text-white"
-          >
-            View all →
-          </Link>
-        </div>
 
-        {/* GRID */}
-        <div className="mt-12 pb-24">
-          <div
-            className="
+          {/* GRID */}
+          <div className="mt-12 pb-24">
+            <div
+              className="
             mx-auto max-w-6xl
             grid gap-4
             grid-cols-2
@@ -72,45 +73,45 @@ export default function Home() {
             md:grid-cols-4
             lg:grid-cols-5
           "
-          >
-            {/* LOADING SKELETON */}
-            {loading &&
-              [...Array(10)].map((_, i) => (
-                <div
-                  key={i}
-                  className="
+            >
+              {/* LOADING SKELETON */}
+              {loading &&
+                [...Array(10)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="
                   rounded-xl border border-white/10
                   bg-slate-950
                   px-4 py-3
                   h-10
                   animate-pulse
                 "
-                />
-              ))}
+                  />
+                ))}
 
-            {/* ERROR */}
-            {error && (
-              <p className="col-span-full text-red-400">
-                Failed to load categories
-              </p>
-            )}
+              {/* ERROR */}
+              {error && (
+                <p className="col-span-full text-red-400">
+                  Failed to load categories
+                </p>
+              )}
 
-            {/* EMPTY */}
-            {!loading && !error && categories.length === 0 && (
-              <p className="col-span-full text-slate-400">
-                No categories found 🚧
-              </p>
-            )}
+              {/* EMPTY */}
+              {!loading && !error && categories.length === 0 && (
+                <p className="col-span-full text-slate-400">
+                  No categories found 🚧
+                </p>
+              )}
 
-            {/* DATA */}
-            {!loading &&
-              !error &&
-              categories.map((cat) => (
-                <Link
-                  key={cat._id}
-                  to={`/categories/${cat.slug}`}
-                  aria-label={`Category ${cat.name}`}
-                  className="
+              {/* DATA */}
+              {!loading &&
+                !error &&
+                categories.map((cat) => (
+                  <Link
+                    key={cat._id}
+                    to={`/categories/${cat.slug}`}
+                    aria-label={`Category ${cat.name}`}
+                    className="
                           group rounded-xl border border-white/10
                           bg-slate-950 px-4 py-3 text-sm
                           text-slate-300 text-center
@@ -120,17 +121,29 @@ export default function Home() {
                           hover:-translate-y-0.5
                           hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]
                         "
-                >
-                  #{cat.name}
-                </Link>
-              ))}
+                  >
+                    #{cat.name}
+                  </Link>
+                ))}
+            </div>
           </div>
-        </div>
         </div>
       </section>
 
+      {/* GLOW DIVIDER */}
+      <div className="relative z-30 bg-slate-950">
+        <div className="relative h-16">
+          <GlowLine
+            orientation="horizontal"
+            position="50%"
+            color="purple"
+            className="left-0"
+          />
+        </div>
+      </div>
+
       {/* WHY VOIDWORK */}
-      <section className="relative z-40 bg-slate-950 rounded-b-[3rem] py-32 px-6">
+      <section className="relative bg-slate-950 rounded-b-[3rem] py-32 px-6">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
           <p className="text-slate-300 text-lg">
