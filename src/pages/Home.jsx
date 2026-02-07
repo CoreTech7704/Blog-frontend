@@ -164,7 +164,7 @@ export default function Home() {
       </section>
 
       {/* LATEST BLOGS */}
-      <section className="relative z-30 bg-slate-100 dark:bg-black py-24 px-6 mt-24 transition-colors duration-300">
+      <section className="relative z-30 bg-slate-100 dark:bg-black py-30 px-6 transition-colors duration-300">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between">
             <div>
