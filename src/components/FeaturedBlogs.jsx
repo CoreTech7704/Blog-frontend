@@ -22,7 +22,7 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
   const [mainBlog, ...sideBlogs] = featuredBlogs;
 
   return (
-    <section className="bg-black py-24 px-6">
+    <section className="bg-black dark:bg-black py-24 px-6 transition-colors duration-300">
       <div className="mx-auto max-w-6xl">
         {/* Section Header */}
         <div className="mb-12 flex items-end justify-between">
@@ -38,8 +38,13 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
 
           <a
             href="/blogs"
-            className="hidden md:inline-block text-sm text-slate-400 hover:text-white transition"
-          >
+            className="
+              hidden md:inline-block text-sm
+              text-slate-400
+              hover:text-white
+              transition-colors
+            "
+            >
             View all →
           </a>
         </div>
@@ -79,8 +84,13 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
         <div className="mt-10 text-center md:hidden">
           <a
             href="/blogs"
-            className="inline-block text-sm text-slate-400 hover:text-white transition"
-          >
+            className="
+              inline-block text-sm
+              text-slate-400
+              hover:text-white
+              transition-colors
+            "
+            >
             View all blogs →
           </a>
         </div>

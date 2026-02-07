@@ -6,7 +6,6 @@ import api from "@/api/axios";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import BlogCardSkeleton from "@/components/BlogCardSkeleton";
-import SectionDivider from "@/components/SectionDivider";
 import GlowLine from '@/components/GlowLine';
 
 export default function Home() {
@@ -41,8 +40,6 @@ export default function Home() {
           <FeaturedBlogs blogs={blogs} loading={loading} />
         </div>
       </section>
-
-      <SectionDivider />
 
       {/* CATEGORIES */}
       <section className="relative z-20 bg-white dark:bg-slate-950 rounded-t-[3rem] py-20 px-6 mt-24 transition-colors duration-300">
