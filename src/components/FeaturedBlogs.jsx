@@ -22,7 +22,7 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
   const [mainBlog, ...sideBlogs] = featuredBlogs;
 
   return (
-    <section className="bg-black dark:bg-black py-24 px-6 transition-colors duration-300">
+    <section className="bg-black py-24 px-6 transition-colors duration-300">
       <div className="mx-auto max-w-6xl">
         {/* Section Header */}
         <div className="mb-12 flex items-end justify-between">

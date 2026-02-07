@@ -31,7 +31,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-slate-50 dark:bg-black text-slate-900 dark:text-white overflow-x-hidden transition-colors duration-300">
+    <main className="bg-black text-slate-900 dark:text-white overflow-x-hidden transition-colors duration-300">
       <Hero />
 
       {/* FEATURED BLOGS */}
