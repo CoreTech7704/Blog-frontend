@@ -87,7 +87,7 @@ export default function About() {
       <section className="py-32 px-6 bg-slate-100 dark:bg-black transition-colors duration-300">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Our Mission</h2>
-          <p className="text-slate-300 text-lg leading-relaxed">
+          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed">
             Our mission is to help developers think better, not just code
             faster. We believe strong fundamentals, clarity, and curiosity
             matter more than chasing every new trend.
@@ -114,7 +114,7 @@ export default function About() {
 
       {/* Call to Action */}
       <section className="py-32 px-6 bg-black dark:bg-black text-center transition-colors duration-300">
-        <h2 className="text-3xl font-bold mb-4">
+        <h2 className="text-3xl text-slate-300 font-bold mb-4">
           If this sounds like your kind of space
         </h2>
         <p className="text-slate-400 mb-8">

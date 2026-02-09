@@ -9,8 +9,15 @@ export default function Auth() {
   const mode = params.get("mode") || "login";
 
   return (
-    <main className="relative min-h-screen bg-black text-white
-                     flex items-center justify-center px-6 pt-32 overflow-hidden">
+    <main className="
+      relative min-h-screen
+      bg-black dark:bg-black
+      text-white
+      flex items-center justify-center
+      px-6 pt-32
+      overflow-hidden
+      transition-colors duration-300
+    ">
       <div className="pointer-events-none absolute inset-0 -z-0 opacity-70">
         <FloatingLines enabledWaves="top,middle,bottom" />
       </div>

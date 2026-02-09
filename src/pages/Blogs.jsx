@@ -17,12 +17,18 @@ export default function Blogs() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white pt-32">
+    <main className="
+      min-h-screen
+      bg-slate-50 dark:bg-slate-950
+      text-slate-900 dark:text-white
+      pt-32
+      transition-colors duration-300
+    ">
       {/* PAGE HEADER */}
       <section className="px-6">
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-4xl font-bold text-slate-100">Recent Blogs</h1>
-          <p className="mt-2 max-w-2xl text-slate-400">
+          <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100">Recent Blogs</h1>
+          <p className="mt-2 max-w-2xl text-slate-500 dark:text-slate-400">
             Fresh insights, updates, and deep dives from the VoidWork community.
           </p>
         </div>
@@ -54,8 +60,8 @@ export default function Blogs() {
 
           {/* EMPTY */}
           {!loading && !error && blogs.length === 0 && (
-            <p className="col-span-full text-slate-400">
-              No blogs found 🚧
+            <p className="col-span-full text-slate-500 dark:text-slate-400">
+              No blogs found
             </p>
           )}
 
