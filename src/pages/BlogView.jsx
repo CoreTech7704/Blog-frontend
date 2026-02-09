@@ -27,6 +27,7 @@ export default function BlogView() {
   /* ================= FETCH COMMENTS ================= */
   useEffect(() => {
     if (!blog?._id) return;
+    if (commentLoading) return;
 
     api
       .get(`/api/blogs/${blog._id}/comments`)
@@ -46,7 +47,7 @@ export default function BlogView() {
   return (
     <main className="bg-black text-white min-h-screen">
       {/* ================= HEADER ================= */}
-      <section className="pt-40 pb-24 px-6 bg-[#05070d]">
+      <section className="pt-40 pb-16 px-6 bg-[#05070d]">
         <div className="mx-auto max-w-3xl">
           <Link
             to="/blogs"
@@ -64,11 +65,11 @@ export default function BlogView() {
 
           <p className="mt-6 text-sm text-slate-500">
             {new Date(blog.createdAt).toDateString()} •{" "}
-            {blog.readingTime} min read
+            {blog.readTime || 5} min read
           </p>
         </div>
 
-        <section className="pt-32 pb-24 px-6 bg-[#05070d]">
+        <section className="px-6 pb-24 bg-[#05070d]">
           {blog.coverImage && (
             <img
               loading="lazy"
@@ -135,9 +136,12 @@ export default function BlogView() {
 
             <button
               disabled={commentLoading}
-              className="mt-3 px-4 py-2 bg-sky-400 text-black rounded-md font-medium"
-            >
-              Post Comment
+              className="
+                mt-3 px-4 py-2 rounded-md font-medium
+                bg-sky-400 text-black
+                disabled:opacity-60 disabled:cursor-not-allowed
+              ">
+              {commentLoading ? "Posting..." : "Post Comment"}
             </button>
           </form>
 
@@ -149,7 +153,11 @@ export default function BlogView() {
               {comments.map((c) => (
                 <div key={c._id} className="flex gap-4">
                   <img
-                    src={c.user.avatar}
+                    src={
+                      c.user.avatar?.startsWith("http")
+                        ? c.user.avatar
+                        : `${import.meta.env.VITE_API_URL}${c.user.avatar}`
+                    }
                     alt="avatar"
                     className="w-10 h-10 rounded-full object-cover"
                   />
@@ -165,17 +173,19 @@ export default function BlogView() {
                     <p className="text-slate-300 mt-1">{c.content}</p>
 
                     {/* Delete (owner/admin later) */}
-                    <button
-                      onClick={async () => {
-                        await api.delete(`/api/comments/${c._id}`);
-                        setComments((prev) =>
-                          prev.filter((x) => x._id !== c._id),
-                        );
-                      }}
-                      className="text-xs text-red-400 hover:text-red-300 mt-1"
-                    >
-                      Delete
-                    </button>
+                    {c.user._id === blog.author?._id && (
+                      <button
+                        onClick={async () => {
+                          await api.delete(`/api/comments/${c._id}`);
+                          setComments((prev) =>
+                            prev.filter((x) => x._id !== c._id),
+                          );
+                        }}
+                        className="text-xs text-red-400 hover:text-red-300 mt-1"
+                      >
+                        Delete
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -183,6 +193,6 @@ export default function BlogView() {
           )}
         </div>
       </section>
-    </main>
+    </main >
   );
 }
