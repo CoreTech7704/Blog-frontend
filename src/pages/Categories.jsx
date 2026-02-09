@@ -15,6 +15,10 @@ export default function CategoriesPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    document.title = "Categories • VoidWork";
+  }, []);
+
   return (
     <main className="min-h-screen bg-black text-white pt-32">
       {/* HEADER */}
@@ -29,6 +33,9 @@ export default function CategoriesPage() {
         </div>
       </section>
 
+      <div className="mx-auto max-w-6xl my-10 border-t border-white/10" />
+      </div>
+      
       {/* GRID */}
       <section className="mt-12 px-6 pb-24">
         <div
@@ -78,11 +85,17 @@ export default function CategoriesPage() {
                 key={cat._id}
                 to={`/categories/${cat.slug}`}
                 className="
-                  rounded-xl border border-white/10
-                  bg-slate-950
-                  px-4 py-3 text-sm text-slate-300
-                  hover:text-white hover:border-white/20
-                  transition text-center
+                  group rounded-xl border border-white/10
+                  bg-slate-950 px-4 py-3 text-sm
+                  text-slate-300 text-center
+                  transition-all duration-300
+                  hover:text-white
+                  hover:border-cyan-400/40
+                  hover:-translate-y-0.5
+                  hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-cyan-400/60
                 "
               >
                 #{cat.name}
