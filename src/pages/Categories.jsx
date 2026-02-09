@@ -34,8 +34,7 @@ export default function CategoriesPage() {
       </section>
 
       <div className="mx-auto max-w-6xl my-10 border-t border-white/10" />
-      </div>
-      
+
       {/* GRID */}
       <section className="mt-12 px-6 pb-24">
         <div
