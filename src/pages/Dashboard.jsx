@@ -16,7 +16,7 @@ export default function Dashboard() {
   const published = blogs.filter((b) => b.status === "published").length;
   const drafts = blogs.filter((b) => b.status === "draft").length;
 
-  // ✅ DELETE HANDLER (CORRECT PLACE)
+  // DELETE HANDLER (CORRECT PLACE)
   async function handleDelete(id) {
     if (!confirm("Delete this blog?")) return;
 

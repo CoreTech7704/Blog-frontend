@@ -36,6 +36,7 @@ export default function CreateBlog() {
   }
 
   function removeCover() {
+    URL.revokeObjectURL(coverPreview);
     setCoverPreview(null);
     setCoverFile(null);
   }
@@ -93,13 +94,18 @@ export default function CreateBlog() {
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 my-24">
+    <main className="
+      max-w-3xl mx-auto px-4 my-24
+      bg-slate-50 dark:bg-black
+      transition-colors duration-300
+    ">
       <form
         onSubmit={(e) => e.preventDefault()}
         className="
           bg-slate-100 dark:bg-slate-900
           border border-slate-200 dark:border-slate-800
           rounded-2xl p-8
+          transition-colors duration-300
         "
       >
         <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
@@ -133,12 +139,12 @@ export default function CreateBlog() {
 
           <div
             className="
-      relative w-full h-56
-      rounded-xl overflow-hidden
-      bg-slate-200 dark:bg-slate-800
-      border border-slate-300 dark:border-slate-700
-      flex items-center justify-center
-    "
+              relative w-full h-56
+              rounded-xl overflow-hidden
+              bg-slate-200 dark:bg-slate-800
+              border border-slate-300 dark:border-slate-700
+              flex items-center justify-center
+            "
           >
             {coverPreview ? (
               <img
@@ -156,10 +162,10 @@ export default function CreateBlog() {
             <div className="absolute bottom-3 right-3 flex gap-2">
               <label
                 className="
-          cursor-pointer px-3 py-1.5 rounded-md text-sm
-          bg-slate-900/70 text-white
-          hover:bg-slate-900 transition
-        "
+                  cursor-pointer px-3 py-1.5 rounded-md text-sm
+                  bg-slate-900/80 dark:bg-slate-900/70 text-white
+                  hover:bg-slate-900 transition
+                "
               >
                 Change
                 <input

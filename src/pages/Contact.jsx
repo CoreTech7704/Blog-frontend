@@ -94,7 +94,7 @@ export default function Contact() {
       <section className="py-32 px-6 bg-white dark:bg-slate-950 transition-colors duration-300">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Send us a Message</h2>
-          <p className="mb-6 text-lg text-slate-300">
+          <p className="mb-6 text-lg text-slate-700 dark:text-slate-300">
             Have a question or want to collaborate? Fill out the form below and
             we'll get back to you as soon as possible.
           </p>
