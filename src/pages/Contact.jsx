@@ -45,8 +45,8 @@ export default function Contact() {
   }
 
   return (
-    <main>
-      <section className="relative min-h-screen overflow-hidden bg-[#05070d]">
+    <main className="bg-slate-50 dark:bg-black text-slate-900 dark:text-white transition-colors duration-300">
+      <section className="relative min-h-screen overflow-hidden bg-[#05070d] dark:bg-[#05070d] transition-colors duration-300">
         {/* FloatingLines BACKGROUND */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-70">
           <div className="w-[100%] h-[100vh]">
@@ -77,10 +77,13 @@ export default function Contact() {
       </section>
 
       {/* Get in Touch Section */}
-      <section id="Learnmore" className="py-32 px-6 bg-black">
+      <section
+        id="Learnmore"
+        className="py-32 px-6 bg-slate-100 dark:bg-black transition-colors duration-300"
+      >
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Get in Touch</h2>
-          <p className="mb-6 text-lg text-slate-300">
+          <p className="mb-6 text-lg text-slate-700 dark:text-slate-300">
             We'd love to hear from you! Whether you have questions, suggestions,
             or just want to say hello, feel free to drop us a message.
           </p>
@@ -88,7 +91,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-32 px-6 bg-slate-950">
+      <section className="py-32 px-6 bg-white dark:bg-slate-950 transition-colors duration-300">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Send us a Message</h2>
           <p className="mb-6 text-lg text-slate-300">
@@ -97,7 +100,18 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="max-w-md mx-auto relative overflow-hidden z-10 bg-gray-800 p-8 rounded-lg shadow-md before:w-24 before:h-24 before:absolute before:bg-purple-600 before:rounded-full before:-z-10 before:blur-2xl after:w-32 after:h-32 after:absolute after:bg-sky-400 after:rounded-full after:-z-10 after:blur-xl after:top-24 after:-right-12">
+        <div className="
+          max-w-md mx-auto relative overflow-hidden z-10
+          bg-white/80 dark:bg-gray-800
+          border border-slate-200 dark:border-white/10
+          p-8 rounded-lg shadow-md
+          backdrop-blur-sm
+          before:w-24 before:h-24 before:absolute
+          before:bg-purple-600 before:rounded-full before:-z-10 before:blur-2xl
+          after:w-32 after:h-32 after:absolute after:bg-sky-400
+          after:rounded-full after:-z-10 after:blur-xl after:top-24 after:-right-12
+          transition-colors duration-300
+        ">
           <form onSubmit={handleSubmit}>
             <Input
               label="Full Name"
@@ -155,7 +169,7 @@ export default function Contact() {
             </div>
           </form>
         </div>
-        <p className="mt-4 text-xs text-slate-400 text-center">
+        <p className="mt-4 text-xs text-slate-500 dark:text-slate-400 text-center">
           We usually reply within 24–48 hours.
         </p>
       </section>
@@ -166,14 +180,21 @@ export default function Contact() {
 function Input({ label, name, value, onChange, type = "text", placeholder }) {
   return (
     <div className="mb-4">
-      <label className="block text-sm text-gray-300">{label}</label>
+      <label className="block text-sm text-slate-600 dark:text-gray-300">{label}</label>
       <input
         name={name}
         type={type}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
+        className="
+          mt-1 p-2 w-full 
+          bg-slate-100 dark:bg-gray-700
+          border border-slate-300 rounded-md dark:border-gray-600
+          text-slate-900 dark:text-white
+          placeholder:text-slate-400
+          focus:outline-none focus:ring-2 focus:ring-cyan-500
+          transition-colors"
       />
     </div>
   );
@@ -182,14 +203,21 @@ function Input({ label, name, value, onChange, type = "text", placeholder }) {
 function Textarea({ label, name, value, onChange, placeholder }) {
   return (
     <div className="mb-4">
-      <label className="block text-sm text-gray-300">{label}</label>
+      <label className="block text-sm text-slate-600 dark:text-gray-300">{label}</label>
       <textarea
         name={name}
         rows={4}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
+        className="
+          mt-1 p-2 w-full 
+          bg-slate-100 dark:bg-gray-700
+          border border-slate-300 rounded-md dark:border-gray-600
+          text-slate-900 dark:text-white
+          placeholder:text-slate-400
+          focus:outline-none focus:ring-2 focus:ring-cyan-500
+          transition-colors"
       />
     </div>
   );

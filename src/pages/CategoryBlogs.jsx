@@ -28,33 +28,52 @@ useEffect(() => {
 
   if (error) {
     return (
-      <main className="min-h-screen flex items-center justify-center text-white">
+      <main className="
+        min-h-screen flex items-center justify-center
+        bg-slate-50 dark:bg-black
+        text-slate-900 dark:text-white
+        transition-colors duration-300
+      ">
         Category not found
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-black text-white pt-32">
+    <main className="
+      min-h-screen
+      bg-slate-50 dark:bg-black
+      text-slate-900 dark:text-white
+      pt-32
+      transition-colors duration-300
+    ">
       {/* HEADER */}
       <section className="px-6">
         <div className="mx-auto max-w-6xl">
           <Link
             to="/categories"
-            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white mb-6"
-          >
+            className="
+              inline-flex items-center gap-2 text-sm mb-6
+              text-slate-500 dark:text-slate-400
+              hover:text-slate-900 dark:hover:text-white
+              transition-colors
+            "
+            >
             <ArrowLeft size={16} />
             Back to categories
           </Link>
 
           {loading ? (
-            <div className="h-10 w-64 bg-white/10 rounded animate-pulse" />
+            <div className="
+              h-10 w-64 rounded animate-pulse
+              bg-slate-200 dark:bg-white/10
+            " />
           ) : (
             <>
-              <h1 className="text-4xl font-bold text-slate-100">
+              <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100">
                 #{category?.name}
               </h1>
-              <p className="mt-2 max-w-2xl text-slate-400">
+              <p className="mt-2 max-w-2xl text-slate-500 dark:text-slate-400">
                 Blogs filed under {category?.name}
               </p>
             </>
@@ -81,7 +100,7 @@ useEffect(() => {
 
           {/* EMPTY */}
           {!loading && blogs.length === 0 && (
-            <p className="col-span-full text-slate-400">
+            <p className="col-span-full text-slate-500 dark:text-slate-400">
               No blogs in this category yet 🚧
             </p>
           )}
