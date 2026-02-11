@@ -258,7 +258,9 @@ html * {
   body {
     @apply bg-background text-foreground;
   }
+}
 
+@layer components {
   .surface {
     @apply bg-card text-card-foreground border border-border rounded-xl;
   }
