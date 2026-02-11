@@ -11,24 +11,6 @@ body,
   height: 100%;
 }
 
-@layer components {
-  .auth-input {
-    @apply w-full rounded-xl bg-black/40 border border-white/10 text-white;
-  }
-
-  .auth-primary-btn {
-    @apply w-full rounded-xl bg-gradient-to-r from-cyan-500 to-violet-500 py-3 font-semibold text-black transition hover:scale-[1.02];
-  }
-
-  .auth-secondary-btn {
-    @apply rounded-xl border border-white/20 px-6 py-3 text-white hover:bg-white/10 transition;
-  }
-
-  .auth-error {
-    @apply text-sm text-red-400 mt-2;
-  }
-}
-
 /* Enable class-based dark mode (Tailwind v4) */
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -271,6 +253,22 @@ html {
 }
 
 @layer components {
+  .auth-input {
+    @apply w-full rounded-xl bg-black/40 border border-white/10 text-white;
+  }
+
+  .auth-primary-btn {
+    @apply w-full rounded-xl bg-gradient-to-r from-cyan-500 to-violet-500 py-3 font-semibold text-black transition hover:scale-[1.02];
+  }
+
+  .auth-secondary-btn {
+    @apply rounded-xl border border-white/20 px-6 py-3 text-white hover:bg-white/10 transition;
+  }
+
+  .auth-error {
+    @apply text-sm text-red-400 mt-2;
+  }
+
   .surface {
     @apply bg-card text-card-foreground border border-border rounded-xl;
   }
@@ -296,7 +294,7 @@ html {
   }
 
   .btn-danger {
-    @apply border border-destructive bg-destructive text-destructive-foreground hover:opacity-90;
+    @apply border border-destructive bg-destructive text-foreground hover:opacity-90;
   }
 
   .badge {
