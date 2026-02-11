@@ -2,7 +2,9 @@
 @import "tw-animate-css";
 @import "highlight.js/styles/github-dark.css";
 
-html, body, #root {
+html,
+body,
+#root {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
@@ -10,20 +12,15 @@ html, body, #root {
 }
 
 .auth-input {
-  @apply w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3
-         text-white placeholder:text-slate-500
-         focus:outline-none focus:ring-2 focus:ring-cyan-500;
+  @apply w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500;
 }
 
 .auth-primary-btn {
-  @apply w-full rounded-xl bg-gradient-to-r from-cyan-500 to-violet-500
-         py-3 font-semibold text-black
-         hover:scale-[1.02] transition;
+  @apply w-full rounded-xl bg-gradient-to-r from-cyan-500 to-violet-500 py-3 font-semibold text-black hover:scale-[1.02] transition;
 }
 
 .auth-secondary-btn {
-  @apply rounded-xl border border-white/20 px-6 py-3
-         text-white hover:bg-white/10 transition;
+  @apply rounded-xl border border-white/20 px-6 py-3 text-white hover:bg-white/10 transition;
 }
 
 .auth-error {
@@ -34,7 +31,8 @@ html, body, #root {
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Smooth theme transitions */
-html, html * {
+html,
+html * {
   transition:
     background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
@@ -256,8 +254,39 @@ html, html * {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
-}
 
+  .surface {
+    @apply bg-card text-card-foreground border border-border rounded-xl;
+  }
+
+  .card {
+    @apply surface p-5;
+  }
+
+  .card-header {
+    @apply mb-2 font-semibold;
+  }
+
+  .card-subtitle {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-md px-4 py-2 text-sm font-medium transition;
+  }
+
+  .btn-outline {
+    @apply btn border border-border bg-transparent
+           hover:bg-accent hover:text-accent-foreground;
+  }
+
+  .btn-danger {
+    @apply btn border border-destructive text-destructive
+           hover:bg-destructive hover:text-destructive-foreground;
+  }
+}
