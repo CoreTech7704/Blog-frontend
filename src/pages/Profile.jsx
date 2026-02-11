@@ -4,13 +4,13 @@ import api from "@/api/axios";
 import { getImageUrl } from "@/utils/getImageUrl";
 import { useAuth } from "@/hooks/useAuth";
 
-
 export default function Profile() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState(false);
+
   const navigate = useNavigate();
   const { setUser } = useAuth();
-  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     api
@@ -21,14 +21,17 @@ export default function Profile() {
 
   if (loading) {
     return (
-      <p className="text-center mt-24 text-slate-500">Loading profile...</p>
+      <p className="text-center mt-24 text-muted-foreground">
+        Loading profile...
+      </p>
     );
   }
 
   const { user, stats } = data;
 
-  async function handledeleteaccount() {
+  async function handleDeleteAccount() {
     if (deleting) return;
+
     const ok = window.confirm(
       "This will permanently delete your account and all data. Are you sure?"
     );
@@ -44,14 +47,13 @@ export default function Profile() {
     }
   }
 
-
   return (
     <main className="max-w-6xl mx-auto px-4 mt-24 mb-10">
-      <div className="bg-slate-100 dark:bg-slate-900 border rounded-2xl p-8">
+      <div className="card p-6 sm:p-8">
         {/* Header */}
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8">
           {/* Avatar */}
-          <div className="w-28 h-28 rounded-full bg-slate-300 flex items-center justify-center">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-muted flex items-center justify-center">
             <img
               src={getImageUrl(user.avatar) || "/default-avatar.png"}
               alt="avatar"
@@ -62,20 +64,25 @@ export default function Profile() {
           {/* Info */}
           <div className="flex-1">
             <h1 className="text-3xl font-bold">{user.fullname}</h1>
+            <p className="mt-1 text-muted-foreground">
+              @{user.username}
+            </p>
+            <p className="text-muted-foreground">
+              {user.email}
+            </p>
 
-            <p className="text-slate-500 mt-1">@{user.username}</p>
-
-            <p className="text-slate-400 mt-1">{user.email}</p>
-
-            <div className="flex gap-3 mt-5">
+            <div className="flex flex-col sm:flex-row gap-3 mt-5">
               <Link
                 to="/editprofile"
-                className="px-4 py-2 bg-sky-400 rounded-md font-medium"
+                className="btn bg-primary text-primary-foreground w-full sm:w-auto"
               >
                 Edit Profile
               </Link>
 
-              <Link to="/dashboard" className="px-4 py-2 border rounded-md">
+              <Link
+                to="/dashboard"
+                className="btn-outline w-full sm:w-auto"
+              >
                 My Blogs
               </Link>
             </div>
@@ -83,7 +90,7 @@ export default function Profile() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
           <StatCard label="Blogs" value={stats.blogs} />
           <StatCard label="Role" value={user.role} />
           <StatCard
@@ -93,28 +100,33 @@ export default function Profile() {
         </div>
 
         {/* Bio */}
-        <div className="mt-8 bg-slate-200 dark:bg-slate-800 rounded-xl p-6">
+        <div className="surface mt-8 p-6">
           <h2 className="font-semibold text-lg">About</h2>
-          <p className="mt-3">{user.bio || "No bio added yet."}</p>
+          <p className="mt-3 text-muted-foreground">
+            {user.bio || "No bio added yet."}
+          </p>
         </div>
 
-        <div className="flex gap-3 mt-5">
+        {/* Actions */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-6">
           <Link
             to="/change-password"
-            className="px-4 py-2 bg-sky-400 rounded-md font-medium"
+            className="btn bg-primary text-primary-foreground w-full sm:w-auto"
           >
             Change Password
           </Link>
 
           <button
-            onClick={() => {
-              handledeleteaccount();
-            }}
+            onClick={handleDeleteAccount}
             disabled={deleting}
-            className={`px-4 py-2 rounded-md
-              ${deleting ? "bg-red-400 cursor-not-allowed" : "bg-red-600 hover:bg-red-700"}
-              text-white`}
-            >
+            className={`btn w-full sm:w-auto
+              ${
+                deleting
+                  ? "bg-destructive/60 cursor-not-allowed"
+                  : "bg-destructive text-destructive-foreground hover:opacity-90"
+              }
+            `}
+          >
             {deleting ? "Deleting..." : "Delete Account"}
           </button>
         </div>
@@ -125,9 +137,11 @@ export default function Profile() {
 
 function StatCard({ label, value }) {
   return (
-    <div className="bg-slate-200 dark:bg-slate-800 rounded-xl p-5 text-center">
+    <div className="surface p-5 text-center">
       <div className="text-2xl font-bold">{value}</div>
-      <div className="text-sm text-slate-600 mt-1">{label}</div>
+      <div className="text-sm text-muted-foreground mt-1">
+        {label}
+      </div>
     </div>
   );
 }

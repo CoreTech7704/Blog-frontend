@@ -49,12 +49,16 @@ export default function EditBlog() {
   }
 
   if (loading) {
-    return <p className="text-center mt-24 text-slate-500">Loading blog...</p>;
+    return (
+      <p className="text-center mt-24 text-muted-foreground">
+        Loading blog...
+      </p>
+    );
   }
 
   return (
     <main className="max-w-3xl mx-auto px-4 my-24">
-      <div className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8">
+      <div className="card p-6 sm:p-8">
         <h1 className="text-2xl font-bold mb-6">Edit Blog</h1>
 
         <Input
@@ -81,29 +85,31 @@ export default function EditBlog() {
         />
 
         <div className="mt-4">
-          <label className="block text-sm font-medium">Status</label>
+          <label className="block text-sm font-medium mb-1">
+            Status
+          </label>
           <select
             name="status"
             value={form.status}
             onChange={handleChange}
-            className="mt-1 w-full rounded-md p-2"
+            className="input"
           >
             <option value="published">Published</option>
             <option value="draft">Draft</option>
           </select>
         </div>
 
-        <div className="flex gap-3 mt-8">
+        <div className="flex flex-col sm:flex-row gap-3 mt-8">
           <button
             onClick={handleUpdate}
-            className="px-5 py-2 bg-sky-400 rounded-md font-medium"
+            className="btn bg-primary text-primary-foreground w-full sm:w-auto"
           >
             Update Blog
           </button>
 
           <button
             onClick={() => navigate("/dashboard")}
-            className="px-5 py-2 border rounded-md"
+            className="btn-outline w-full sm:w-auto"
           >
             Cancel
           </button>
@@ -113,12 +119,12 @@ export default function EditBlog() {
   );
 }
 
-/* ---------- Inputs (OUTSIDE component) ---------- */
+/* ---------- Inputs ---------- */
 
 function Input({ label, name, value, onChange }) {
   return (
     <div className="mt-4">
-      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+      <label className="block text-sm font-medium mb-1">
         {label}
       </label>
       <input
@@ -126,13 +132,7 @@ function Input({ label, name, value, onChange }) {
         name={name}
         value={value}
         onChange={onChange}
-        className="
-          mt-1 w-full rounded-md
-          bg-white dark:bg-slate-800
-          border border-slate-300 dark:border-slate-700
-          text-slate-900 dark:text-slate-100
-          p-2 focus:outline-none focus:ring-2 focus:ring-sky-400
-        "
+        className="input"
       />
     </div>
   );
@@ -141,7 +141,7 @@ function Input({ label, name, value, onChange }) {
 function Textarea({ label, name, rows, value, onChange }) {
   return (
     <div className="mt-4">
-      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+      <label className="block text-sm font-medium mb-1">
         {label}
       </label>
       <textarea
@@ -149,13 +149,7 @@ function Textarea({ label, name, rows, value, onChange }) {
         name={name}
         value={value}
         onChange={onChange}
-        className="
-          mt-1 w-full rounded-md
-          bg-white dark:bg-slate-800
-          border border-slate-300 dark:border-slate-700
-          text-slate-900 dark:text-slate-100
-          p-3 focus:outline-none focus:ring-2 focus:ring-sky-400
-        "
+        className="input resize-y"
       />
     </div>
   );
