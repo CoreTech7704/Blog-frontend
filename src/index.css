@@ -266,7 +266,9 @@ html * {
   }
 
   .card {
-    @apply surface p-5;
+    @apply bg-card text-card-foreground
+           border border-border rounded-xl
+           p-5;
   }
 
   .card-header {
@@ -278,15 +280,18 @@ html * {
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition;
+    @apply inline-flex items-center justify-center gap-2
+           rounded-md px-4 py-2 text-sm font-medium transition;
   }
 
   .btn-outline {
-    @apply btn border border-border bg-transparent hover:bg-accent hover:text-accent-foreground;
+    @apply border border-border bg-transparent
+           hover:bg-accent hover:text-accent-foreground;
   }
 
   .btn-danger {
-    @apply btn border border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground;
+    @apply border border-destructive text-destructive
+           hover:bg-destructive hover:text-destructive-foreground;
   }
 
   .badge {
@@ -302,6 +307,9 @@ html * {
   }
 
   .input {
-    @apply w-full rounded-md px-3 py-2 bg-background text-foreground border border-border focus:outline-none focus:ring-2 focus:ring-ring;
+    @apply w-full rounded-md px-3 py-2
+           bg-background text-foreground
+           border border-border
+           focus:outline-none focus:ring-2 focus:ring-ring;
   }
 }
