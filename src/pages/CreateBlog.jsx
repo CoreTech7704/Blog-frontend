@@ -6,15 +6,8 @@ export default function CreateBlog() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [coverFile, setCoverFile] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    api.get("/api/categories").then((res) => {
-      setCategories(res.data);
-    });
-  }, []);
-
   const [coverPreview, setCoverPreview] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [form, setForm] = useState({
     title: "",
@@ -22,6 +15,12 @@ export default function CreateBlog() {
     content: "",
     category: "",
   });
+
+  useEffect(() => {
+    api.get("/api/categories").then((res) => {
+      setCategories(res.data);
+    });
+  }, []);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -36,14 +35,14 @@ export default function CreateBlog() {
   }
 
   function removeCover() {
-    URL.revokeObjectURL(coverPreview);
+    if (coverPreview) URL.revokeObjectURL(coverPreview);
     setCoverPreview(null);
     setCoverFile(null);
   }
 
   async function handleSubmit(status) {
     if (isSubmitting) return;
-    
+
     if (!form.title || !form.content || !form.category) {
       alert("Title, content, and category are required");
       return;
@@ -51,7 +50,7 @@ export default function CreateBlog() {
 
     try {
       setIsSubmitting(true);
-      
+
       const fd = new FormData();
       fd.append("title", form.title);
       fd.append("excerpt", form.excerpt);
@@ -59,18 +58,15 @@ export default function CreateBlog() {
       fd.append("category", form.category);
       fd.append("status", status);
 
-      // ✅ Validate only if cover exists
       if (coverFile) {
         if (!coverFile.type.startsWith("image/")) {
           alert("Only images allowed");
           return;
         }
-
         if (coverFile.size > 5 * 1024 * 1024) {
           alert("Max 5MB allowed");
           return;
         }
-
         fd.append("cover", coverFile);
       }
 
@@ -78,15 +74,8 @@ export default function CreateBlog() {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      alert(
-        status === "published"
-          ? "Blog published successfully"
-          : "Draft saved successfully",
-      );
-
       navigate("/dashboard");
-    } catch (err) {
-      console.error(err);
+    } catch {
       alert("Failed to create blog");
     } finally {
       setIsSubmitting(false);
@@ -94,26 +83,12 @@ export default function CreateBlog() {
   }
 
   return (
-    <main className="
-      max-w-3xl mx-auto px-4 my-24
-      bg-slate-50 dark:bg-black
-      transition-colors duration-300
-    ">
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="
-          bg-slate-100 dark:bg-slate-900
-          border border-slate-200 dark:border-slate-800
-          rounded-2xl p-8
-          transition-colors duration-300
-        "
-      >
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-          Create New Blog
-        </h1>
+    <main className="max-w-3xl mx-auto px-4 my-24">
+      <form onSubmit={(e) => e.preventDefault()} className="card">
+        <h1 className="text-2xl font-bold mb-6">Create New Blog</h1>
 
         {/* Title */}
-        <Input
+        <Field
           label="Title"
           name="title"
           value={form.title}
@@ -122,30 +97,23 @@ export default function CreateBlog() {
         />
 
         {/* Description */}
-        <Textarea
+        <Field
           label="Short Description"
           name="excerpt"
           value={form.excerpt}
           onChange={handleChange}
           placeholder="Brief summary of your blog"
+          textarea
           rows={3}
         />
 
         {/* Cover Image */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+        <div className="mt-6">
+          <label className="block text-sm font-medium mb-2">
             Cover Image
           </label>
 
-          <div
-            className="
-              relative w-full h-56
-              rounded-xl overflow-hidden
-              bg-slate-200 dark:bg-slate-800
-              border border-slate-300 dark:border-slate-700
-              flex items-center justify-center
-            "
-          >
+          <div className="relative h-48 sm:h-56 rounded-xl border border-border bg-muted flex items-center justify-center overflow-hidden">
             {coverPreview ? (
               <img
                 src={coverPreview}
@@ -153,20 +121,13 @@ export default function CreateBlog() {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <span className="text-slate-500 dark:text-slate-400">
+              <span className="text-muted-foreground text-sm">
                 No cover image
               </span>
             )}
 
-            {/* Overlay actions */}
             <div className="absolute bottom-3 right-3 flex gap-2">
-              <label
-                className="
-                  cursor-pointer px-3 py-1.5 rounded-md text-sm
-                  bg-slate-900/80 dark:bg-slate-900/70 text-white
-                  hover:bg-slate-900 transition
-                "
-              >
+              <label className="btn-outline cursor-pointer">
                 Change
                 <input
                   type="file"
@@ -180,11 +141,7 @@ export default function CreateBlog() {
                 <button
                   type="button"
                   onClick={removeCover}
-                  className="
-            px-3 py-1.5 rounded-md text-sm
-            bg-red-600/80 text-white
-            hover:bg-red-600 transition
-          "
+                  className="btn-danger"
                 >
                   Remove
                 </button>
@@ -195,23 +152,16 @@ export default function CreateBlog() {
 
         {/* Category */}
         <div className="mt-4">
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+          <label className="block text-sm font-medium mb-1">
             Category
           </label>
           <select
             name="category"
             value={form.category}
             onChange={handleChange}
-            className="
-              mt-1 w-full rounded-md
-              bg-white dark:bg-slate-800
-              border border-slate-300 dark:border-slate-700
-              text-slate-900 dark:text-slate-100
-              p-2 focus:outline-none focus:ring-2 focus:ring-sky-400
-            "
+            className="input"
           >
             <option value="">Select category</option>
-
             {categories.map((cat) => (
               <option key={cat._id} value={cat._id}>
                 {cat.name}
@@ -221,12 +171,13 @@ export default function CreateBlog() {
         </div>
 
         {/* Content */}
-        <Textarea
+        <Field
           label="Content"
           name="content"
           value={form.content}
           onChange={handleChange}
           placeholder="Write your blog content here..."
+          textarea
           rows={10}
         />
 
@@ -236,11 +187,7 @@ export default function CreateBlog() {
             type="button"
             disabled={isSubmitting}
             onClick={() => handleSubmit("published")}
-            className={`
-              px-5 py-2 rounded-md font-medium transition-colors
-              bg-sky-400 text-slate-950 hover:bg-sky-300
-              disabled:opacity-50 disabled:cursor-not-allowed
-            `}
+            className="btn bg-primary text-primary-foreground disabled:opacity-50"
           >
             {isSubmitting ? "Publishing..." : "Publish Blog"}
           </button>
@@ -249,23 +196,15 @@ export default function CreateBlog() {
             type="button"
             disabled={isSubmitting}
             onClick={() => handleSubmit("draft")}
-            className={`
-              px-5 py-2 rounded-md
-              border border-slate-300 dark:border-slate-700
-              text-slate-700 dark:text-slate-300
-              hover:bg-slate-200 dark:hover:bg-slate-800
-              transition-colors
-              disabled:opacity-50 disabled:cursor-not-allowed
-            `}
+            className="btn-outline disabled:opacity-50"
           >
             {isSubmitting ? "Saving..." : "Save as Draft"}
           </button>
 
           <button
             type="button"
-            disabled={isSubmitting}
             onClick={() => navigate("/dashboard")}
-            className="px-5 py-2 rounded-md text-slate-500 dark:text-slate-400 hover:underline disabled:opacity-50"
+            className="text-sm text-muted-foreground hover:underline"
           >
             Cancel
           </button>
@@ -275,52 +214,41 @@ export default function CreateBlog() {
   );
 }
 
-/* ---------- Reusable Inputs ---------- */
+/* ---------- Reusable Field ---------- */
 
-function Input({ label, name, value, onChange, placeholder }) {
+function Field({
+  label,
+  name,
+  value,
+  onChange,
+  placeholder,
+  textarea,
+  rows,
+}) {
   return (
     <div className="mt-4">
-      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+      <label className="block text-sm font-medium mb-1">
         {label}
       </label>
-      <input
-        type="text"
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="
-          mt-1 w-full rounded-md
-          bg-white dark:bg-slate-800
-          border border-slate-300 dark:border-slate-700
-          text-slate-900 dark:text-slate-100
-          p-2 focus:outline-none focus:ring-2 focus:ring-sky-400
-        "
-      />
-    </div>
-  );
-}
-
-function Textarea({ label, name, value, onChange, placeholder, rows }) {
-  return (
-    <div className="mt-4">
-      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
-        {label}
-      </label>
-      <textarea
-        name={name}
-        rows={rows}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="
-          mt-1 w-full rounded-md
-          bg-white dark:bg-slate-800
-          border border-slate-300 dark:border-slate-700
-          text-slate-900 dark:text-slate-100
-          p-3 focus:outline-none focus:ring-2 focus:ring-sky-400
-        "
-      />
+      {textarea ? (
+        <textarea
+          name={name}
+          rows={rows}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          className="input resize-none"
+        />
+      ) : (
+        <input
+          type="text"
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          className="input"
+        />
+      )}
     </div>
   );
 }

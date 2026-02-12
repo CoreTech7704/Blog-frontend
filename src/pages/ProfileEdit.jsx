@@ -15,27 +15,26 @@ export default function ProfileEdit() {
   const [avatarPreview, setAvatarPreview] = useState("");
 
   /* ================= FETCH USER ================= */
-useEffect(() => {
-  api.get("/api/user/me").then((res) => {
-    const { user } = res.data;
+  useEffect(() => {
+    api.get("/api/user/me").then((res) => {
+      const { user } = res.data;
 
-    setForm({
-      fullname: user.fullname,
-      username: user.username,
-      bio: user.bio || "",
-      email: user.email,
+      setForm({
+        fullname: user.fullname,
+        username: user.username,
+        bio: user.bio || "",
+        email: user.email,
+      });
+
+      if (user.avatar) {
+        setAvatarPreview(
+          user.avatar.startsWith("http")
+            ? user.avatar
+            : `${import.meta.env.VITE_API_URL}${user.avatar}`
+        );
+      }
     });
-
-    if (user.avatar) {
-      setAvatarPreview(
-        user.avatar.startsWith("http")
-          ? user.avatar
-          : `${import.meta.env.VITE_API_URL}${user.avatar}`
-      );
-    }
-  });
-}, []);
-
+  }, []);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -46,7 +45,6 @@ useEffect(() => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // preview instantly
     setAvatarPreview(URL.createObjectURL(file));
 
     const fd = new FormData();
@@ -57,7 +55,6 @@ useEffect(() => {
         headers: { "Content-Type": "multipart/form-data" },
       });
     } catch {
-      setAvatarPreview(form.avatar); // revert
       alert("Failed to update avatar");
     }
   }
@@ -80,49 +77,36 @@ useEffect(() => {
 
   return (
     <main className="max-w-3xl mx-auto px-4 my-24">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8"
-      >
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-          Edit Profile
-        </h1>
+      <form onSubmit={handleSubmit} className="card">
+        <h1 className="text-2xl font-bold mb-6">Edit Profile</h1>
 
         {/* Avatar */}
-        <div className="mt-6">
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
-            Profile Image
-          </label>
-
-          <div className="flex items-center gap-4 mt-3">
-            <div className="w-24 h-24 rounded-full bg-slate-300 dark:bg-slate-700 flex items-center justify-center overflow-hidden">
-              {avatarPreview ? (
-                <img
-                  src={avatarPreview}
-                  alt="Avatar preview"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <span className="text-slate-600 dark:text-slate-300">
-                  Avatar
-                </span>
-              )}
-            </div>
-
-            <label className="cursor-pointer px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
-              Change Image
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="w-24 h-24 rounded-full bg-muted flex items-center justify-center overflow-hidden">
+            {avatarPreview ? (
+              <img
+                src={avatarPreview}
+                alt="Avatar preview"
+                className="w-full h-full object-cover"
               />
-            </label>
+            ) : (
+              <span className="text-muted-foreground text-sm">Avatar</span>
+            )}
           </div>
+
+          <label className="btn-outline w-fit cursor-pointer">
+            Change Image
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
+          </label>
         </div>
 
         {/* Full Name */}
-        <Input
+        <Field
           label="Full Name"
           name="fullname"
           value={form.fullname}
@@ -130,7 +114,7 @@ useEffect(() => {
         />
 
         {/* Username */}
-        <Input
+        <Field
           label="Username"
           name="username"
           value={form.username}
@@ -139,34 +123,35 @@ useEffect(() => {
 
         {/* Bio */}
         <div className="mt-4">
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
-            Bio
-          </label>
+          <label className="block text-sm font-medium mb-1">Bio</label>
           <textarea
             name="bio"
             rows={4}
             value={form.bio}
             onChange={handleChange}
-            className="mt-1 w-full rounded-md bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
+            className="input resize-none"
+            placeholder="Tell something about yourself…"
           />
         </div>
 
-        {/* Email (read-only) */}
-        <Input label="Email" name="email" value={form.email} disabled />
+        {/* Email */}
+        <Field
+          label="Email"
+          name="email"
+          value={form.email}
+          disabled
+        />
 
         {/* Actions */}
-        <div className="flex gap-3 mt-8">
-          <button
-            type="submit"
-            className="px-5 py-2 rounded-md bg-sky-400 text-slate-950 font-medium hover:bg-sky-300 transition-colors"
-          >
+        <div className="flex flex-col sm:flex-row gap-3 mt-8">
+          <button type="submit" className="btn bg-primary text-primary-foreground">
             Save Changes
           </button>
 
           <button
             type="button"
             onClick={() => navigate("/profile")}
-            className="px-5 py-2 rounded-md border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+            className="btn-outline"
           >
             Cancel
           </button>
@@ -176,12 +161,12 @@ useEffect(() => {
   );
 }
 
-/* ================= INPUT ================= */
+/* ================= FIELD ================= */
 
-function Input({ label, name, value, onChange, disabled }) {
+function Field({ label, name, value, onChange, disabled }) {
   return (
     <div className="mt-4">
-      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+      <label className="block text-sm font-medium mb-1">
         {label}
       </label>
       <input
@@ -190,7 +175,7 @@ function Input({ label, name, value, onChange, disabled }) {
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className={`mt-1 w-full rounded-md bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 p-2 focus:outline-none focus:ring-2 focus:ring-sky-400 ${
+        className={`input ${
           disabled ? "opacity-60 cursor-not-allowed" : ""
         }`}
       />
