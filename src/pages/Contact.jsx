@@ -1,7 +1,6 @@
 import { useState } from "react";
 import api from "@/api/axios";
 import FloatingLines from "@/components/ui/FloatingLines";
-import GlowLine from "@/components/GlowLine";
 
 export default function Contact() {
   const [form, setForm] = useState({

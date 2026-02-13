@@ -43,7 +43,7 @@ export default function Home() {
       </section>
 
       {/* CATEGORIES */}
-      <section className="relative z-20 bg-card rounded-t-[3rem] py-20 px-6 mt-14">
+      <section className="relative z-20 bg-card rounded-t-[3rem] py-20 px-6">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between gap-6">
             <div>
@@ -121,7 +121,7 @@ export default function Home() {
       </div>
 
       {/* WHY VOIDWORK */}
-      <section className="relative bg-card rounded-b-[3rem] py-32 px-6">
+      <section className="relative bg-card py-32 px-6">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
           <p className="text-muted-foreground text-lg">

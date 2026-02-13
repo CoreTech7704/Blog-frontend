@@ -20,14 +20,14 @@ export default function CategoriesPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-black text-white pt-32">
+    <main className="min-h-screen bg-background text-foreground pt-32 transition-colors duration-300">
       {/* HEADER */}
       <section className="px-6">
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-4xl font-bold text-slate-100">
+          <h1 className="text-4xl font-bold">
             Categories
           </h1>
-          <p className="mt-2 max-w-2xl text-slate-400">
+          <p className="mt-2 max-w-2xl text-muted-foreground">
             Browse all topics and explore blogs by category.
           </p>
         </div>
@@ -62,7 +62,7 @@ export default function CategoriesPage() {
 
           {/* ERROR */}
           {error && (
-            <p className="col-span-full text-red-400">
+            <p className="col-span-full text-muted-foreground">
               Failed to load categories
             </p>
           )}

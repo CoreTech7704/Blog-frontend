@@ -13,25 +13,24 @@ export default function CategoryBlogs() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-useEffect(() => {
+  useEffect(() => {
 
-  api
-    .get(`/api/categories/${slug}/blogs`)
-    .then((res) => {
-      setCategory(res.data.category);
-      setBlogs(res.data.blogs);
-    })
-    .catch(() => setError(true))
-    .finally(() => setLoading(false));
-}, [slug]);
+    api
+      .get(`/api/categories/${slug}/blogs`)
+      .then((res) => {
+        setCategory(res.data.category);
+        setBlogs(res.data.blogs);
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }, [slug]);
 
 
   if (error) {
     return (
       <main className="
         min-h-screen flex items-center justify-center
-        bg-slate-50 dark:bg-black
-        text-slate-900 dark:text-white
+        bg-background text-foreground
         transition-colors duration-300
       ">
         Category not found
@@ -41,10 +40,8 @@ useEffect(() => {
 
   return (
     <main className="
-      min-h-screen
-      bg-slate-50 dark:bg-black
-      text-slate-900 dark:text-white
-      pt-32
+      min-h-screen flex items-center justify-center
+      bg-background text-foreground
       transition-colors duration-300
     ">
       {/* HEADER */}
@@ -54,11 +51,11 @@ useEffect(() => {
             to="/categories"
             className="
               inline-flex items-center gap-2 text-sm mb-6
-              text-slate-500 dark:text-slate-400
+              text-muted-foreground
               hover:text-slate-900 dark:hover:text-white
-              transition-colors
+              transition-colors duration-300
             "
-            >
+          >
             <ArrowLeft size={16} />
             Back to categories
           </Link>
@@ -73,7 +70,7 @@ useEffect(() => {
               <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100">
                 #{category?.name}
               </h1>
-              <p className="mt-2 max-w-2xl text-slate-500 dark:text-slate-400">
+              <p className="mt-2 max-w-2xl text-muted-foreground">
                 Blogs filed under {category?.name}
               </p>
             </>
@@ -100,7 +97,7 @@ useEffect(() => {
 
           {/* EMPTY */}
           {!loading && blogs.length === 0 && (
-            <p className="col-span-full text-slate-500 dark:text-slate-400">
+            <p className="col-span-full text-muted-foreground">
               No blogs in this category yet 🚧
             </p>
           )}
