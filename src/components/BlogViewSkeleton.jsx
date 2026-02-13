@@ -3,7 +3,7 @@ export default function BlogViewSkeleton() {
     <main className="min-h-screen animate-pulse
                      bg-white text-slate-900
                      dark:bg-black dark:text-white">
-      
+
       <section className="pt-40 pb-24 px-6
                           bg-slate-100 dark:bg-[#05070d]">
         <div className="mx-auto max-w-3xl space-y-6">

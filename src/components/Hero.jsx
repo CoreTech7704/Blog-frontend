@@ -34,14 +34,14 @@ export default function Hero() {
           tutorials, and resources designed to empower developers of all levels.
         </p>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <Link
             to="/blogs"
-            className=" relative flex items-center gap-2
+            className="group relative flex items-center gap-2
             rounded-xl px-6 py-3 text-md font-semibold text-white
             bg-gradient-to-r from-cyan-500 to-violet-600
-            backdrop-blur-md 
-            border border-white
+            backdrop-blur-md  
+            border border-white/60
             shadow-lg shadow-violet-500/30
             transition-all duration-300
             hover:scale-105 hover:shadow-xl hover:shadow-violet-500/40
@@ -59,7 +59,7 @@ export default function Hero() {
                           px-6 py-2 rounded-xl
                           text-md font-semibold text-white/80
                           bg-white/5 backdrop-blur-md
-                          border border-white
+                          border border-white/60
                           transition-all duration-300
                           hover:bg-white/10 hover:text-white
                           hover:scale-105 hover:shadow-lg hover:shadow-white/20

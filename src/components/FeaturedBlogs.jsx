@@ -18,14 +18,14 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
 
   const featuredBlogs = blogs.filter((b) => b.featured);
   if (!featuredBlogs.length) return null;
-
+  
   const [mainBlog, ...sideBlogs] = featuredBlogs;
 
   return (
-    <section className="bg-black py-24 px-6 transition-colors duration-300">
+    <section className="bg-black py-24 px-6">
       <div className="mx-auto max-w-6xl">
         {/* Section Header */}
-        <div className="mb-12 flex items-end justify-between">
+        <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <h2 className="text-3xl font-bold text-slate-100">
               Featured Blogs
@@ -39,10 +39,11 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
           <a
             href="/blogs"
             className="
-              hidden md:inline-block text-sm
+              hidden md:inline-flex items-center gap-1 text-sm
               text-slate-400
               hover:text-white
-              transition-colors
+              transition-all
+              hover:translate-x-0.5
             "
             >
             View all →
@@ -85,10 +86,11 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
           <a
             href="/blogs"
             className="
-              inline-block text-sm
+              inline-flex items-center gap-1 text-sm
               text-slate-400
               hover:text-white
-              transition-colors
+              transition-all
+              hover:translate-x-0.5
             "
             >
             View all blogs →
