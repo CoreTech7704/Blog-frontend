@@ -51,10 +51,10 @@ export default function ChangePassword() {
 
   return (
     <main
-  className="relative min-h-screen bg-background text-foreground
-             flex items-center justify-center px-6 pt-32 overflow-hidden
-             transition-colors duration-300"
->
+      className="relative min-h-screen bg-background text-foreground
+                flex items-center justify-center px-6 pt-32 overflow-hidden
+                transition-colors duration-300"
+    >
       {/* BACKGROUND */}
       <div className="pointer-events-none absolute inset-0 -z-0 opacity-70">
         <FloatingLines

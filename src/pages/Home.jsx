@@ -32,7 +32,7 @@ export default function Home() {
   const featuredBlog = latestBlogs[0];
 
   return (
-    <main className="bg-background text-foreground overflow-x-hidden">
+    <main className="bg-black text-foreground overflow-x-hidden">
       <Hero />
 
       {/* FEATURED BLOGS */}
@@ -121,7 +121,7 @@ export default function Home() {
       </div>
 
       {/* WHY VOIDWORK */}
-      <section className="relative bg-card py-32 px-6">
+      <section className="relative bg-card rounded-b-[3rem] -mb-6 py-32 px-6">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
           <p className="text-muted-foreground text-lg">
@@ -142,7 +142,7 @@ export default function Home() {
       </section>
 
       {/* LATEST BLOGS */}
-      <section className="relative z-30 bg-muted py-28 px-6">
+      <section className="relative z-30 bg-muted py-32 px-6">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between gap-6">
             <div>

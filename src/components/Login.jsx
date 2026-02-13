@@ -35,7 +35,7 @@ navigate("/");
   }
 
   return (
-    <div className="flex justify-center items-center w-full px-4">
+    <div className="flex justify-center items-center min-h-screen px-4">
       <section className="bg-gradient-to-r from-cyan-500 to-violet-500 rounded-3xl p-[2px]">
         <div className="rounded-3xl bg-slate-950/90 backdrop-blur-xl shadow-2xl p-10 max-w-xl w-full border border-white/10">
           <h1 className="text-4xl font-bold text-center mb-6">Log in</h1>
