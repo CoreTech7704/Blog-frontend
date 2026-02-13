@@ -36,7 +36,7 @@ export default function Home() {
       <Hero />
 
       {/* FEATURED BLOGS */}
-      <section className="relative z-10 bg-background py-24 px-6 -mt-1">
+      <section className="relative z-10 bg-black py-24 px-6 -mt-1">
         <div className="mx-auto max-w-6xl">
           <FeaturedBlogs blogs={blogs} loading={loading} />
         </div>

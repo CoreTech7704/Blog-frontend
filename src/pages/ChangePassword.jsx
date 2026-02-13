@@ -51,9 +51,10 @@ export default function ChangePassword() {
 
   return (
     <main
-      className="relative min-h-screen bg-black text-white
-                 flex items-center justify-center px-6 pt-32 overflow-hidden"
-    >
+  className="relative min-h-screen bg-background text-foreground
+             flex items-center justify-center px-6 pt-32 overflow-hidden
+             transition-colors duration-300"
+>
       {/* BACKGROUND */}
       <div className="pointer-events-none absolute inset-0 -z-0 opacity-70">
         <FloatingLines
@@ -163,7 +164,7 @@ export default function ChangePassword() {
               <h2 className="text-3xl font-bold mb-4">
                 Password Updated 🎉
               </h2>
-              <p className="text-slate-400 mb-6">
+              <p className="text-muted-foreground mb-6">
                 Your password has been changed successfully.
               </p>
               <a

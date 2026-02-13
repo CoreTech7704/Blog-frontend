@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "@/api/axios";
 import FloatingLines from "@/components/ui/FloatingLines";
+import GlowLine from "@/components/GlowLine";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -47,13 +48,13 @@ export default function Contact() {
   return (
     <main className="bg-background text-foreground">
       <section className="relative min-h-screen bg-[#05070d] overflow-hidden">
-        {/* FloatingLines BACKGROUND */}   
+        {/* FloatingLines BACKGROUND */}
         <div className="pointer-events-none absolute inset-0 opacity-70">
-            <FloatingLines
-              enabledWaves="top,middle,bottom"
-              lineDistance={15}
-              bendStrength={0.5}
-            />
+          <FloatingLines
+            enabledWaves="top,middle,bottom"
+            lineDistance={15}
+            bendStrength={0.5}
+          />
         </div>
 
         {/* HERO CONTENT */}
@@ -71,13 +72,13 @@ export default function Contact() {
         </div>
 
         {/* BOTTOM FADE */}
-         <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent" />
+        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </section>
 
       {/* Get in Touch Section */}
       <section
         id="Learnmore"
-        className="py-32 px-6 bg-background"
+        className="py-32 px-6 bg-black"
       >
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Get in Touch</h2>
@@ -88,8 +89,15 @@ export default function Contact() {
         </div>
       </section>
 
+      {/* GLOW DIVIDER */}
+      <div className="relative z-30 bg-card">
+        <div className="relative h-16">
+          <GlowLine orientation="horizontal" position="50%" color="purple" />
+        </div>
+      </div>
+
       {/* Contact Form Section */}
-      <section className="py-32 px-6 bg-background transition-colors duration-300">
+      <section className="py-32 px-6  bg-background transition-colors duration-300">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Send us a Message</h2>
           <p className="mb-6 text-lg">
