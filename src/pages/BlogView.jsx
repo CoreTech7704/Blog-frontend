@@ -38,14 +38,15 @@ export default function BlogView() {
 
   if (error || !blog) {
     return (
-      <main className="min-h-screen flex items-center justify-center text-white">
+      <main className="min-h-screen flex items-center justify-center text-foreground">
         Blog not found
       </main>
     );
   }
 
+
   return (
-    <main className="bg-black text-white min-h-screen">
+    <main className="bg-background text-foreground min-h-screen transition-colors duration-300">
       {/* ================= HEADER ================= */}
       <section className="pt-40 pb-16 px-6 bg-[#05070d]">
         <div className="mx-auto max-w-3xl">
@@ -87,7 +88,7 @@ export default function BlogView() {
 
       {/* ================= CONTENT ================= */}
       <section className="px-6 py-24">
-        <article className="mx-auto max-w-3xl space-y-6 text-slate-300">
+        <article className="mx-auto max-w-3xl space-y-6 text-muted-foreground">
           <MarkdownContent content={blog.content} />
         </article>
       </section>
@@ -147,7 +148,7 @@ export default function BlogView() {
 
           {/* Comments List */}
           {comments.length === 0 ? (
-            <p className="text-slate-500">No comments yet.</p>
+            <p className="text-muted-foreground">No comments yet.</p>
           ) : (
             <div className="space-y-6">
               {comments.map((c) => (
@@ -170,7 +171,7 @@ export default function BlogView() {
                       </span>
                     </div>
 
-                    <p className="text-slate-300 mt-1">{c.content}</p>
+                    <p className="text-foreground/80 mt-1">{c.content}</p>
 
                     {/* Delete (owner/admin later) */}
                     {c.user._id === blog.author?._id && (

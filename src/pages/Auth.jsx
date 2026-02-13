@@ -11,7 +11,7 @@ export default function Auth() {
   return (
     <main className="
       relative min-h-screen
-      bg-black dark:bg-black
+      bg-black
       text-white
       flex items-center justify-center
       px-6 pt-32

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   return (
-    <main className="bg-slate-50 dark:bg-black text-slate-900 dark:text-white transition-colors duration-300">
+    <main className="bg-background text-foreground transition-colors duration-300">
       <section className="relative min-h-screen overflow-hidden bg-[#05070d] dark:bg-[#05070d] transition-colors duration-300">
         {/* FloatingLines BACKGROUND */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-70">
@@ -61,7 +61,7 @@ export default function About() {
       >
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
-          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed">
+          <p className="text-muted-foreground text-lg leading-relaxed">
             The internet is full of tutorials that explain what to type, but not
             why it works. VoidWork exists to bridge that gap. We focus on
             understanding systems, making better decisions, and learning in a
@@ -84,7 +84,7 @@ export default function About() {
       </section>
 
       {/* Our Mission */}
-      <section className="py-32 px-6 bg-slate-100 dark:bg-black transition-colors duration-300">
+      <section className="py-32 px-6 bg-background transition-colors duration-300">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Our Mission</h2>
           <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed">
@@ -114,10 +114,10 @@ export default function About() {
 
       {/* Call to Action */}
       <section className="py-32 px-6 bg-black dark:bg-black text-center transition-colors duration-300">
-        <h2 className="text-3xl text-slate-300 font-bold mb-4">
+        <h2 className="text-3xl text-foreground font-bold mb-4">
           If this sounds like your kind of space
         </h2>
-        <p className="text-slate-400 mb-8">
+        <p className="text-muted-foreground mb-8">
           Start exploring, reading, and building with us.
         </p>
 

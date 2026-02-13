@@ -16,8 +16,7 @@ export default function MarkdownContent({ content }) {
               <code
                 className="
                   rounded px-1 py-0.5 text-sm
-                  bg-slate-200 text-slate-900
-                  dark:bg-white/10 dark:text-slate-200
+                  bg-muted text-foreground
                 "
               >
                 {children}
@@ -33,19 +32,19 @@ export default function MarkdownContent({ content }) {
         },
 
         h1: ({ children }) => (
-          <h1 className="text-3xl font-bold mt-12 mb-4 text-white">
+          <h1 className="text-3xl font-bold mt-12 mb-4 text-foreground">
             {children}
           </h1>
         ),
 
         h2: ({ children }) => (
-          <h2 className="text-2xl font-semibold mt-10 mb-3 text-white">
+          <h2 className="text-2xl font-semibold mt-10 mb-3 text-foreground">
             {children}
           </h2>
         ),
 
         p: ({ children }) => (
-          <p className="leading-relaxed text-slate-300 mb-4">
+          <p className="leading-relaxed text-muted-foreground mb-4">
             {children}
           </p>
         ),

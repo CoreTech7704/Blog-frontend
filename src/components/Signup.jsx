@@ -30,13 +30,11 @@ async function handleSubmit(e) {
 
     await api.post("/api/auth/signup", {
       fullname,
-      username: email.split("@")[0], // ✅ simple default
+      username: email.split("@")[0],
       email,
       password,
     });
 
-    // ✅ DO NOT setUser
-    // ✅ DO NOT go to dashboard
     navigate("/auth?mode=login");
   } catch (err) {
     setError(err.response?.data?.message || "Signup failed");
