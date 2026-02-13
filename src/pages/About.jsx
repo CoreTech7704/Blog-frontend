@@ -57,7 +57,7 @@ export default function About() {
       {/* Why VoidWork? */}
       <section
         id="Learnmore"
-        className="py-32 px-6 bg-slate-100 dark:bg-black transition-colors duration-300"
+        className="py-32 px-6 bg-black"
       >
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>

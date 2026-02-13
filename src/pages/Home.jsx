@@ -43,7 +43,7 @@ export default function Home() {
       </section>
 
       {/* CATEGORIES */}
-      <section className="relative z-20 bg-card rounded-t-[3rem] py-20 px-6 mt-24">
+      <section className="relative z-20 bg-card rounded-t-[3rem] py-20 px-6 mt-14">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between gap-6">
             <div>

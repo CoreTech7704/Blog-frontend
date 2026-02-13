@@ -89,13 +89,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* GLOW DIVIDER */}
-      <div className="relative z-30 bg-card">
-        <div className="relative h-16">
-          <GlowLine orientation="horizontal" position="50%" color="purple" />
-        </div>
-      </div>
-
       {/* Contact Form Section */}
       <section className="py-32 px-6  bg-background transition-colors duration-300">
         <div className="mx-auto max-w-3xl text-center">
