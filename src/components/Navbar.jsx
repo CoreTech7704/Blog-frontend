@@ -142,7 +142,7 @@ export default function Navbar({ theme, setTheme }) {
         <div className="flex ml-2 items-center gap-2">
 
           <Link
-            to="#"
+            to="/search"
             className="
               text-slate-600 dark:text-slate-300
               hover:text-cyan-500
