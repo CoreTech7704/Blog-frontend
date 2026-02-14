@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
-import SearchResults from "@/components/SearchResults";
+import SearchResults from "@/components/SearchResult";
 
 export default function Search() {
   const [query, setQuery] = useState("");
