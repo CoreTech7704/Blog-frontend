@@ -7,7 +7,7 @@ export default function SearchResults({ loading, searched, results }) {
       {/* Idle */}
       {!searched && (
         <p className="text-center text-muted-foreground">
-          Type something and hit search 🔍
+          Type something and hit search to explore.
         </p>
       )}
 
@@ -23,7 +23,7 @@ export default function SearchResults({ loading, searched, results }) {
       {/* Empty */}
       {searched && !loading && results.length === 0 && (
         <p className="text-center text-muted-foreground">
-          No results found
+          No matches found - try a different keyword.
         </p>
       )}
 
