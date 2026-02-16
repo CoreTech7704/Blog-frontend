@@ -24,7 +24,7 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // 🚫 STOP infinite loop
+    // STOP infinite loop
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&

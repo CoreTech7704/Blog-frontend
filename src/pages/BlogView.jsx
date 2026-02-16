@@ -27,11 +27,15 @@ export default function BlogView() {
   /* ================= FETCH COMMENTS ================= */
   useEffect(() => {
     if (!blog?._id) return;
-    if (commentLoading) return;
 
     api
       .get(`/api/blogs/${blog._id}/comments`)
-      .then((res) => setComments(res.data));
+      .then((res) => {
+        setComments(res.data.comments || []);
+      })
+      .catch(() => {
+        setComments([]);
+      });
   }, [blog]);
 
   if (loading) return <BlogViewSkeleton />;
@@ -100,6 +104,7 @@ export default function BlogView() {
             Comments ({comments.length})
           </h3>
 
+          
           {/* Add Comment */}
           <form
             onSubmit={async (e) => {
@@ -155,7 +160,7 @@ export default function BlogView() {
                 <div key={c._id} className="flex gap-4">
                   <img
                     src={
-                      c.user.avatar?.startsWith("http")
+                      c.user?.avatar?.startsWith("http")
                         ? c.user.avatar
                         : `${import.meta.env.VITE_API_URL}${c.user.avatar}`
                     }
@@ -165,7 +170,7 @@ export default function BlogView() {
 
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <p className="font-medium">{c.user.fullname}</p>
+                      <p className="font-medium">{c.user?.fullname}</p>
                       <span className="text-xs text-slate-500">
                         {new Date(c.createdAt).toLocaleString()}
                       </span>
