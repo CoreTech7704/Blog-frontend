@@ -69,6 +69,7 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
           <div className="flex flex-col gap-6">
             {sideBlogs.slice(0, 2).map((blog) => (
               <BlogCard
+              featured
                 key={blog.slug}
                 title={blog.title}
                 excerpt={blog.excerpt}

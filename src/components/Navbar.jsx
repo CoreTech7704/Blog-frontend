@@ -127,7 +127,7 @@ export default function Navbar({ theme, setTheme }) {
                 <button
                   onClick={handleLogout}
                   className="
-                    w-full text-left px-4 py-2
+                    w-full text-left px-4 py-2 rounded-b-2xl
                     text-red-500 hover:bg-red-500/10
                   "
                 >
@@ -275,7 +275,7 @@ function DropdownItem({ to, label }) {
     <Link
       to={to}
       className="
-        block px-4 py-2
+        block px-4 py-2 rounded-2xl
         text-slate-700 dark:text-slate-300
         hover:bg-slate-100 dark:hover:bg-slate-800
       "

@@ -62,7 +62,7 @@ export default function BlogView() {
             Back to blogs
           </Link>
 
-          <span className="inline-block mb-4 rounded-full border border-white/20 px-3 py-1 text-xs text-slate-300">
+          <span className="inline-block ml-2 mb-4 rounded-full border border-white/20 px-3 py-1 text-xs text-slate-300">
             #{blog.tags?.[0] || "General"}
           </span>
 

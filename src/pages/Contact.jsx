@@ -89,7 +89,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-32 px-6  bg-background transition-colors duration-300">
+      <section className="py-32 px-6  bg-background transition-colors border rounded-t-4xl -mt-4 duration-300">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Send us a Message</h2>
           <p className="mb-6 text-lg">
@@ -116,7 +116,7 @@ export default function Contact() {
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="John Doe"
+              placeholder="Enter your full name"
             />
 
             <Input

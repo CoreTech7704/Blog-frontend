@@ -114,18 +114,18 @@ export default function Home() {
       </section>
 
       {/* GLOW DIVIDER */}
-      <div className="relative z-30 bg-card">
+      <div className="relative z-50 bg-card transition-colors duration-300">
         <div className="relative h-16">
-          <GlowLine orientation="horizontal" position="50%" color="purple" />
+          <GlowLine orientation="horizontal" position="50%" color="blue" />
         </div>
       </div>
 
       {/* WHY VOIDWORK */}
-      <section className="relative bg-card py-32 px-6">
+      <section className="relative z-40 bg-card border rounded-b-[4rem] py-32 px-6 -m-5">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
           <p className="text-muted-foreground text-lg">
-            VoidWork focuses on understanding systems, not memorizing code.
+            The internet is full of tutorials that explain what to type, but not why it works. VoidWork exists to bridge that gap. We focus on understanding systems, making better decisions, and learning in a way that actually sticks.
           </p>
 
           <Link
@@ -142,7 +142,7 @@ export default function Home() {
       </section>
 
       {/* LATEST BLOGS */}
-      <section className="relative z-30 bg-muted py-28 px-6">
+      <section className="relative z-30 bg-muted py-35 px-6">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between gap-6">
             <div>

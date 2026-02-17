@@ -81,7 +81,7 @@ export default function Profile() {
 
               <Link
                 to="/dashboard"
-                className="btn-outline w-full sm:w-auto"
+                className="btn btn-outline px-4 radius-2xl w-full sm:w-auto"
               >
                 My Blogs
               </Link>

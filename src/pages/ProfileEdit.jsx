@@ -94,7 +94,7 @@ export default function ProfileEdit() {
             )}
           </div>
 
-          <label className="btn-outline w-fit cursor-pointer">
+          <label className="btn btn-outline w-fit cursor-pointer">
             Change Image
             <input
               type="file"
@@ -151,7 +151,7 @@ export default function ProfileEdit() {
           <button
             type="button"
             onClick={() => navigate("/profile")}
-            className="btn-outline"
+            className="btn btn-outline"
           >
             Cancel
           </button>

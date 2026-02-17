@@ -1,4 +1,5 @@
 import FloatingLines from "@/components/ui/FloatingLines";
+import GlowLine from "@/components/GlowLine";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -55,11 +56,8 @@ export default function About() {
       </section>
 
       {/* Why VoidWork? */}
-      <section
-        id="Learnmore"
-        className="py-32 px-6 bg-black"
-      >
-        <div className="mx-auto max-w-3xl text-center">
+      <section id="Learnmore" className="py-32 px-6 bg-black">
+        <div className="py-6 mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             The internet is full of tutorials that explain what to type, but not
@@ -71,7 +69,7 @@ export default function About() {
       </section>
 
       {/* The Story */}
-      <section className="py-32 px-6 bg-white dark:bg-slate-950 transition-colors duration-300">
+      <section className="py-32 px-6 bg-white dark:bg-slate-950 border-t rounded-t-[2.5rem] -mt-7 transition-colors duration-300">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">The Story</h2>
           <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed">
@@ -82,6 +80,13 @@ export default function About() {
           </p>
         </div>
       </section>
+
+      {/* GLOW DIVIDER */}
+      <div className="relative z-10 bg-background transition-colors duration-300">
+        <div className="relative h-16">
+          <GlowLine orientation="horizontal" position="50%" color="blue" />
+        </div>
+      </div>
 
       {/* Our Mission */}
       <section className="py-32 px-6 bg-background transition-colors duration-300">
@@ -94,6 +99,13 @@ export default function About() {
           </p>
         </div>
       </section>
+
+      {/* GLOW DIVIDER */}
+      <div className="relative z-10 bg-background transition-colors duration-300">
+        <div className="relative h-16">
+          <GlowLine orientation="horizontal" position="50%" color="purple" />
+        </div>
+      </div>
 
       {/* What You’ll Find */}
       <section className="py-32 px-6 bg-white dark:bg-slate-950 transition-colors duration-300">
@@ -112,12 +124,19 @@ export default function About() {
         </div>
       </section>
 
+      {/* GLOW DIVIDER */}
+      <div className="relative z-10 bg-background transition-colors duration-300">
+        <div className="relative h-16">
+          <GlowLine orientation="horizontal" position="50%" color="blue" />
+        </div>
+      </div>
+
       {/* Call to Action */}
-      <section className="py-32 px-6 bg-black dark:bg-black text-center transition-colors duration-300">
+      <section className="py-32 px-6 bg-background text-center transition-colors duration-300">
         <h2 className="text-3xl text-foreground font-bold mb-4">
           If this sounds like your kind of space
         </h2>
-        <p className="text-muted-foreground mb-8">
+        <p className="mb-8">
           Start exploring, reading, and building with us.
         </p>
 

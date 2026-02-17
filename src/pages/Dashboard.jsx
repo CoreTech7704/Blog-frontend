@@ -99,14 +99,14 @@ function BlogRow({ blog, onDelete }) {
       <div className="flex flex-col sm:flex-row gap-2">
         <Link
           to={`/dashboard/blogs/${blog._id}/edit`}
-          className="btn-outline"
+          className="btn btn-outline"
         >
           Edit
         </Link>
 
         <button
           onClick={() => onDelete(blog._id)}
-          className="btn-danger"
+          className="btn btn-danger"
         >
           Delete
         </button>

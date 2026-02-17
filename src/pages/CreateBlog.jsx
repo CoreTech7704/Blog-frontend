@@ -127,7 +127,7 @@ export default function CreateBlog() {
             )}
 
             <div className="absolute bottom-3 right-3 flex gap-2">
-              <label className="btn-outline cursor-pointer">
+              <label className="btn btn-outline cursor-pointer">
                 Change
                 <input
                   type="file"
@@ -196,7 +196,7 @@ export default function CreateBlog() {
             type="button"
             disabled={isSubmitting}
             onClick={() => handleSubmit("draft")}
-            className="btn-outline disabled:opacity-50"
+            className="btn btn-outline disabled:opacity-50"
           >
             {isSubmitting ? "Saving..." : "Save as Draft"}
           </button>
