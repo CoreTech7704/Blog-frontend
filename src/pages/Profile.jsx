@@ -33,7 +33,7 @@ export default function Profile() {
     if (deleting) return;
 
     const ok = window.confirm(
-      "This will permanently delete your account and all data. Are you sure?"
+      "This will permanently delete your account and all data. Are you sure?",
     );
     if (!ok) return;
 
@@ -64,12 +64,18 @@ export default function Profile() {
           {/* Info */}
           <div className="flex-1">
             <h1 className="text-3xl font-bold">{user.fullname}</h1>
-            <p className="mt-1 text-muted-foreground">
-              @{user.username}
-            </p>
-            <p className="text-muted-foreground">
-              {user.email}
-            </p>
+            <p className="mt-1 text-muted-foreground">@{user.username}</p>
+            {stats.blogs >= 1 && (
+              <span
+                title="Author — Published contributor"
+                className="inline-block mt-2 px-3 py-1 text-xs font-medium rounded-full
+                  bg-sky-500/15 text-sky-400"
+              >
+                Author
+              </span>
+            )}
+
+            <p className="text-muted-foreground">{user.email}</p>
 
             <div className="flex flex-col sm:flex-row gap-3 mt-5">
               <Link
@@ -92,10 +98,17 @@ export default function Profile() {
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
           <StatCard label="Blogs" value={stats.blogs} />
-          <StatCard label="Role" value={user.role} />
+          <StatCard
+            title="Author — Published contributor"
+            label="Role"
+            value={stats.blogs >= 1 ? "🧑‍💻 Author" : "👤 User"}
+          />
           <StatCard
             label="Joined"
-            value={new Date(user.createdAt).getFullYear()}
+            value={new Date(user.createdAt).toLocaleDateString("en-US", {
+              month: "short",
+              year: "numeric",
+            })}
           />
         </div>
 
@@ -139,9 +152,7 @@ function StatCard({ label, value }) {
   return (
     <div className="surface p-5 text-center">
       <div className="text-2xl font-bold">{value}</div>
-      <div className="text-sm text-muted-foreground mt-1">
-        {label}
-      </div>
+      <div className="text-sm text-muted-foreground mt-1">{label}</div>
     </div>
   );
 }
