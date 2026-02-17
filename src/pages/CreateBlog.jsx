@@ -51,11 +51,19 @@ export default function CreateBlog() {
     try {
       setIsSubmitting(true);
 
+      const tagsArray = form.tags
+        ? form.tags
+            .split(",")
+            .map((t) => t.trim())
+            .filter(Boolean)
+        : ["General"];
+
       const fd = new FormData();
       fd.append("title", form.title);
       fd.append("excerpt", form.excerpt);
       fd.append("content", form.content);
       fd.append("category", form.category);
+      fd.append("tags", JSON.stringify(tagsArray));
       fd.append("status", status);
 
       if (coverFile) {
@@ -109,9 +117,7 @@ export default function CreateBlog() {
 
         {/* Cover Image */}
         <div className="mt-6">
-          <label className="block text-sm font-medium mb-2">
-            Cover Image
-          </label>
+          <label className="block text-sm font-medium mb-2">Cover Image</label>
 
           <div className="relative h-48 sm:h-56 rounded-xl border border-border bg-muted flex items-center justify-center overflow-hidden">
             {coverPreview ? (
@@ -152,9 +158,7 @@ export default function CreateBlog() {
 
         {/* Category */}
         <div className="mt-4">
-          <label className="block text-sm font-medium mb-1">
-            Category
-          </label>
+          <label className="block text-sm font-medium mb-1">Category</label>
           <select
             name="category"
             value={form.category}
@@ -169,6 +173,18 @@ export default function CreateBlog() {
             ))}
           </select>
         </div>
+
+        {/* Tags */}
+        <Field
+          label="Tags"
+          name="tags"
+          value={form.tags}
+          onChange={handleChange}
+          placeholder="react, node, backend"
+        />
+        <p className="text-xs text-muted-foreground mt-1">
+          Separate tags with commas
+        </p>
 
         {/* Content */}
         <Field
@@ -216,20 +232,10 @@ export default function CreateBlog() {
 
 /* ---------- Reusable Field ---------- */
 
-function Field({
-  label,
-  name,
-  value,
-  onChange,
-  placeholder,
-  textarea,
-  rows,
-}) {
+function Field({ label, name, value, onChange, placeholder, textarea, rows }) {
   return (
     <div className="mt-4">
-      <label className="block text-sm font-medium mb-1">
-        {label}
-      </label>
+      <label className="block text-sm font-medium mb-1">{label}</label>
       {textarea ? (
         <textarea
           name={name}

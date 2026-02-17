@@ -12,6 +12,7 @@ export default function EditBlog() {
     content: "",
     category: "",
     status: "draft",
+    tags: "",
   });
 
   const [loading, setLoading] = useState(true);
@@ -28,6 +29,7 @@ export default function EditBlog() {
           content: blog.content,
           category: blog.category?._id || "",
           status: blog.status,
+          tags: blog.tags?.join(", ") || "",
         });
       })
       .finally(() => setLoading(false));
@@ -41,7 +43,14 @@ export default function EditBlog() {
   /* ================= UPDATE ================= */
   async function handleUpdate() {
     try {
-      await api.put(`/api/blogs/${id}`, form);
+      const tagsArray = form.tags
+        ? form.tags
+            .split(",")
+            .map((t) => t.trim())
+            .filter(Boolean)
+        : ["General"];
+
+      await api.put(`/api/blogs/${id}`, { ...form, tags: tagsArray });
       navigate("/dashboard");
     } catch {
       alert("Failed to update blog");
@@ -50,9 +59,7 @@ export default function EditBlog() {
 
   if (loading) {
     return (
-      <p className="text-center mt-24 text-muted-foreground">
-        Loading blog...
-      </p>
+      <p className="text-center mt-24 text-muted-foreground">Loading blog...</p>
     );
   }
 
@@ -76,6 +83,16 @@ export default function EditBlog() {
           onChange={handleChange}
         />
 
+        <Input
+          label="Tags"
+          name="tags"
+          value={form.tags}
+          onChange={handleChange}
+        />
+        <p className="text-xs text-muted-foreground mt-1">
+          Separate tags with commas
+        </p>
+
         <Textarea
           label="Content"
           name="content"
@@ -85,9 +102,7 @@ export default function EditBlog() {
         />
 
         <div className="mt-4">
-          <label className="block text-sm font-medium mb-1">
-            Status
-          </label>
+          <label className="block text-sm font-medium mb-1">Status</label>
           <select
             name="status"
             value={form.status}
@@ -109,7 +124,7 @@ export default function EditBlog() {
 
           <button
             onClick={() => navigate("/dashboard")}
-            className="btn-outline w-full sm:w-auto"
+            className="btn btn-outline w-full sm:w-auto"
           >
             Cancel
           </button>
@@ -124,9 +139,7 @@ export default function EditBlog() {
 function Input({ label, name, value, onChange }) {
   return (
     <div className="mt-4">
-      <label className="block text-sm font-medium mb-1">
-        {label}
-      </label>
+      <label className="block text-sm font-medium mb-1">{label}</label>
       <input
         type="text"
         name={name}
@@ -141,9 +154,7 @@ function Input({ label, name, value, onChange }) {
 function Textarea({ label, name, rows, value, onChange }) {
   return (
     <div className="mt-4">
-      <label className="block text-sm font-medium mb-1">
-        {label}
-      </label>
+      <label className="block text-sm font-medium mb-1">{label}</label>
       <textarea
         rows={rows}
         name={name}

@@ -48,7 +48,6 @@ export default function BlogView() {
     );
   }
 
-
   return (
     <main className="bg-background text-foreground min-h-screen transition-colors duration-300">
       {/* ================= HEADER ================= */}
@@ -62,15 +61,22 @@ export default function BlogView() {
             Back to blogs
           </Link>
 
-          <span className="inline-block ml-2 mb-4 rounded-full border border-white/20 px-3 py-1 text-xs text-slate-300">
-            #{blog.tags?.[0] || "General"}
-          </span>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {(blog.tags?.length ? blog.tags : ["General"]).map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-white/20 px-3 py-1 text-xs text-slate-300"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
 
           <h1 className="text-4xl sm:text-5xl font-bold">{blog.title}</h1>
 
           <p className="mt-6 text-sm text-slate-500">
-            {new Date(blog.createdAt).toDateString()} •{" "}
-            {blog.readTime || 5} min read
+            {new Date(blog.createdAt).toDateString()} • {blog.readTime || 5} min
+            read
           </p>
         </div>
 
@@ -104,7 +110,6 @@ export default function BlogView() {
             Comments ({comments.length})
           </h3>
 
-          
           {/* Add Comment */}
           <form
             onSubmit={async (e) => {
@@ -146,7 +151,8 @@ export default function BlogView() {
                 mt-3 px-4 py-2 rounded-md font-medium
                 bg-sky-400 text-black
                 disabled:opacity-60 disabled:cursor-not-allowed
-              ">
+              "
+            >
               {commentLoading ? "Posting..." : "Post Comment"}
             </button>
           </form>
@@ -199,6 +205,6 @@ export default function BlogView() {
           )}
         </div>
       </section>
-    </main >
+    </main>
   );
 }

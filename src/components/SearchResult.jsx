@@ -31,17 +31,17 @@ export default function SearchResults({ loading, searched, results }) {
       {!loading && results.length > 0 && (
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {results.map((blog) => (
-            <BlogCard
-              key={blog._id}
-              slug={blog.slug}
-              title={blog.title}
-              excerpt={
-                blog.excerpt || blog.content?.slice(0, 140) + "..."
-              }
-              category={blog.tags?.[0] || "General"}
-              readTime={blog.readTime || 5}
-            />
-          ))}
+  <BlogCard
+    key={blog._id}
+    slug={blog.slug}
+    title={blog.title}
+    excerpt={blog.excerpt}
+    category={blog.category?.name || "General"}
+    readTime={blog.readingTime || 5}
+    author={blog.author?.fullname}
+    createdAt={blog.createdAt}
+  />
+))}
         </div>
       )}
     </div>

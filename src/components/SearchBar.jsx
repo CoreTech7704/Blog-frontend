@@ -12,6 +12,7 @@ export default function SearchBar({ onSearch }) {
 
   function clearSearch() {
     setQuery("");
+    onSearch(""); 
   }
 
   return (
