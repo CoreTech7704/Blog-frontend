@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "@/api/axios";
+import TermsPolicyModal from "@/components/TermsPolicyModal";
 
 export default function Signup() {
+  const [showTerms, setShowTerms] = useState(false);
   const navigate = useNavigate();
 
   const [fullname, setFullname] = useState("");
@@ -43,12 +45,11 @@ async function handleSubmit(e) {
   }
 }
 
-
   return (
     <div className="flex justify-center items-center min-h-screen px-4">
       <section className="bg-gradient-to-r from-cyan-500 to-violet-500 rounded-3xl p-[2px]">
         <div className="rounded-3xl bg-slate-950/90 backdrop-blur-xl shadow-2xl p-10 max-w-xl w-full border border-white/10">
-          <h1 className="text-4xl font-bold text-center mb-6">Sign up</h1>
+          <h1 className="text-4xl font-bold text-center mb-6">Sign in</h1>
 
           {error && (
             <p className="text-sm text-red-400 text-center mb-4">
@@ -84,14 +85,33 @@ async function handleSubmit(e) {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-slate-400">
+          <div className="mt-5 text-center text-sm text-slate-400">
             Already have an account?{" "}
             <Link to="/auth?mode=login" className="text-cyan-400 hover:underline">
               Log in
             </Link>
           </div>
+
+          <p className="mt-2 text-center text-xs text-slate-500">
+            By continuing, you agree to our{" "}
+            <button
+              type="button"
+              onClick={() => setShowTerms(true)}
+              className="text-cyan-400 hover:underline"
+            >
+              Terms & Privacy Policy
+            </button>.
+          </p>
+
+          <p className="mt-2 text-center text-xs text-slate-500">
+            We respect your privacy and will never share your <br /> information with third parties.
+          </p>
         </div>
       </section>
+      <TermsPolicyModal
+        open={showTerms}
+        onClose={() => setShowTerms(false)}
+      />
     </div>
   );
 }

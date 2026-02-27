@@ -2,8 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import api from "@/api/axios";
+import TermsPolicyModal from "@/components/TermsPolicyModal";
 
 export default function Login() {
+  const [showTerms, setShowTerms] = useState(false);
   const navigate = useNavigate();
 
   const { setUser } = useAuth();
@@ -98,11 +100,26 @@ navigate("/");
             </Link>
           </div>
 
-          <p className="mt-6 text-center text-xs text-slate-500">
-            By continuing, you agree to our Terms & Privacy Policy.
+          <p className="mt-2 text-center text-xs text-slate-500">
+            By continuing, you agree to our{" "}
+            <button
+              type="button"
+              onClick={() => setShowTerms(true)}
+              className="text-cyan-400 hover:underline"
+            >
+              Terms & Privacy Policy
+            </button>.
+          </p>
+
+          <p className="mt-2 text-center text-xs text-slate-500">
+            Your information is secure and never shared.
           </p>
         </div>
       </section>
+      <TermsPolicyModal
+        open={showTerms}
+        onClose={() => setShowTerms(false)}
+      />
     </div>
   );
 }

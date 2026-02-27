@@ -51,8 +51,8 @@ export default function BlogView() {
   return (
     <main className="bg-background text-foreground min-h-screen transition-colors duration-300">
       {/* ================= HEADER ================= */}
-      <section className="pt-40 pb-16 px-6 bg-[#05070d]">
-        <div className="mx-auto max-w-3xl">
+      <section className="pt-40 px-6 bg-[#05070d]">
+        <div className="mx-auto max-w-5xl">
           <Link
             to="/blogs"
             className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white mb-6"
@@ -80,7 +80,7 @@ export default function BlogView() {
           </p>
         </div>
 
-        <section className="px-6 pb-24 bg-[#05070d]">
+        <section className="px-6 pb-24 flex justify-center bg-[#05070d]">
           {blog.coverImage && (
             <img
               loading="lazy"
@@ -90,7 +90,7 @@ export default function BlogView() {
                   : `${import.meta.env.VITE_API_URL}${blog.coverImage}`
               }
               alt="cover"
-              className="w-full h-96 object-cover rounded-xl mb-10"
+              className="w-[58%] h-auto object-cover rounded-xl mt-5"
             />
           )}
         </section>
@@ -98,14 +98,14 @@ export default function BlogView() {
 
       {/* ================= CONTENT ================= */}
       <section className="px-6 py-24">
-        <article className="mx-auto max-w-3xl space-y-6 text-muted-foreground">
+        <article className="mx-auto max-w-4xl space-y-6 text-muted-foreground">
           <MarkdownContent content={blog.content} />
         </article>
       </section>
 
       {/* ================= COMMENTS ================= */}
       <section className="px-6 pb-24">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-4xl">
           <h3 className="text-xl font-semibold mb-6">
             Comments ({comments.length})
           </h3>
