@@ -86,7 +86,7 @@ export default function BlogView() {
               loading="lazy"
               src={blog.cover.url}
               alt="cover"
-              className="w-full md:w-[60%] h-auto object-cover rounded-xl mt-5"
+              className="w-full lg:w-[60%] h-auto object-cover rounded-xl mt-5"
               onError={(e) => {
                 e.currentTarget.style.display = "none";
               }}
