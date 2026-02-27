@@ -13,6 +13,7 @@ export default function ProfileEdit() {
   });
 
   const [avatarPreview, setAvatarPreview] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   /* ================= FETCH USER ================= */
   useEffect(() => {
@@ -26,12 +27,8 @@ export default function ProfileEdit() {
         email: user.email,
       });
 
-      if (user.avatar) {
-        setAvatarPreview(
-          user.avatar.startsWith("http")
-            ? user.avatar
-            : `${import.meta.env.VITE_API_URL}${user.avatar}`
-        );
+      if (user.avatar?.url) {
+        setAvatarPreview(user.avatar.url);
       }
     });
   }, []);
@@ -42,20 +39,36 @@ export default function ProfileEdit() {
   }
 
   async function handleImageChange(e) {
-    const file = e.target.files[0];
+    if (uploading) return;
+setUploading(true);
+
+    try {
+      const file = e.target.files[0];
     if (!file) return;
 
-    setAvatarPreview(URL.createObjectURL(file));
+    const previewUrl = URL.createObjectURL(file);
+    setAvatarPreview(previewUrl);
 
     const fd = new FormData();
     fd.append("avatar", file);
 
     try {
-      await api.put("/api/user/me/avatar", fd, {
+      const res = await api.put("/api/user/me/avatar", fd, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
+      // replace preview with Cloudinary URL
+      if (res.data.avatar?.url) {
+        setAvatarPreview(res.data.avatar.url);
+      }
+
+      URL.revokeObjectURL(previewUrl);
     } catch {
+      URL.revokeObjectURL(previewUrl);
       alert("Failed to update avatar");
+    }
+    } finally {
+      setUploading(false);
     }
   }
 
@@ -86,6 +99,7 @@ export default function ProfileEdit() {
             {avatarPreview ? (
               <img
                 src={avatarPreview}
+                onError={() => setAvatarPreview("")}
                 alt="Avatar preview"
                 className="w-full h-full object-cover"
               />
@@ -100,6 +114,7 @@ export default function ProfileEdit() {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
+              disabled={uploading}
               className="hidden"
             />
           </label>
@@ -135,16 +150,14 @@ export default function ProfileEdit() {
         </div>
 
         {/* Email */}
-        <Field
-          label="Email"
-          name="email"
-          value={form.email}
-          disabled
-        />
+        <Field label="Email" name="email" value={form.email} disabled />
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-3 mt-8">
-          <button type="submit" className="btn bg-primary text-primary-foreground">
+          <button
+            type="submit"
+            className="btn bg-primary text-primary-foreground"
+          >
             Save Changes
           </button>
 
@@ -166,18 +179,14 @@ export default function ProfileEdit() {
 function Field({ label, name, value, onChange, disabled }) {
   return (
     <div className="mt-4">
-      <label className="block text-sm font-medium mb-1">
-        {label}
-      </label>
+      <label className="block text-sm font-medium mb-1">{label}</label>
       <input
         type="text"
         name={name}
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className={`input ${
-          disabled ? "opacity-60 cursor-not-allowed" : ""
-        }`}
+        className={`input ${disabled ? "opacity-60 cursor-not-allowed" : ""}`}
       />
     </div>
   );

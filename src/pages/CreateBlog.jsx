@@ -30,8 +30,13 @@ export default function CreateBlog() {
     const file = e.target.files[0];
     if (!file) return;
 
+    if (coverPreview) {
+      URL.revokeObjectURL(coverPreview);
+    }
+
+    const previewUrl = URL.createObjectURL(file);
     setCoverFile(file);
-    setCoverPreview(URL.createObjectURL(file));
+    setCoverPreview(previewUrl);
   }
 
   function removeCover() {
@@ -81,6 +86,10 @@ export default function CreateBlog() {
       await api.post("/api/blogs", fd, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
+      setCoverFile(null);
+      if (coverPreview) URL.revokeObjectURL(coverPreview);
+      setCoverPreview(null);
 
       navigate("/dashboard");
     } catch {
@@ -155,6 +164,10 @@ export default function CreateBlog() {
             </div>
           </div>
         </div>
+
+        <p className="text-xs text-muted-foreground mt-1">
+          Recommended size: 1200×630 • Max 5MB
+        </p>
 
         {/* Category */}
         <div className="mt-4">

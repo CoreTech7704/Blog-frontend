@@ -9,7 +9,7 @@ export default function About() {
       <section className="relative min-h-screen overflow-hidden bg-[#05070d] dark:bg-[#05070d] transition-colors duration-300">
         {/* FloatingLines BACKGROUND */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-70">
-          <div className="w-[100%] h-[100vh]">
+          <div className="w-full h-screen">
             <FloatingLines
               enabledWaves="top,middle,bottom"
               lineDistance={15}
@@ -22,7 +22,7 @@ export default function About() {
         <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
           <h1 className="mb-2 text-5xl font-extrabold leading-tight text-white sm:text-6xl md:text-7xl">
             About{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent text-shadow-xl ">
+            <span className="bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent text-shadow-xl ">
               VoidWork
             </span>
           </h1>
@@ -37,7 +37,7 @@ export default function About() {
             href="#Learnmore"
             className=" relative flex items-center gap-2
             rounded-xl px-6 py-3 text-md font-semibold text-white
-            bg-gradient-to-r from-cyan-500 to-violet-600
+            bg-linear-to-r from-cyan-500 to-violet-600
             backdrop-blur-md 
             border border-white
             shadow-lg shadow-violet-500/30
@@ -52,7 +52,7 @@ export default function About() {
         </div>
 
         {/* BOTTOM FADE */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black to-transparent" />
       </section>
 
       {/* Why VoidWork? */}
@@ -144,7 +144,7 @@ export default function About() {
           to="/blogs"
           className="inline-flex items-center gap-2
                rounded-xl px-6 py-3 font-semibold
-               bg-gradient-to-r from-cyan-500 to-violet-500
+               bg-linear-to-r from-cyan-500 to-violet-500
                text-black hover:scale-105 transition
                hover:shadow-xl hover:shadow-violet-500/40
               active:scale-95"

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function ForgotPassword() {
   return (
     <div className="flex justify-center items-center min-h-screen px-4">
-      <section className="bg-gradient-to-r from-cyan-500 to-violet-500 rounded-3xl p-[2px]">
+      <section className="bg-linear-to-r from-cyan-500 to-violet-500 rounded-3xl p-0.5">
         <div
           className="rounded-3xl bg-slate-950/90 backdrop-blur-xl
                      shadow-2xl p-10 max-w-xl w-full
@@ -41,7 +41,7 @@ export default function ForgotPassword() {
             <button
               type="submit"
               className="w-full py-3 rounded-xl font-semibold
-                         bg-gradient-to-r from-cyan-500 to-violet-500
+                         bg-linear-to-r from-cyan-500 to-violet-500
                          text-black hover:scale-[1.03]
                          transition shadow-lg hover:shadow-cyan-500/25"
             >

@@ -11,7 +11,7 @@ export default function Hero() {
     <section className="relative min-h-screen overflow-hidden bg-[#05070d]">
       {/* FloatingLines BACKGROUND */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-70">
-        <div className="w-[100%] h-[100vh]">
+        <div className="w-full h-screen">
           <FloatingLines
             enabledWaves="top,middle,bottom"
             lineDistance={15}
@@ -24,7 +24,7 @@ export default function Hero() {
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
         <h1 className="mb-2 text-5xl font-extrabold leading-tight text-white sm:text-6xl md:text-7xl">
           Welcome to{" "}
-          <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent text-shadow-xl ">
+          <span className="bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent text-shadow-xl ">
             VoidWork
           </span>
         </h1>
@@ -39,7 +39,7 @@ export default function Hero() {
             to="/blogs"
             className="group relative flex items-center gap-2
             rounded-xl px-6 py-3 text-md font-semibold text-white
-            bg-gradient-to-r from-cyan-500 to-violet-600
+            bg-linear-to-r from-cyan-500 to-violet-600
             backdrop-blur-md  
             border border-white/60
             shadow-lg shadow-violet-500/30
@@ -74,7 +74,7 @@ export default function Hero() {
       </div>
 
       {/* BOTTOM FADE */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black to-transparent" />
     </section>
   );
 }

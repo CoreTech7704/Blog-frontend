@@ -25,7 +25,7 @@ export default function BlogCard({
         }
       `}
     >
-      <div className={`p-6 ${featured ? "min-h-[260px]" : "min-h-[180px]"}`}>
+      <div className={`p-6 ${featured ? "min-h-65" : "min-h-45"}`}>
         {/* Category */}
         <span
           className={`

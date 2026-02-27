@@ -133,7 +133,7 @@ export default function Home() {
             className="
               inline-flex items-center gap-2 rounded-xl
               px-6 py-3 mt-6 font-semibold
-              bg-gradient-to-r from-cyan-500 to-violet-500 text-black
+              bg-linear-to-r from-cyan-500 to-violet-500 text-black
             "
           >
             About VoidWork <ArrowRight />

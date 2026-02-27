@@ -56,7 +56,7 @@ export default function ChangePassword() {
                 transition-colors duration-300"
     >
       {/* BACKGROUND */}
-      <div className="pointer-events-none absolute inset-0 -z-0 opacity-70">
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-70">
         <FloatingLines
           enabledWaves="top,middle,bottom"
           lineDistance={15}
@@ -65,7 +65,7 @@ export default function ChangePassword() {
       </div>
 
       {/* CARD */}
-      <section className="bg-gradient-to-r from-cyan-500 to-violet-500 rounded-3xl p-[2px] w-full max-w-lg">
+      <section className="bg-linear-to-r from-cyan-500 to-violet-500 rounded-3xl p-0.5 w-full max-w-lg">
         <div
           className="rounded-3xl bg-slate-950/90 backdrop-blur-xl
                      shadow-2xl p-10 border border-white/10"
@@ -149,7 +149,7 @@ export default function ChangePassword() {
                 <button
                   disabled={loading}
                   className="w-full py-3 rounded-xl font-semibold
-                             bg-gradient-to-r from-cyan-500 to-violet-500
+                             bg-linear-to-r from-cyan-500 to-violet-500
                              text-black hover:scale-[1.03]
                              transition shadow-lg
                              disabled:opacity-60 disabled:cursor-not-allowed"
@@ -170,7 +170,7 @@ export default function ChangePassword() {
               <a
                 href="/profile"
                 className="inline-block rounded-xl px-6 py-3
-                           bg-gradient-to-r from-cyan-500 to-violet-500
+                           bg-linear-to-r from-cyan-500 to-violet-500
                            text-black font-semibold
                            hover:scale-105 transition"
               >

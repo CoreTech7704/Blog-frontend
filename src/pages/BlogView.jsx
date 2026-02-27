@@ -80,17 +80,16 @@ export default function BlogView() {
           </p>
         </div>
 
-        <section className="px-6 pb-24 flex justify-center bg-[#05070d]">
-          {blog.coverImage && (
+        <section className="px-6 pb-10 flex justify-center bg-[#05070d]">
+          {blog.cover?.url && (
             <img
               loading="lazy"
-              src={
-                blog.coverImage.startsWith("http")
-                  ? blog.coverImage
-                  : `${import.meta.env.VITE_API_URL}${blog.coverImage}`
-              }
+              src={blog.cover.url}
               alt="cover"
-              className="w-[58%] h-auto object-cover rounded-xl mt-5"
+              className="w-full md:w-[60%] h-auto object-cover rounded-xl mt-5"
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
             />
           )}
         </section>
@@ -165,13 +164,12 @@ export default function BlogView() {
               {comments.map((c) => (
                 <div key={c._id} className="flex gap-4">
                   <img
-                    src={
-                      c.user?.avatar?.startsWith("http")
-                        ? c.user.avatar
-                        : `${import.meta.env.VITE_API_URL}${c.user.avatar}`
-                    }
+                    src={c.user?.avatar?.url || "/default-avatar.png"}
                     alt="avatar"
                     className="w-10 h-10 rounded-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = "/default-avatar.png";
+                    }}
                   />
 
                   <div className="flex-1">

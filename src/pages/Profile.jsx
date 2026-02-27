@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "@/api/axios";
-import { getImageUrl } from "@/utils/getImageUrl";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function Profile() {
@@ -55,9 +54,13 @@ export default function Profile() {
           {/* Avatar */}
           <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-muted flex items-center justify-center">
             <img
-              src={getImageUrl(user.avatar) || "/default-avatar.png"}
+              loading="lazy"
+              src={user.avatar?.url || "/default-avatar.png"}
               alt="avatar"
               className="w-full h-full rounded-full object-cover"
+              onError={(e) => {
+                e.currentTarget.src = "/default-avatar.png";
+              }}
             />
           </div>
 

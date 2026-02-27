@@ -32,7 +32,7 @@ export default function ResetPassword() {
       </div>
 
       {/* CARD */}
-      <section className="relative w-full max-w-lg rounded-3xl bg-gradient-to-r from-cyan-500 to-violet-500 p-[2px]">
+      <section className="relative w-full max-w-lg rounded-3xl bg-linear-to-r from-cyan-500 to-violet-500 p-0.5">
         <div className="rounded-3xl bg-slate-950/90 backdrop-blur-xl border border-white/10 shadow-2xl p-6 sm:p-10">
           {!success ? (
             <>

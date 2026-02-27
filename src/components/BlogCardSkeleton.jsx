@@ -12,7 +12,7 @@ export default function BlogCardSkeleton({ featured = false }) {
             : "bg-slate-100 dark:bg-black/40 border-slate-200 dark:border-white/10"
         }
 
-        ${featured ? "min-h-[260px]" : "min-h-[180px]"}
+        ${featured ? "min-h-65" : "min-h-45"}
       `}
     >
       <div className="p-6 space-y-4">

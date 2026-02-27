@@ -67,7 +67,7 @@ export default function Navbar({ theme, setTheme }) {
         {/* Brand */}
         <Link
           to="/"
-          className="text-3xl font-bold bg-gradient-to-r
+          className="text-3xl font-bold bg-linear-to-r
           from-cyan-500 to-violet-500 bg-clip-text text-transparent"
         >
           VoidWork
@@ -169,7 +169,7 @@ export default function Navbar({ theme, setTheme }) {
               className="hidden
                 px-5 h-10 md:flex items-center justify-center
                 rounded-xl font-semibold
-                bg-gradient-to-r from-cyan-500 to-violet-500
+                bg-linear-to-r from-cyan-500 to-violet-500
                 text-black hover:scale-105 transition
               "
             >
@@ -259,7 +259,7 @@ function NavLink({ to, label }) {
       className="
         hover:text-cyan-400
         relative after:absolute after:-bottom-1
-        after:left-0 after:h-[2px] after:w-0
+        after:left-0 after:h-0.5 after:w-0
         after:bg-cyan-400 after:transition-all
         hover:after:w-full
         transition-colors

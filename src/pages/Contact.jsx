@@ -60,7 +60,7 @@ export default function Contact() {
         <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 text-center">
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white">
             Contact{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
               VoidWork
             </span>
           </h1>
@@ -71,7 +71,7 @@ export default function Contact() {
         </div>
 
         {/* BOTTOM FADE */}
-        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent" />
+        <div className="absolute bottom-0 inset-x-0 h-32 bg-linear-to-t from-black to-transparent" />
       </section>
 
       {/* Get in Touch Section */}
@@ -157,7 +157,7 @@ export default function Contact() {
                 disabled={loading || success}
                 className="
                   rounded-xl px-6 py-3 font-semibold
-                  bg-gradient-to-r from-cyan-500 to-violet-500
+                  bg-linear-to-r from-cyan-500 to-violet-500
                   text-white hover:scale-105 transition
                   disabled:opacity-50 disabled:cursor-not-allowed
                 "
