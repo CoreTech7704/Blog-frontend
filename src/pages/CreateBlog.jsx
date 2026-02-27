@@ -197,8 +197,24 @@ export default function CreateBlog() {
           rows={10}
         />
 
+        {/* Markdown Note */}
+        <div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            This editor supports{" "}
+            <a
+              href="https://www.markdownguide.org/basic-syntax/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              Markdown
+            </a>{" "}
+            formatting (headings, lists, code blocks, links, etc.).
+          </p>
+        </div>
+
         {/* Actions */}
-        <div className="flex flex-col sm:flex-row gap-3 mt-8">
+        <div className="flex flex-col sm:flex-row gap-3 mt-4">
           <button
             type="button"
             disabled={isSubmitting}
