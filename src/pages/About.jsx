@@ -58,8 +58,8 @@ export default function About() {
       {/* Why VoidWork? */}
       <section id="Learnmore" className="py-32 px-6 bg-black">
         <div className="py-6 mx-auto max-w-3xl text-center">
-          <h2 className="text-4xl font-bold mb-6">Why VoidWork?</h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
+          <h2 className="text-4xl text-white font-bold mb-6">Why VoidWork?</h2>
+          <p className="text-slate-300  text-lg leading-relaxed">
             The internet is full of tutorials that explain what to type, but not
             why it works. VoidWork exists to bridge that gap. We focus on
             understanding systems, making better decisions, and learning in a
@@ -69,7 +69,7 @@ export default function About() {
       </section>
 
       {/* The Story */}
-      <section className="py-32 px-6 bg-white dark:bg-slate-950 border-t rounded-t-[2.5rem] -mt-7 transition-colors duration-300">
+      <section className="py-32 px-6 bg-background border-t rounded-t-[2.5rem] -mt-7 transition-colors duration-300">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">The Story</h2>
           <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed">
@@ -108,7 +108,7 @@ export default function About() {
       </div>
 
       {/* What You’ll Find */}
-      <section className="py-32 px-6 bg-white dark:bg-slate-950 transition-colors duration-300">
+      <section className="py-32 px-6 bg-background transition-colors duration-300">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold mb-6">
             What You’ll Find on VoidWork

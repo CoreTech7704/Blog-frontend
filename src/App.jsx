@@ -15,6 +15,7 @@ import CategoriesPage from "./pages/Categories";
 import CategoryBlogs from "./pages/CategoryBlogs";
 import NotFound from "./pages/NotFound";
 import Search from "./pages/Search";
+import FeaturedBlogsPage from "./pages/FetureedBlogs";
 
 /* Auth pages */
 import Auth from "./pages/Auth";
@@ -44,6 +45,7 @@ function App() {
           <Route path="/blogs/:slug" element={<BlogView />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/categories/:slug" element={<CategoryBlogs />} />
+          <Route path="/featured" element={<FeaturedBlogsPage />} />
 
           {/* ================= AUTH ================= */}
           <Route path="/auth" element={<Auth />} />

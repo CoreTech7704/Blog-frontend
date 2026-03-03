@@ -74,14 +74,15 @@ export default function Contact() {
         <div className="absolute bottom-0 inset-x-0 h-32 bg-linear-to-t from-black to-transparent" />
       </section>
 
+
       {/* Get in Touch Section */}
       <section
         id="Learnmore"
         className="py-32 px-6 bg-black"
       >
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-4xl font-bold mb-6">Get in Touch</h2>
-          <p className="mb-6 text-lg text-slate-700 dark:text-slate-300">
+          <h2 className="text-4xl text-white font-bold mb-6">Get in Touch</h2>
+          <p className="mb-6 text-lg text-slate-300">
             We'd love to hear from you! Whether you have questions, suggestions,
             or just want to say hello, feel free to drop us a message.
           </p>

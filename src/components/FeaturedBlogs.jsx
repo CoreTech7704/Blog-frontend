@@ -37,7 +37,7 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
           </div>
 
           <a
-            href="/blogs"
+            href="/featured"
             className="
               hidden md:inline-flex items-center gap-1 text-sm
               text-slate-400
@@ -61,7 +61,8 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
               title={mainBlog.title}
               excerpt={mainBlog.excerpt}
               category={mainBlog.tags?.[0] || "General"}
-              coverImage={mainBlog.coverImage}
+              cover={mainBlog.cover?.url}
+              readTime={mainBlog.readingTime}
             />
           </div>
 
@@ -69,13 +70,12 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
           <div className="flex flex-col gap-6">
             {sideBlogs.slice(0, 2).map((blog) => (
               <BlogCard
-              featured
+                compact
                 key={blog.slug}
                 title={blog.title}
                 excerpt={blog.excerpt}
                 category={blog.tags?.[0] || "General"}
-                readTime={blog.readTime}
-                coverImage={blog.coverImage}
+                readTime={mainBlog.readingTime}
                 slug={blog.slug}
               />
             ))}
@@ -85,7 +85,7 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
         {/* Mobile View All */}
         <div className="mt-10 text-center md:hidden">
           <a
-            href="/blogs"
+            href="/featured"
             className="
               inline-flex items-center gap-1 text-sm
               text-slate-400

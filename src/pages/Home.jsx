@@ -29,7 +29,6 @@ export default function Home() {
   }, []);
 
   const latestBlogs = blogs.slice(0, 4);
-  const featuredBlog = latestBlogs[0];
 
   return (
     <main className="bg-black text-foreground overflow-x-hidden">
@@ -109,7 +108,22 @@ export default function Home() {
                   </Link>
                 ))}
             </div>
+            <div className="mt-10 text-center md:hidden">
+              <a
+                href="/categories"
+                className="
+                  inline-flex items-center gap-1 text-sm
+                  text-slate-400
+                  hover:text-white
+                  transition-all
+                  hover:translate-x-0.5
+                "
+                >
+                View all blogs →
+              </a>
+            </div>
           </div>
+          {/* Mobile View All */}
         </div>
       </section>
 
@@ -178,20 +192,34 @@ export default function Home() {
           )}
 
           {latestBlogs.length > 0 && (
-            <div className="grid gap-8 lg:grid-cols-3">
-              <div className="lg:col-span-2">
-                {featuredBlog && (
-                  <BlogCard {...featuredBlog} featured />
-                )}
-              </div>
-
-              <div className="grid gap-8">
-                {latestBlogs.slice(1).map((blog) => (
-                  <BlogCard key={blog._id} {...blog} />
-                ))}
-              </div>
+            <div className="grid gap-8 grid-cols-1 sm:grid-cols-2">
+              {latestBlogs.map((blog) => (
+                <BlogCard 
+                key={blog._id} 
+                slug={blog.slug}
+                title={blog.title}
+                excerpt={blog.excerpt}
+                readTime={blog.readingTime}
+                category={blog.tags?.[0] || "General"}
+                />
+              ))}
             </div>
           )}
+        </div>
+        {/* Mobile View All */}
+        <div className="mt-10 text-center md:hidden">
+          <a
+            href="/blogs"
+            className="
+              inline-flex items-center gap-1 text-sm
+              text-slate-400
+              hover:text-white
+              transition-all
+              hover:translate-x-0.5
+            "
+            >
+            View all blogs →
+          </a>
         </div>
       </section>
     </main>

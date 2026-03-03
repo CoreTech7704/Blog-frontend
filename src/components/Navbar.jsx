@@ -51,7 +51,7 @@ export default function Navbar({ theme, setTheme }) {
   }
 
   return (
-    <header className="fixed top-0 z-50 w-full px-6">
+    <header className="fixed top-0 z-150 w-full px-6">
       <nav
         className="
           relative mx-auto mt-4 max-w-6xl h-14 px-6
