@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import MarkdownContent from "@/components/MarkDownContent";
 import { useEffect, useState } from "react";
 import api from "@/api/axios";
 
@@ -8,6 +9,7 @@ export default function CreateBlog() {
   const [coverFile, setCoverFile] = useState(null);
   const [coverPreview, setCoverPreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [editorMode, setEditorMode] = useState("edit");
 
   const [form, setForm] = useState({
     title: "",
@@ -99,8 +101,22 @@ export default function CreateBlog() {
     }
   }
 
+  function autoResize(e) {
+    const el = e.target;
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  }
+
+  useEffect(() => {
+    const textarea = document.querySelector("textarea[name='content']");
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+    }
+  }, [editorMode]);
+
   return (
-    <main className="max-w-3xl mx-auto px-4 my-24">
+    <main className="max-w-4xl mx-auto px-4 my-24">
       <form onSubmit={(e) => e.preventDefault()} className="card">
         <h1 className="text-2xl font-bold mb-6">Create New Blog</h1>
 
@@ -200,29 +216,75 @@ export default function CreateBlog() {
         </p>
 
         {/* Content */}
-        <Field
-          label="Content"
-          name="content"
-          value={form.content}
-          onChange={handleChange}
-          placeholder="Write your blog content here..."
-          textarea
-          rows={10}
-        />
+        <div className="mt-6">
+          <label className="block text-sm font-medium mb-2">Content</label>
+
+          {/* Editor Tabs */}
+          <div className="flex items-center gap-2 border-b border-border mb-3">
+            <button
+              type="button"
+              onClick={() => setEditorMode("edit")}
+              className={`px-4 py-2 text-sm ${
+                editorMode === "edit"
+                  ? "border-b-2 border-primary font-medium"
+                  : "text-muted-foreground"
+              }`}
+            >
+              Edit
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setEditorMode("preview")}
+              className={`px-4 py-2 text-sm ${
+                editorMode === "preview"
+                  ? "border-b-2 border-primary font-medium"
+                  : "text-muted-foreground"
+              }`}
+            >
+              Preview
+            </button>
+          </div>
+
+          {/* EDIT MODE */}
+          {editorMode === "edit" && (
+            <textarea
+              name="content"
+              value={form.content}
+              onChange={(e) => {
+                handleChange(e);
+                autoResize(e);
+              }}
+              placeholder="Write your blog using Markdown..."
+              className="input font-mono leading-relaxed tracking-wide overflow-hidden transition-all duration-150"
+              style={{ minHeight: "320px" }}
+            />
+          )}
+
+          {/* PREVIEW MODE */}
+          {editorMode === "preview" && (
+            <div className="border border-border rounded-lg p-5 bg-muted">
+              {form.content ? (
+                <MarkdownContent content={form.content} />
+              ) : (
+                <p className="text-muted-foreground">Nothing to preview yet.</p>
+              )}
+            </div>
+          )}
+        </div>
 
         {/* Markdown Note */}
         <div>
-          <p className="mt-2 text-xs text-muted-foreground">
-            This editor supports{" "}
+          <p className="text-xs text-muted-foreground mt-2">
+            Supports <strong>Markdown</strong>. Need help?{" "}
             <a
               href="https://www.markdownguide.org/basic-syntax/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline"
             >
-              Markdown
-            </a>{" "}
-            formatting (headings, lists, code blocks, links, etc.).
+              Markdown Guide
+            </a>
           </p>
         </div>
 

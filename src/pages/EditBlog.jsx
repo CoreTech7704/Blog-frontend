@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import MarkdownContent from "@/components/MarkDownContent";
 import api from "@/api/axios";
 
 export default function EditBlog() {
@@ -11,6 +12,7 @@ export default function EditBlog() {
   const [updating, setUpdating] = useState(false);
 
   const [categories, setCategories] = useState([]);
+  const [editorMode, setEditorMode] = useState("edit");
 
   const [form, setForm] = useState({
     title: "",
@@ -127,16 +129,25 @@ export default function EditBlog() {
     }
   }
 
+    function autoResize(el) {
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  }
+
+  useEffect(() => {
+    const textarea = document.querySelector("textarea[name='content']");
+    autoResize(textarea);
+  }, [editorMode, form.content]);
+
   if (loading) {
     return (
-      <p className="text-center mt-24 text-muted-foreground">
-        Loading blog...
-      </p>
+      <p className="text-center mt-24 text-muted-foreground">Loading blog...</p>
     );
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 my-24">
+    <main className="max-w-4xl mx-auto px-4 my-24">
       <div className="card p-6 sm:p-8">
         <h1 className="text-2xl font-bold mb-6">Edit Blog</h1>
 
@@ -159,9 +170,7 @@ export default function EditBlog() {
 
         {/* COVER IMAGE */}
         <div className="mt-6">
-          <label className="block text-sm font-medium mb-2">
-            Cover Image
-          </label>
+          <label className="block text-sm font-medium mb-2">Cover Image</label>
 
           <div className="relative h-48 sm:h-56 rounded-xl border border-border bg-muted flex items-center justify-center overflow-hidden">
             {coverPreview ? (
@@ -206,9 +215,7 @@ export default function EditBlog() {
 
         {/* CATEGORY */}
         <div className="mt-4">
-          <label className="block text-sm font-medium mb-1">
-            Category
-          </label>
+          <label className="block text-sm font-medium mb-1">Category</label>
           <select
             name="category"
             value={form.category}
@@ -236,13 +243,77 @@ export default function EditBlog() {
         </p>
 
         {/* CONTENT */}
-        <Textarea
-          label="Content"
-          name="content"
-          rows={10}
-          value={form.content}
-          onChange={handleChange}
-        />
+        <div className="mt-6">
+          <label className="block text-sm font-medium mb-2">Content</label>
+
+          {/* Editor Tabs */}
+          <div className="flex items-center gap-2 border-b border-border mb-3">
+            <button
+              type="button"
+              onClick={() => setEditorMode("edit")}
+              className={`px-4 py-2 text-sm ${
+                editorMode === "edit"
+                  ? "border-b-2 border-primary font-medium"
+                  : "text-muted-foreground"
+              }`}
+            >
+              Edit
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setEditorMode("preview")}
+              className={`px-4 py-2 text-sm ${
+                editorMode === "preview"
+                  ? "border-b-2 border-primary font-medium"
+                  : "text-muted-foreground"
+              }`}
+            >
+              Preview
+            </button>
+          </div>
+
+          {/* EDIT MODE */}
+          {editorMode === "edit" && (
+            <textarea
+              name="content"
+              value={form.content}
+              onChange={(e) => {
+                handleChange(e);
+                autoResize(e.target);
+              }}
+              placeholder="Write your blog using Markdown..."
+              className="input font-mono leading-relaxed tracking-wide overflow-hidden transition-all duration-150"
+              style={{ minHeight: "320px", resize: "none" }}
+            />
+          )}
+
+          {/* PREVIEW MODE */}
+          {editorMode === "preview" && (
+            <div className="border border-border rounded-lg p-5 bg-muted">
+              {form.content ? (
+                <MarkdownContent content={form.content} />
+              ) : (
+                <p className="text-muted-foreground">Nothing to preview yet.</p>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Markdown Note */}
+        <div>
+          <p className="text-xs text-muted-foreground mt-2">
+            Supports <strong>Markdown</strong>. Need help?{" "}
+            <a
+              href="https://www.markdownguide.org/basic-syntax/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              Markdown Guide
+            </a>
+          </p>
+        </div>
 
         {/* STATUS */}
         <div className="mt-4">
@@ -285,9 +356,7 @@ export default function EditBlog() {
 function Input({ label, name, value, onChange }) {
   return (
     <div className="mt-4">
-      <label className="block text-sm font-medium mb-1">
-        {label}
-      </label>
+      <label className="block text-sm font-medium mb-1">{label}</label>
       <input
         type="text"
         name={name}
@@ -304,9 +373,7 @@ function Input({ label, name, value, onChange }) {
 function Textarea({ label, name, rows, value, onChange }) {
   return (
     <div className="mt-4">
-      <label className="block text-sm font-medium mb-1">
-        {label}
-      </label>
+      <label className="block text-sm font-medium mb-1">{label}</label>
       <textarea
         rows={rows}
         name={name}
