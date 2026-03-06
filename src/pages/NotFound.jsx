@@ -27,11 +27,11 @@ export default function NotFound() {
           404
         </FuzzyText>
 
-        <h2 className="mt-2 mb-6 text-4xl font-bold text-foreground">
+        <h2 className="mt-5 font-logo mb-5 text-4xl font-bold text-foreground">
           Page Not Found
         </h2>
 
-        <p className="mb-8 max-w-2xl text-lg text-muted-foreground">
+        <p className="mb-8 font-hero tracking-wide leading-tight max-w-2xl text-lg">
           Sorry, the page you are looking for does not exist.
           Please check the URL or return to the homepage.
         </p>
@@ -39,11 +39,11 @@ export default function NotFound() {
         <Link
           to="/"
           className="
-            group relative inline-flex items-center gap-2
-            rounded-xl px-6 py-3 text-base font-semibold
-            text-black
-            bg-gradient-to-r from-cyan-500 to-violet-600
-            border border-border
+            group relative flex items-center gap-2
+            rounded-xl px-6 py-3 text-md font-semibold text-white
+            bg-linear-to-r from-cyan-500 to-violet-600
+            backdrop-blur-md  
+            border-2 border-white/60
             shadow-lg shadow-violet-500/30
             transition-all duration-300
             hover:scale-105 hover:shadow-xl hover:shadow-violet-500/40

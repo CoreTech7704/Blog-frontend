@@ -24,12 +24,13 @@ export default function Hero() {
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
         <h1 className="mb-2 text-5xl font-extrabold leading-tight text-white sm:text-6xl md:text-7xl">
           Welcome to{" "}
-          <span className="bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent text-shadow-xl ">
-            VoidWork
+          <span className="tracking-tight bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent text-shadow-xl ">
+            <span className="font-logo font-semibold">Void</span>
+            <span className="font-logo font-bold">Work</span>
           </span>
         </h1>
 
-        <p className="mb-6 max-w-2xl text-lg text-slate-300">
+        <p className="font-hero tracking-wide text-lg mb-6 max-w-2xl text-slate-300 leading-tight">
           Dive into the world of coding with our expertly crafted blogs,
           tutorials, and resources designed to empower developers of all levels.
         </p>
@@ -41,7 +42,7 @@ export default function Hero() {
             rounded-xl px-6 py-3 text-md font-semibold text-white
             bg-linear-to-r from-cyan-500 to-violet-600
             backdrop-blur-md  
-            border border-white/60
+            border-2 border-white/60
             shadow-lg shadow-violet-500/30
             transition-all duration-300
             hover:scale-105 hover:shadow-xl hover:shadow-violet-500/40
@@ -59,7 +60,7 @@ export default function Hero() {
                           px-6 py-2 rounded-xl
                           text-md font-semibold text-white/80
                           bg-white/5 backdrop-blur-md
-                          border border-white/60
+                          border-2 border-white/60
                           transition-all duration-300
                           hover:bg-white/10 hover:text-white
                           hover:scale-105 hover:shadow-lg hover:shadow-white/20

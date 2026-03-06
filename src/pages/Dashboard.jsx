@@ -86,7 +86,7 @@ function BlogRow({ blog, onDelete }) {
   return (
     <div className="surface p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div>
-        <h3 className="font-semibold break-words">{blog.title}</h3>
+        <h3 className="font-semibold wrap-break-word">{blog.title}</h3>
 
         <div className="text-sm text-muted-foreground mt-1">
           {blog.category?.name} •{" "}

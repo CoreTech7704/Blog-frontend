@@ -15,13 +15,15 @@ export default function Navbar({ theme, setTheme }) {
 
   const location = useLocation();
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMobileOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "auto";
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "";
     };
   }, [mobileOpen]);
 
@@ -33,8 +35,7 @@ export default function Navbar({ theme, setTheme }) {
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Logout handler
@@ -67,16 +68,20 @@ export default function Navbar({ theme, setTheme }) {
         {/* Brand */}
         <Link
           to="/"
-          className="text-3xl font-bold bg-linear-to-r
-          from-cyan-500 to-violet-500 bg-clip-text text-transparent"
+          className="text-3xl tracking-tight bg-linear-to-r
+          from-cyan-500 to-violet-500 bg-clip-text text-transparent
+          hover:text-transparent hover:bg-clip-text hover:from-cyan-400 hover:to-violet-400
+          transition-all duration-300
+         "
         >
-          VoidWork
+          <span className="font-logo font-semibold">Void</span>
+          <span className="font-logo font-bold">Work</span>
         </Link>
 
         {/* Navigation */}
-        <div 
-        className="
-              hidden md:flex gap-6 text-lg font-medium items-center
+        <div
+          className="
+              hidden md:flex gap-7 text-lg font-medium items-center
               text-slate-700 dark:text-slate-300
               "
         >
@@ -100,8 +105,9 @@ export default function Navbar({ theme, setTheme }) {
                 {user.fullname || "User"}
                 <ChevronDown
                   size={14}
-                  className={`transition-transform ${userOpen ? "rotate-180" : ""
-                    }`}
+                  className={`transition-transform ${
+                    userOpen ? "rotate-180" : ""
+                  }`}
                 />
               </button>
 
@@ -114,9 +120,10 @@ export default function Navbar({ theme, setTheme }) {
                   shadow-lg
                   transition-all duration-200
                   hover:bg-slate-100 dark:hover:bg-slate-800
-                  ${userOpen
-                    ? "opacity-100 scale-100"
-                    : "opacity-0 scale-95 pointer-events-none"
+                  ${
+                    userOpen
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95 pointer-events-none"
                   }
                 `}
               >
@@ -140,14 +147,13 @@ export default function Navbar({ theme, setTheme }) {
 
         {/* Right actions */}
         <div className="flex ml-2 items-center gap-2">
-
           <Link
             to="/search"
             className="
               text-slate-600 dark:text-slate-300
               hover:text-cyan-500
               text-2xl hover:scale-105 transition
-            "  
+            "
           >
             <Search />
           </Link>
@@ -165,7 +171,6 @@ export default function Navbar({ theme, setTheme }) {
           {!user && (
             <Link
               to="/auth?mode=login"
-
               className="hidden
                 px-5 h-10 md:flex items-center justify-center
                 rounded-xl font-semibold
@@ -192,13 +197,25 @@ export default function Navbar({ theme, setTheme }) {
         >
           <MobileLink to="/" label="Home" setMobileOpen={setMobileOpen} />
           <MobileLink to="/blogs" label="Blogs" setMobileOpen={setMobileOpen} />
-          <MobileLink to="/contact" label="Contact" setMobileOpen={setMobileOpen} />
+          <MobileLink
+            to="/contact"
+            label="Contact"
+            setMobileOpen={setMobileOpen}
+          />
           <MobileLink to="/about" label="About" setMobileOpen={setMobileOpen} />
 
           {user ? (
             <>
-              <MobileLink to="/profile" label="Profile" setMobileOpen={setMobileOpen} />
-              <MobileLink to="/dashboard" label="Dashboard" setMobileOpen={setMobileOpen} />
+              <MobileLink
+                to="/profile"
+                label="Profile"
+                setMobileOpen={setMobileOpen}
+              />
+              <MobileLink
+                to="/dashboard"
+                label="Dashboard"
+                setMobileOpen={setMobileOpen}
+              />
               <MobileLink
                 to="/dashboard/blogs/new"
                 label="Create Blog"
@@ -242,10 +259,8 @@ export default function Navbar({ theme, setTheme }) {
               </button>
             </div>
           )}
-
         </div>
       )}
-
     </header>
   );
 }

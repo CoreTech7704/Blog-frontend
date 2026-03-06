@@ -60,11 +60,12 @@ export default function Contact() {
         <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 text-center">
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white">
             Contact{" "}
-            <span className="bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
-              VoidWork
+            <span className="tracking-tight bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent text-shadow-xl ">
+              <span className="font-logo font-semibold">Void</span>
+              <span className="font-logo font-bold">Work</span>
             </span>
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-slate-300">
+          <p className="mt-4 font-hero tracking-wide leading-tight max-w-2xl text-lg text-slate-300">
             For inquiries, feedback, or collaboration opportunities, please
             reach out to us.
           </p>
@@ -74,12 +75,8 @@ export default function Contact() {
         <div className="absolute bottom-0 inset-x-0 h-32 bg-linear-to-t from-black to-transparent" />
       </section>
 
-
       {/* Get in Touch Section */}
-      <section
-        id="Learnmore"
-        className="py-32 px-6 bg-black"
-      >
+      <section id="Learnmore" className="py-32 px-6 bg-black">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl text-white font-bold mb-6">Get in Touch</h2>
           <p className="mb-6 text-lg text-slate-300">
@@ -99,7 +96,8 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="
+        <div
+          className="
           max-w-md mx-auto relative overflow-hidden z-10
           bg-white/80 dark:bg-gray-800
           border border-slate-200 dark:border-white/10
@@ -110,7 +108,8 @@ export default function Contact() {
           after:w-32 after:h-32 after:absolute after:bg-sky-400
           after:rounded-full after:-z-10 after:blur-xl after:top-24 after:-right-12
           transition-colors duration-300
-        ">
+        "
+        >
           <form onSubmit={handleSubmit}>
             <Input
               label="Full Name"
@@ -179,7 +178,9 @@ export default function Contact() {
 function Input({ label, name, value, onChange, type = "text", placeholder }) {
   return (
     <div className="mb-4">
-      <label className="block text-sm text-slate-600 dark:text-gray-300">{label}</label>
+      <label className="block text-sm text-slate-600 dark:text-gray-300">
+        {label}
+      </label>
       <input
         name={name}
         type={type}
@@ -202,7 +203,9 @@ function Input({ label, name, value, onChange, type = "text", placeholder }) {
 function Textarea({ label, name, value, onChange, placeholder }) {
   return (
     <div className="mb-4">
-      <label className="block text-sm text-slate-600 dark:text-gray-300">{label}</label>
+      <label className="block text-sm text-slate-600 dark:text-gray-300">
+        {label}
+      </label>
       <textarea
         name={name}
         rows={4}

@@ -46,11 +46,11 @@ export default function BlogCard({
           />
 
           {/* subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
         </div>
       )}
 
-      <div className={`p-6 ${featured ? "pt-5 min-h-[18rem]" : "min-h-[12rem]"}`}>
+      <div className={`p-6 ${featured ? "pt-5 min-h-72" : "min-h-48"}`}>
         {/* Category */}
         <span
           className={`

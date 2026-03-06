@@ -10,8 +10,11 @@ export default function Footer() {
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           {/* Brand */}
           <div>
-            <h2 className="text-2xl font-bold bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
-              VoidWork
+            <h2>
+              <span className="text-2xl tracking-tight bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent text-shadow-xl">
+                <span className="font-logo font-semibold">Void</span>
+                <span className="font-logo font-bold">Work</span>
+              </span>
             </h2>
             <p className="mt-2 max-w-sm text-sm text-slate-400">
               Clean, practical blogs and tutorials for people who care about
@@ -91,10 +94,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <TermsPolicyModal
-        open={showTerms}
-        onClose={() => setShowTerms(false)}
-      />
+      <TermsPolicyModal open={showTerms} onClose={() => setShowTerms(false)} />
     </footer>
   );
 }

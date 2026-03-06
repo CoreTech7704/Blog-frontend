@@ -22,12 +22,13 @@ export default function About() {
         <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
           <h1 className="mb-2 text-5xl font-extrabold leading-tight text-white sm:text-6xl md:text-7xl">
             About{" "}
-            <span className="bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent text-shadow-xl ">
-              VoidWork
+            <span className="tracking-tight bg-linear-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent text-shadow-xl ">
+              <span className="font-logo font-semibold">Void</span>
+              <span className="font-logo font-bold">Work</span>
             </span>
           </h1>
 
-          <p className="mb-6 max-w-2xl text-lg text-slate-300">
+          <p className="mb-6 font-hero tracking-wide leading-tight max-w-2xl text-lg text-slate-300">
             VoidWork is a developer-first platform focused on clear, practical,
             and honest writing about coding, software engineering, and
             technology.
@@ -136,9 +137,7 @@ export default function About() {
         <h2 className="text-3xl text-foreground font-bold mb-4">
           If this sounds like your kind of space
         </h2>
-        <p className="mb-8">
-          Start exploring, reading, and building with us.
-        </p>
+        <p className="mb-8">Start exploring, reading, and building with us.</p>
 
         <Link
           to="/blogs"
