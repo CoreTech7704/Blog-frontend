@@ -1,13 +1,8 @@
 import BlogCard from "@/components/BlogCard";
 import BlogCardSkeleton from "@/components/BlogCardSkeleton";
+import UserCard from "@/components/UserCard";
 
-export default function SearchResults({
-  loading,
-  searched,
-  results,
-  total,
-  query,
-}) {
+export default function SearchResults({ loading, searched, results, type }) {
   return (
     <div className="mt-16">
       {/* Idle */}
@@ -34,27 +29,25 @@ export default function SearchResults({
       )}
 
       {/* Results */}
-      <div>
-        {searched && !loading && results.length > 0 && (
-          <h2 className="mb-8 text-lg text-muted-foreground">
-            {total} results for <span className="text-foreground font-medium">"{query}"</span>
-          </h2>
-        )}
-      </div>
+      {/* Results */}
       {!loading && results.length > 0 && (
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {results.map((blog) => (
-            <BlogCard
-              key={blog._id}
-              slug={blog.slug}
-              title={blog.title}
-              excerpt={blog.excerpt}
-              category={blog.category?.name || "General"}
-              readTime={blog.readingTime || 5}
-              author={blog.author?.fullname}
-              createdAt={blog.createdAt}
-            />
-          ))}
+          {type === "blogs" &&
+            results.map((blog) => (
+              <BlogCard
+                key={blog._id}
+                slug={blog.slug}
+                title={blog.title}
+                excerpt={blog.excerpt}
+                category={blog.category?.name || "General"}
+                readTime={blog.readingTime || 5}
+                author={blog.author?.fullname}
+                createdAt={blog.createdAt}
+              />
+            ))}
+
+          {type === "users" &&
+            results.map((user) => <UserCard key={user._id} user={user} />)}
         </div>
       )}
     </div>

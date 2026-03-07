@@ -74,7 +74,7 @@ export default function Profile() {
                 className="inline-block mt-2 px-3 py-1 text-xs font-medium rounded-full
                   bg-sky-500/15 text-sky-400"
               >
-                Author
+                ⦿ Author
               </span>
             )}
 

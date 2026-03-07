@@ -10,8 +10,11 @@ export default function Search() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [sort, setSort] = useState("latest");
+  const [type, setType] = useState("blogs");
 
-  async function handleSearch(keyword, pageNum = 1) {
+  async function handleSearch(keyword, pageNum = 1, sortType = sort) {
     if (loading) return;
 
     if (!keyword || keyword.length < 2) {
@@ -32,12 +35,15 @@ export default function Search() {
           q: keyword,
           page: pageNum,
           limit: 9,
+          sort: sortType,
+          type,
         },
       });
 
       setResults(res.data.results);
       setPage(res.data.page);
       setPages(res.data.pages);
+      setTotal(res.data.total);
     } catch (err) {
       console.error("SEARCH ERROR:", err);
       setResults([]);
@@ -69,12 +75,42 @@ export default function Search() {
 
         {/* Search bar sits below */}
         <div className="mt-10">
-          <SearchBar onSearch={handleSearch} />
+          <SearchBar
+            onSearch={handleSearch}
+            type={type}
+            setType={setType}
+            placeholder={
+              type === "blogs" ? "Search blogs, topics..." : "Search users..."
+            }
+          />
         </div>
       </section>
 
+      {/* SORT & COUNT */}
+      {searched && !loading && (
+        <div className="flex items-center justify-between px-6 mt-12 animate-fade-in">
+          <h2 className="text-lg text-muted-foreground">
+            {total} results for{" "}
+            <span className="text-foreground font-medium">"{query}"</span>
+          </h2>
+
+          <select
+            value={sort}
+            onChange={(e) => {
+              const value = e.target.value;
+              setSort(value);
+              handleSearch(query, 1, value);
+            }}
+            className="input w-auto text-sm"
+          >
+            <option value="latest">Latest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </div>
+      )}
+
       {/* RESULTS */}
-      <section className="px-6 py-24">
+      <section className="px-6 pb-20">
         <div className="mx-auto max-w-6xl">
           <SearchResults
             loading={loading}
@@ -82,8 +118,7 @@ export default function Search() {
             results={results}
             page={page}
             pages={pages}
-            query={query}
-            total={results.length ? pages * 9 : 0}
+            type={type}
             onPageChange={(p) => handleSearch(query, p)}
           />
         </div>

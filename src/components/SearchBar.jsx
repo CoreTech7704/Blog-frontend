@@ -1,7 +1,7 @@
 import { Search, X } from "lucide-react";
 import { useState } from "react";
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ onSearch, placeholder, type, setType }) {
   const [query, setQuery] = useState("");
 
   function handleSubmit(e) {
@@ -12,20 +12,20 @@ export default function SearchBar({ onSearch }) {
 
   function clearSearch() {
     setQuery("");
-    onSearch(""); 
+    onSearch("");
   }
 
   return (
     <form
       onSubmit={handleSubmit}
       className="
-        mx-auto flex items-center gap-2
-        w-full max-w-2xl
-        rounded-xl
+        mx-auto max-w-2xl
+        flex items-center gap-2
+        w-full rounded-xl
         border border-white/15
         bg-black/60 backdrop-blur-md
         px-3 py-2
-        focus-within:ring-2 focus-within:ring-cyan-500/40
+        focus-within:ring-2 focus-within:ring-sky-00/40
         transition
       "
     >
@@ -36,13 +36,27 @@ export default function SearchBar({ onSearch }) {
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search blogs, topics, categories..."
+        placeholder={placeholder}
         className="
           flex-1 bg-transparent
           text-white placeholder-slate-500
           outline-none text-sm
         "
       />
+
+      {/* Type selector */}
+      <select
+        value={type}
+        onChange={(e) => {
+          const value = e.target.value;
+          setType(value);
+          if (query) onSearch(query);
+        }}
+        className="bg-transparent text-sm text-slate-300 border-l border-white/10 px-3 outline-none"
+      >
+        <option value="blogs">Blogs</option>
+        <option value="users">Users</option>
+      </select>
 
       {/* Clear */}
       {query && (
