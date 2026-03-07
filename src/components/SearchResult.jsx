@@ -1,7 +1,13 @@
 import BlogCard from "@/components/BlogCard";
 import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 
-export default function SearchResults({ loading, searched, results }) {
+export default function SearchResults({
+  loading,
+  searched,
+  results,
+  total,
+  query,
+}) {
   return (
     <div className="mt-16">
       {/* Idle */}
@@ -28,20 +34,27 @@ export default function SearchResults({ loading, searched, results }) {
       )}
 
       {/* Results */}
+      <div>
+        {searched && !loading && results.length > 0 && (
+          <h2 className="mb-8 text-lg text-muted-foreground">
+            {total} results for <span className="text-foreground font-medium">"{query}"</span>
+          </h2>
+        )}
+      </div>
       {!loading && results.length > 0 && (
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {results.map((blog) => (
-  <BlogCard
-    key={blog._id}
-    slug={blog.slug}
-    title={blog.title}
-    excerpt={blog.excerpt}
-    category={blog.category?.name || "General"}
-    readTime={blog.readingTime || 5}
-    author={blog.author?.fullname}
-    createdAt={blog.createdAt}
-  />
-))}
+            <BlogCard
+              key={blog._id}
+              slug={blog.slug}
+              title={blog.title}
+              excerpt={blog.excerpt}
+              category={blog.category?.name || "General"}
+              readTime={blog.readingTime || 5}
+              author={blog.author?.fullname}
+              createdAt={blog.createdAt}
+            />
+          ))}
         </div>
       )}
     </div>

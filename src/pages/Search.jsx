@@ -82,6 +82,8 @@ export default function Search() {
             results={results}
             page={page}
             pages={pages}
+            query={query}
+            total={results.length ? pages * 9 : 0}
             onPageChange={(p) => handleSearch(query, p)}
           />
         </div>

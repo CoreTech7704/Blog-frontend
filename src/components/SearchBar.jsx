@@ -36,7 +36,7 @@ export default function SearchBar({ onSearch }) {
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search blogs, topics, authors…"
+        placeholder="Search blogs, topics, categories..."
         className="
           flex-1 bg-transparent
           text-white placeholder-slate-500
