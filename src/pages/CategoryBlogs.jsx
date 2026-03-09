@@ -116,6 +116,7 @@ export default function CategoryBlogs() {
                   blog.content?.slice(0, 140) + "..."
                 }
                 category={category?.name}
+                categorySlug={blog.category?.slug}
                 readTime={blog.readTime || 5}
               />
             ))}

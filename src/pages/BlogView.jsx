@@ -4,9 +4,11 @@ import { ArrowLeft } from "lucide-react";
 import api from "@/api/axios";
 import MarkdownContent from "@/components/MarkDownContent";
 import BlogViewSkeleton from "@/components/BlogViewSkeleton";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function BlogView() {
   const { slug } = useParams();
+  const { user: currentUser } = useAuth();
 
   const [blog, setBlog] = useState(null);
   const [comments, setComments] = useState([]);
@@ -74,10 +76,39 @@ export default function BlogView() {
 
           <h1 className="text-4xl sm:text-5xl font-bold">{blog.title}</h1>
 
-          <p className="mt-6 text-sm text-slate-500">
-            {new Date(blog.createdAt).toDateString()} • {blog.readTime || 5} min
-            read
-          </p>
+          <div className="mt-6 flex items-center gap-3 text-sm text-slate-400">
+            {/* Author */}
+            {blog.author && (
+              <Link
+                to={`/user/${blog.author.username}`}
+                className="flex items-center gap-2 hover:text-white transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <img
+                    src={blog.author?.avatar?.url || "/default-avatar.png"}
+                    alt="author"
+                    className="w-7 h-7 rounded-full object-cover"
+                  />
+                  <div className="flex flex-col leading-tight">
+                    <span className="font-medium">{blog.author.fullname}</span>
+                    <span className="text-xs text-slate-500">
+                      @{blog.author.username}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            )}
+
+            <span>•</span>
+
+            {/* Date */}
+            <span>{new Date(blog.createdAt).toDateString()}</span>
+
+            <span>•</span>
+
+            {/* Reading time */}
+            <span>{blog.readTime || 5} min read</span>
+          </div>
         </div>
 
         <section className="px-6 pb-10 flex justify-center bg-[#05070d]">
@@ -163,27 +194,45 @@ export default function BlogView() {
             <div className="space-y-6">
               {comments.map((c) => (
                 <div key={c._id} className="flex gap-4">
-                  <img
-                    src={c.user?.avatar?.url || "/default-avatar.png"}
-                    alt="avatar"
-                    className="w-10 h-10 rounded-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = "/default-avatar.png";
-                    }}
-                  />
+                  <Link to={`/user/${c.user?.username || "#"}`}>
+                    <img
+                      src={c.user?.avatar?.url || "/default-avatar.png"}
+                      alt="avatar"
+                      className="w-10 h-10 rounded-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = "/default-avatar.png";
+                      }}
+                    />
+                  </Link>
 
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <p className="font-medium">{c.user?.fullname}</p>
+                      {c.user ? (
+                        <Link
+                          to={`/user/${c.user.username}`}
+                          className="font-medium hover:text-primary transition-colors"
+                        >
+                          {c.user.fullname}
+                        </Link>
+                      ) : (
+                        <span className="font-medium text-muted-foreground">
+                          Deleted User
+                        </span>
+                      )}
                       <span className="text-xs text-slate-500">
-                        {new Date(c.createdAt).toLocaleString()}
+                        {new Date(c.createdAt).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
                       </span>
                     </div>
 
                     <p className="text-foreground/80 mt-1">{c.content}</p>
 
                     {/* Delete (owner/admin later) */}
-                    {c.user._id === blog.author?._id && (
+                    {(c.user?._id?.toString() === currentUser?._id ||
+                      blog.author?._id?.toString() === currentUser?._id) && (
                       <button
                         onClick={async () => {
                           await api.delete(`/api/comments/${c._id}`);

@@ -109,8 +109,8 @@ export default function Home() {
                 ))}
             </div>
             <div className="mt-10 text-center md:hidden">
-              <a
-                href="/categories"
+              <Link
+                to="/categories"
                 className="
                   inline-flex items-center gap-1 text-sm
                   text-slate-400
@@ -120,7 +120,7 @@ export default function Home() {
                 "
                 >
                 View all blogs →
-              </a>
+              </Link>
             </div>
           </div>
           {/* Mobile View All */}
@@ -200,7 +200,8 @@ export default function Home() {
                 title={blog.title}
                 excerpt={blog.excerpt}
                 readTime={blog.readingTime}
-                category={blog.tags?.[0] || "General"}
+                category={blog.category?.name ?? "General"}
+                categorySlug={blog.category?.slug}
                 />
               ))}
             </div>
@@ -208,8 +209,8 @@ export default function Home() {
         </div>
         {/* Mobile View All */}
         <div className="mt-10 text-center md:hidden">
-          <a
-            href="/blogs"
+          <Link
+            to="/blogs"
             className="
               inline-flex items-center gap-1 text-sm
               text-slate-400
@@ -219,7 +220,7 @@ export default function Home() {
             "
             >
             View all blogs →
-          </a>
+          </Link>
         </div>
       </section>
     </main>

@@ -78,7 +78,8 @@ export default function Blogs() {
                   blog.excerpt ||
                   blog.content?.slice(0, 140) + "..."
                 }
-                category={blog.tags?.[0] || "General"}
+                category={blog.category?.name ?? "General"}
+                categorySlug={blog.category?.slug}
                 readTime={blog.readingTime || 5}
               />
             ))}

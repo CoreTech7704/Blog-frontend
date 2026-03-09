@@ -60,7 +60,8 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
               slug={mainBlog.slug}
               title={mainBlog.title}
               excerpt={mainBlog.excerpt}
-              category={mainBlog.tags?.[0] || "General"}
+              category={mainBlog.category?.name ?? "General"}
+              categorySlug={mainBlog.category?.slug}
               cover={mainBlog.cover?.url}
               readTime={mainBlog.readingTime}
             />
@@ -74,7 +75,8 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
                 key={blog.slug}
                 title={blog.title}
                 excerpt={blog.excerpt}
-                category={blog.tags?.[0] || "General"}
+                category={mainBlog.category?.name ?? "General"}
+                categorySlug={mainBlog.category?.slug}
                 readTime={mainBlog.readingTime}
                 slug={blog.slug}
               />

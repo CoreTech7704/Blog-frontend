@@ -1,19 +1,27 @@
 import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function BlogCard({
   slug,
   title,
   excerpt,
   category,
+  categorySlug,
   readTime,
   cover,
   featured = false,
   compact = false,
 }) {
+  const navigate = useNavigate();
+
   return (
-    <Link
-      to={`/blogs/${slug}`}
+    <div
+      role="link"
+      tabIndex={0}
+      onClick={() => navigate(`/blogs/${slug}`)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") navigate(`/blogs/${slug}`);
+      }}
       className={`
         group relative block overflow-hidden rounded-2xl
         border backdrop-blur-sm transition-all duration-300
@@ -23,12 +31,11 @@ export default function BlogCard({
           featured
             ? "bg-slate-950 border-white/10 shadow-xl hover:shadow-[0_0_40px_rgba(99,102,241,0.25)]"
             : compact
-            ? "bg-slate-950/70 border-white/10 hover:shadow-[0_0_40px_rgba(99,102,241,0.25)]"
-            : "bg-white/70 dark:bg-black/40 border-slate-200 dark:border-white/10"
+              ? "bg-slate-950/70 border-white/10 hover:shadow-[0_0_40px_rgba(99,102,241,0.25)]"
+              : "bg-white/70 dark:bg-black/40 border-slate-200 dark:border-white/10"
         }
       `}
     >
-
       {featured && cover && !compact && (
         <div className="relative h-56 w-full overflow-hidden">
           <img
@@ -52,20 +59,23 @@ export default function BlogCard({
 
       <div className={`p-6 ${featured ? "pt-5 min-h-72" : "min-h-48"}`}>
         {/* Category */}
-        <span
+        <Link
+          to={categorySlug ? `/categories/${categorySlug}` : "#"}
+          onClick={(e) => e.stopPropagation()}
           className={`
             inline-block mb-3 rounded-full border px-3 py-1 text-xs
+            hover:border-primary hover:text-primary transition
             ${
               featured
                 ? "border-white/20 text-slate-300"
                 : compact
-                ? "border-white/20 text-slate-300"
-                : "border-slate-300 dark:border-white/20 text-slate-600 dark:text-slate-300"
+                  ? "border-white/20 text-slate-300"
+                  : "border-slate-300 dark:border-white/20 text-slate-600 dark:text-slate-300"
             }
           `}
         >
-          {category}
-        </span>
+          #{category}
+        </Link>
 
         {/* Title */}
         <h3
@@ -75,8 +85,8 @@ export default function BlogCard({
               featured
                 ? "text-2xl text-white"
                 : compact
-                ? "text-lg text-slate-100"
-                : "text-lg text-slate-900 dark:text-slate-100"
+                  ? "text-lg text-slate-100"
+                  : "text-lg text-slate-900 dark:text-slate-100"
             }
           `}
         >
@@ -115,6 +125,6 @@ export default function BlogCard({
           />
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
