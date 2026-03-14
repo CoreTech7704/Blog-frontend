@@ -23,12 +23,11 @@ export default function Login() {
     try {
       const res = await api.post("/api/auth/login", { email, password });
 
-localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("accessToken", res.data.accessToken);
 
-setUser(res.data.user);
+      setUser(res.data.user);
 
-navigate("/");
-
+      navigate("/");
     } catch {
       setError("Invalid email or password");
     } finally {
@@ -48,9 +47,7 @@ navigate("/");
             )}
 
             <div>
-              <label className="block mb-2 text-sm text-slate-300">
-                Email
-              </label>
+              <label className="block mb-2 text-sm text-slate-300">Email</label>
               <input
                 type="email"
                 value={email}
@@ -95,7 +92,10 @@ navigate("/");
 
           <div className="mt-6 text-center text-sm text-slate-400">
             Don’t have an account?{" "}
-            <Link to="/auth?mode=signup" className="text-cyan-400 hover:underline">
+            <Link
+              to="/auth?mode=signup"
+              className="text-cyan-400 hover:underline"
+            >
               Sign up
             </Link>
           </div>
@@ -108,7 +108,8 @@ navigate("/");
               className="text-cyan-400 hover:underline"
             >
               Terms & Privacy Policy
-            </button>.
+            </button>
+            .
           </p>
 
           <p className="mt-2 text-center text-xs text-slate-500">
@@ -116,10 +117,7 @@ navigate("/");
           </p>
         </div>
       </section>
-      <TermsPolicyModal
-        open={showTerms}
-        onClose={() => setShowTerms(false)}
-      />
+      <TermsPolicyModal open={showTerms} onClose={() => setShowTerms(false)} />
     </div>
   );
 }

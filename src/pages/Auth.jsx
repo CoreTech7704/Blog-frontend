@@ -18,7 +18,7 @@ export default function Auth() {
       overflow-hidden
       transition-colors duration-300
     ">
-      <div className="pointer-events-none absolute inset-0 -z-0 opacity-70">
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-70">
         <FloatingLines enabledWaves="top,middle,bottom" />
       </div>
 
