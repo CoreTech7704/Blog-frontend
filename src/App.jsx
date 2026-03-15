@@ -51,7 +51,7 @@ function App() {
 
           {/* ================= AUTH ================= */}
           <Route path="/auth" element={<Auth />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/change-password" element={<ChangePassword />} />
 
           {/* ================= PROTECTED ================= */}

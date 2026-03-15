@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import api from "@/api/axios";
 import TermsPolicyModal from "@/components/TermsPolicyModal";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function Login() {
   const [showTerms, setShowTerms] = useState(false);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const { setUser } = useAuth();
 
@@ -62,14 +64,24 @@ export default function Login() {
               <label className="block mb-2 text-sm text-slate-300">
                 Password
               </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                className="w-full rounded-lg px-4 py-3 bg-black/40 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500 transition"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  className="w-full rounded-lg px-4 py-3 bg-black/40 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500 transition"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2
+                      text-slate-400 hover:text-white"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
             <div className="text-right">
