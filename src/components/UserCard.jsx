@@ -5,7 +5,7 @@ export default function UserCard({ user }) {
     <Link to={`/user/${user.username}`}>
       <div className="flex gap-4 p-5 rounded-xl border border-border bg-card hover:border-primary/40 transition">
         <img
-          src={user.avatar?.url || "/avatar.png"}
+          src={user.avatar?.url || "https://res.cloudinary.com/daax8dehh/image/upload/v1773673391/default-avatar_qwz0c2.webp"}
           alt={user.username}
           className="w-25 h-25 rounded-full object-cover"
         />

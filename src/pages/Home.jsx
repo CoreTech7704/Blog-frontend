@@ -202,6 +202,7 @@ export default function Home() {
                 readTime={blog.readingTime}
                 category={blog.category?.name ?? "General"}
                 categorySlug={blog.category?.slug}
+                cover={blog.cover?.url}
                 />
               ))}
             </div>

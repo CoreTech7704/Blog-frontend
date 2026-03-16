@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import api from "@/api/axios";
 import MarkdownContent from "@/components/MarkDownContent";
@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 export default function BlogView() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const { user: currentUser } = useAuth();
 
   const [blog, setBlog] = useState(null);
@@ -55,13 +56,19 @@ export default function BlogView() {
       {/* ================= HEADER ================= */}
       <section className="pt-40 px-6 bg-[#05070d]">
         <div className="mx-auto max-w-5xl">
-          <Link
-            to="/blogs"
+          <button
+            onClick={() => {
+              if (window.history.length > 1) {
+                navigate(-1);
+              } else {
+                navigate("/blogs");
+              }
+            }}
             className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white mb-6"
           >
             <ArrowLeft size={16} />
-            Back to blogs
-          </Link>
+            Go back
+          </button>
 
           <div className="flex flex-wrap gap-2 mb-4">
             {(blog.tags?.length ? blog.tags : ["General"]).map((tag) => (
@@ -85,7 +92,7 @@ export default function BlogView() {
               >
                 <div className="flex items-center gap-2">
                   <img
-                    src={blog.author?.avatar?.url || "/default-avatar.png"}
+                    src={blog.author?.avatar?.url || "https://res.cloudinary.com/daax8dehh/image/upload/v1773673391/default-avatar_qwz0c2.webp"}
                     alt="author"
                     className="w-7 h-7 rounded-full object-cover"
                   />
@@ -196,11 +203,11 @@ export default function BlogView() {
                 <div key={c._id} className="flex gap-4">
                   <Link to={`/user/${c.user?.username || "#"}`}>
                     <img
-                      src={c.user?.avatar?.url || "/default-avatar.png"}
+                      src={c.user?.avatar?.url || "https://res.cloudinary.com/daax8dehh/image/upload/v1773673391/default-avatar_qwz0c2.webp"}
                       alt="avatar"
                       className="w-10 h-10 rounded-full object-cover"
                       onError={(e) => {
-                        e.currentTarget.src = "/default-avatar.png";
+                        e.currentTarget.src = "https://res.cloudinary.com/daax8dehh/image/upload/v1773673391/default-avatar_qwz0c2.webp";
                       }}
                     />
                   </Link>

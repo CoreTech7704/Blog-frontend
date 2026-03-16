@@ -55,11 +55,11 @@ export default function Profile() {
           <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-muted flex items-center justify-center">
             <img
               loading="lazy"
-              src={user.avatar?.url || "/default-avatar.png"}
+              src={user.avatar?.url || "https://res.cloudinary.com/daax8dehh/image/upload/v1773673391/default-avatar_qwz0c2.webp"}
               alt="avatar"
               className="w-full h-full rounded-full object-cover"
               onError={(e) => {
-                e.currentTarget.src = "/default-avatar.png";
+                e.currentTarget.src = "https://res.cloudinary.com/daax8dehh/image/upload/v1773673391/default-avatar_qwz0c2.webp";
               }}
             />
           </div>

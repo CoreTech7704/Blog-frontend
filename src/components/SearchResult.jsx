@@ -29,7 +29,6 @@ export default function SearchResults({ loading, searched, results, type }) {
       )}
 
       {/* Results */}
-      {/* Results */}
       {!loading && results.length > 0 && (
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {type === "blogs" &&

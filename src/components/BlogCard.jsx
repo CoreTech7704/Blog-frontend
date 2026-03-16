@@ -36,7 +36,7 @@ export default function BlogCard({
         }
       `}
     >
-      {featured && cover && !compact && (
+      {cover && (
         <div className="relative h-56 w-full overflow-hidden">
           <img
             src={cover}

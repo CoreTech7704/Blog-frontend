@@ -34,7 +34,7 @@ export default function UserProfile() {
       <section className="flex flex-col items-center text-center">
 
         <img
-          src={user.avatar?.url || "/avatar.png"}
+          src={user.avatar?.url || "https://res.cloudinary.com/daax8dehh/image/upload/v1773673391/default-avatar_qwz0c2.webp"}
           alt={user.username}
           className="w-28 h-28 rounded-full object-cover border border-border"
         />
