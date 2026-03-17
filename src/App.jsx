@@ -21,6 +21,7 @@ import UserProfile from "@/pages/UserProfile";
 /* Auth pages */
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
+import VerifyEmail from "./pages/VerifyEmail";
 
 /* User / Protected pages */
 import Profile from "./pages/Profile";
@@ -51,6 +52,7 @@ function App() {
 
           {/* ================= AUTH ================= */}
           <Route path="/auth" element={<Auth />} />
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/change-password" element={<ChangePassword />} />
 
