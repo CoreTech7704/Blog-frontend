@@ -48,7 +48,7 @@ export default function BlogCard({
               group-hover:scale-105
             "
             onError={(e) => {
-              e.currentTarget.style.display = "none";
+              e.currentTarget.src = "https://res.cloudinary.com/daax8dehh/image/upload/v1773674991/default-blog-cover_zg2sni.webp";
             }}
           />
 

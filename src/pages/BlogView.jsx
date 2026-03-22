@@ -5,6 +5,7 @@ import api from "@/api/axios";
 import MarkdownContent from "@/components/MarkDownContent";
 import BlogViewSkeleton from "@/components/BlogViewSkeleton";
 import { useAuth } from "@/hooks/useAuth";
+import Recommendations from "../components/Recommendations";
 
 export default function BlogView() {
   const { slug } = useParams();
@@ -16,6 +17,7 @@ export default function BlogView() {
   const [commentText, setCommentText] = useState("");
   const [loading, setLoading] = useState(true);
   const [commentLoading, setCommentLoading] = useState(false);
+  const [recommendations, setRecommendations] = useState(null);
   const [error, setError] = useState(false);
 
   /* ================= FETCH BLOG ================= */
@@ -26,6 +28,20 @@ export default function BlogView() {
       .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, [slug]);
+
+  /* =========== FETCH RECOMMENDATIONS =========== */
+  useEffect(() => {
+  if (!blog?._id) return;
+
+  api
+    .get(`/api/blogs/${blog._id}/recommendations`)
+    .then((res) => {
+      setRecommendations(res.data);
+    })
+    .catch(() => {
+      setRecommendations(null);
+    });
+}, [blog]);
 
   /* ================= FETCH COMMENTS ================= */
   useEffect(() => {
@@ -139,6 +155,8 @@ export default function BlogView() {
           <MarkdownContent content={blog.content} />
         </article>
       </section>
+
+      <Recommendations data={recommendations} />
 
       {/* ================= COMMENTS ================= */}
       <section className="px-6 pb-24">
