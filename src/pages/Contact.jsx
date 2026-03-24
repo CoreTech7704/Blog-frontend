@@ -32,6 +32,10 @@ export default function Contact() {
       return setError("Enter a valid email address");
     }
 
+    if (form.message.length < 10) {
+      return setError("Message must be at least 10 characters");
+    }
+
     try {
       setLoading(true);
       await api.post("/api/contact", form);
