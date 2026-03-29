@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Public Pages -->
+  <url>
+    <loc>https://blog-frontend-steel-three.vercel.app/</loc>
+  </url>
+
+  <url>
+    <loc>https://blog-frontend-steel-three.vercel.app/about</loc>
+  </url>
+
+  <url>
+    <loc>https://blog-frontend-steel-three.vercel.app/contact</loc>
+  </url>
+
+  <url>
+    <loc>https://blog-frontend-steel-three.vercel.app/blogs</loc>
+  </url>
+
+  <url>
+    <loc>https://blog-frontend-steel-three.vercel.app/search</loc>
+  </url>
+
+  <url>
+    <loc>https://blog-frontend-steel-three.vercel.app/categories</loc>
+  </url>
+
+  <url>
+    <loc>https://blog-frontend-steel-three.vercel.app/featured</loc>
+  </url>
+
+  <!-- Dynamic Pages (Structure only) -->
+  <!-- These will be indexed when discovered -->
+
+  <url>
+    <loc>https://blog-frontend-steel-three.vercel.app/blogs/</loc>
+  </url>
+
+  <url>
+    <loc>https://blog-frontend-steel-three.vercel.app/categories/</loc>
+  </url>
+
+  <url>
+    <loc>https://blog-frontend-steel-three.vercel.app/user/</loc>
+  </url>
+
+</urlset>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://blog-frontend-steel-three.vercel.app/sitemap.xml
