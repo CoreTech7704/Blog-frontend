@@ -13,6 +13,8 @@ export default function BlogCard({
   compact = false,
 }) {
   const navigate = useNavigate();
+  const defaultCover =
+    "https://res.cloudinary.com/daax8dehh/image/upload/v1773674991/default-blog-cover_zg2sni.webp";
 
   return (
     <div
@@ -36,28 +38,26 @@ export default function BlogCard({
         }
       `}
     >
-      {cover && (
-        <div className="relative h-56 w-full overflow-hidden">
-          <img
-            src={cover}
-            alt={title}
-            loading="lazy"
-            className="
-              h-full w-full object-cover rounded-t-2xl
-              transition-transform duration-500
-              group-hover:scale-105
-            "
-            onError={(e) => {
-              e.currentTarget.src = "https://res.cloudinary.com/daax8dehh/image/upload/v1773674991/default-blog-cover_zg2sni.webp";
-            }}
-          />
+      <div className="relative h-56 w-full overflow-hidden">
+        <img
+          src={cover?.trim() ? cover : defaultCover}
+          alt={title}
+          loading="lazy"
+          className="
+      h-full w-full object-cover rounded-t-2xl
+      transition-transform duration-500
+      group-hover:scale-105
+    "
+          onError={(e) => {
+            e.currentTarget.src = defaultCover;
+          }}
+        />
 
-          {/* subtle gradient overlay */}
-          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
-        </div>
-      )}
+        {/* subtle gradient overlay */}
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
+      </div>
 
-      <div className={`p-6 ${featured ? "pt-5 min-h-72" : "min-h-48"}`}>
+      <div className={`p-6 ${featured ? "pt-5 min-h-64" : "min-h-48"}`}>
         {/* Category */}
         <Link
           to={categorySlug ? `/categories/${categorySlug}` : "#"}
@@ -90,7 +90,13 @@ export default function BlogCard({
             }
           `}
         >
-          {title}
+          {(() => {
+            if (compact) {
+              return title.length > 70 ? title.slice(0, 67) + "..." : title;
+            } else {
+              return title.length > 140 ? title.slice(0, 137) + "..." : title;
+            }
+          })()}
         </h3>
 
         {/* Excerpt */}

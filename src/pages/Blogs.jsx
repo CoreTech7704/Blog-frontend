@@ -80,6 +80,7 @@ export default function Blogs() {
                 }
                 category={blog.category?.name ?? "General"}
                 categorySlug={blog.category?.slug}
+                cover={blog.cover?.url}
                 readTime={blog.readingTime || 5}
               />
             ))}

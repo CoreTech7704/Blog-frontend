@@ -1,5 +1,6 @@
 import BlogCard from "./BlogCard";
 import BlogCardSkeleton from "@/components/BlogCardSkeleton";
+import { Link } from "react-router-dom";
 
 export default function FeaturedBlogs({ blogs = [], loading }) {
   if (loading) {
@@ -18,13 +19,11 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
 
   const featuredBlogs = blogs.filter((b) => b.featured);
   if (!featuredBlogs.length) return null;
-  
-  const [mainBlog, ...sideBlogs] = featuredBlogs;
 
   return (
     <section className="bg-black py-24 px-6">
       <div className="mx-auto max-w-6xl">
-        {/* Section Header */}
+        {/* Header */}
         <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <h2 className="text-3xl font-bold text-slate-100">
@@ -36,68 +35,65 @@ export default function FeaturedBlogs({ blogs = [], loading }) {
             </p>
           </div>
 
-          <a
-            href="/featured"
-            className="
-              hidden md:inline-flex items-center gap-1 text-sm
-              text-slate-400
-              hover:text-white
-              transition-all
-              hover:translate-x-0.5
-            "
-            >
+          <Link
+            to="/featured"
+            className="hidden md:inline-flex items-center gap-1 text-sm text-slate-400 hover:text-white transition"
+          >
             View all →
-          </a>
+          </Link>
         </div>
 
-        {/* Grid */}
+        {/* Featured Editorial Grid */}
         <div className="grid gap-6 md:grid-cols-3">
-          {/* Main Featured */}
+          {/* Top Row */}
           <div className="md:col-span-2">
             <BlogCard
               featured
-              key={mainBlog.slug}
-              slug={mainBlog.slug}
-              title={mainBlog.title}
-              excerpt={mainBlog.excerpt}
-              category={mainBlog.category?.name ?? "General"}
-              categorySlug={mainBlog.category?.slug}
-              cover={mainBlog.cover?.url}
-              readTime={mainBlog.readingTime}
+              slug={featuredBlogs[0]?.slug}
+              title={featuredBlogs[0]?.title}
+              excerpt={featuredBlogs[0]?.excerpt}
+              category={featuredBlogs[0]?.category?.name ?? "General"}
+              categorySlug={featuredBlogs[0]?.category?.slug}
+              cover={featuredBlogs[0]?.cover?.url}
+              readTime={featuredBlogs[0]?.readingTime}
             />
           </div>
 
-          {/* Side Featured */}
-          <div className="flex flex-col gap-6">
-            {sideBlogs.slice(0, 2).map((blog) => (
-              <BlogCard
-                compact
-                key={blog.slug}
-                title={blog.title}
-                excerpt={blog.excerpt}
-                category={mainBlog.category?.name ?? "General"}
-                categorySlug={mainBlog.category?.slug}
-                readTime={mainBlog.readingTime}
-                slug={blog.slug}
-              />
-            ))}
-          </div>
-        </div>
+          <BlogCard
+            compact
+            slug={featuredBlogs[1]?.slug}
+            title={featuredBlogs[1]?.title}
+            excerpt={featuredBlogs[1]?.excerpt}
+            category={featuredBlogs[1]?.category?.name ?? "General"}
+            categorySlug={featuredBlogs[1]?.category?.slug}
+            cover={featuredBlogs[1]?.cover?.url}
+            readTime={featuredBlogs[1]?.readingTime}
+          />
 
-        {/* Mobile View All */}
-        <div className="mt-10 text-center md:hidden">
-          <a
-            href="/featured"
-            className="
-              inline-flex items-center gap-1 text-sm
-              text-slate-400
-              hover:text-white
-              transition-all
-              hover:translate-x-0.5
-            "
-            >
-            View all blogs →
-          </a>
+          {/* Bottom Row */}
+          <BlogCard
+            compact
+            slug={featuredBlogs[2]?.slug}
+            title={featuredBlogs[2]?.title}
+            excerpt={featuredBlogs[2]?.excerpt}
+            category={featuredBlogs[2]?.category?.name ?? "General"}
+            categorySlug={featuredBlogs[2]?.category?.slug}
+            cover={featuredBlogs[2]?.cover?.url}
+            readTime={featuredBlogs[2]?.readingTime}
+          />
+
+          <div className="md:col-span-2">
+            <BlogCard
+              featured
+              slug={featuredBlogs[3]?.slug}
+              title={featuredBlogs[3]?.title}
+              excerpt={featuredBlogs[3]?.excerpt}
+              category={featuredBlogs[3]?.category?.name ?? "General"}
+              categorySlug={featuredBlogs[3]?.category?.slug}
+              cover={featuredBlogs[3]?.cover?.url}
+              readTime={featuredBlogs[3]?.readingTime}
+            />
+          </div>
         </div>
       </div>
     </section>

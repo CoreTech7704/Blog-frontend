@@ -117,6 +117,7 @@ export default function CategoryBlogs() {
                 }
                 category={category?.name}
                 categorySlug={blog.category?.slug}
+                cover={blog.cover?.url}
                 readTime={blog.readTime || 5}
               />
             ))}
